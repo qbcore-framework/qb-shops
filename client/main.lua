@@ -13,6 +13,30 @@ function DrawText3Ds(x, y, z, text)
     ClearDrawOrigin()
 end
 
+RandomInt = function(length)
+	if length > 0 then
+		return RandomInt(length-1) .. NumberCharset[math.random(1, #NumberCharset)]
+	else
+		return ''
+	end
+end
+
+RandomStr = function(length)
+	if length > 0 then
+		return RandomStr(length-1) .. StringCharset[math.random(1, #StringCharset)]
+	else
+		return ''
+	end
+end
+
+function SetWeaponSeries()
+    for k, v in pairs(Config.Products["weapons"]) do
+        if k < 9 then
+            Config.Products["weapons"][k].info.serie = tostring(RandomInt(2) .. RandomStr(3) .. RandomInt(1) .. RandomStr(2) .. RandomInt(3) .. RandomStr(4))
+        end
+    end
+end
+
 Citizen.CreateThread(function()
     while true do
         local InRange = false
@@ -29,6 +53,7 @@ Citizen.CreateThread(function()
                     if dist < 1 then
                         DrawText3Ds(loc["x"], loc["y"], loc["z"] + 0.15, '~g~E~w~ - Shop')
                         if IsControlJustPressed(0, 38) then -- E
+			    SetWeaponSeries()
                             local ShopItems = {}
                             ShopItems.label = Config.Locations[shop]["label"]
                             ShopItems.items = Config.Locations[shop]["products"]
