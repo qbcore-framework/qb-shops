@@ -13,6 +13,13 @@ function DrawText3Ds(x, y, z, text)
     ClearDrawOrigin()
 end
 
+local StringCharset = {}
+local NumberCharset = {}
+
+for i = 48,  57 do table.insert(NumberCharset, string.char(i)) end
+for i = 65,  90 do table.insert(StringCharset, string.char(i)) end
+for i = 97, 122 do table.insert(StringCharset, string.char(i)) end
+
 RandomInt = function(length)
 	if length > 0 then
 		return RandomInt(length-1) .. NumberCharset[math.random(1, #NumberCharset)]
