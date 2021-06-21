@@ -280,6 +280,22 @@ Config.Products = {
             type = "item",
             slot = 2,
         },
+        [3] = {
+            name = "fishingrod",
+            price = 500,
+            amount = 50,
+            info = {},
+            type = "item",
+            slot = 3,
+        },
+        [4] = {
+            name = "fishingbait",
+            price = 100,
+            amount = 50,
+            info = {},
+            type = "item",
+            slot = 4,
+        },
     },
     ["leisureshop"] = {
         [1] = {
@@ -657,7 +673,7 @@ Config.Locations = {
         },
         ["products"] = Config.Products["normal"],
     },
-    ["247supermarket9"] = {
+    ["247supermarket10"] = {
         ["label"] = "24/7 Supermarket",
         ["type"] = "normal",
         ["coords"] = {
@@ -923,7 +939,7 @@ Config.Locations = {
         ["products"] = Config.Products["gearshop"],
     },
     ["leisureshop"] = {
-        ["label"] = "Vrijetijdswinkel",
+        ["label"] = "Leisure shop",
         ["type"] = "leisure",
         ["coords"] = {
             [1] = {
@@ -934,16 +950,16 @@ Config.Locations = {
         },
         ["products"] = Config.Products["leisureshop"],
     },   
-    ["mustapha"] = {
-        ["label"] = "Rental Mustapha",
-        ["type"] = "leisure",
-        ["coords"] = {
-            [1] = {
-                ["x"] = -31.18, 
-                ["y"] = -1397.537, 
-                ["z"] = 29.50
-            }
-        },
-        ["products"] = Config.Products["mustapha"],
-    },    
+    -- ["mustapha"] = {
+    --     ["label"] = "Rental Mustapha",
+    --     ["type"] = "leisure",
+    --     ["coords"] = {
+    --         [1] = {
+    --             ["x"] = -31.18, 
+    --             ["y"] = -1397.537, 
+    --             ["z"] = 29.50
+    --         }
+    --     },
+    --     ["products"] = Config.Products["mustapha"],
+    -- },    
 }
