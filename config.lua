@@ -802,111 +802,19 @@ Config.Locations = {
         },
         ["products"] = Config.Products["coffeeshop"],
     },
-    ["ammunation1"] = {
+    ["ammunation"] = {
         ["label"] = "Ammunation",
         ["type"] = "weapon",
         ["coords"] = {
-            [1] = {
-                ["x"] = -662.1, 
-                ["y"] = -935.3, 
-                ["z"] = 21.8
-            }
-        },
-        ["products"] = Config.Products["weapons"],
-    },
-    ["ammunation2"] = {
-        ["label"] = "Ammunation",
-        ["type"] = "weapon",
-        ["coords"] = {
-            [1] = {
-                ["x"] = 810.2, 
-                ["y"] = -2157.3, 
-                ["z"] = 29.6
-            }
-        },
-        ["products"] = Config.Products["weapons"],
-    },
-    ["ammunation3"] = {
-        ["label"] = "Ammunation",
-        ["type"] = "weapon",
-        ["coords"] = {
-            [1] = {
-                ["x"] = 1693.4, 
-                ["y"] = 3759.5, 
-                ["z"] = 34.7
-            }
-        },
-        ["products"] = Config.Products["weapons"],
-    },
-    ["ammunation4"] = {
-        ["label"] = "Ammunation",
-        ["type"] = "weapon",
-        ["coords"] = {
-            [1] = {
-                ["x"] = -330.2, 
-                ["y"] = 6083.8, 
-                ["z"] = 31.4
-            }
-        },
-        ["products"] = Config.Products["weapons"],
-    },
-    ["ammunation5"] = {
-        ["label"] = "Ammunation",
-        ["type"] = "weapon",
-        ["coords"] = {
-            [1] = {
-                ["x"] = 252.3, 
-                ["y"] = -50.0, 
-                ["z"] = 69.9
-            }
-        },
-        ["products"] = Config.Products["weapons"],
-    },
-    ["ammunation6"] = {
-        ["label"] = "Ammunation",
-        ["type"] = "weapon",
-        ["coords"] = {
-            [1] = {
-                ["x"] = 22.0, 
-                ["y"] = -1107.2, 
-                ["z"] = 29.8
-            }
-        },
-        ["products"] = Config.Products["weapons"],
-    },
-    ["ammunation7"] = {
-        ["label"] = "Ammunation",
-        ["type"] = "weapon",
-        ["coords"] = {
-            [1] = {
-                ["x"] = 2567.6, 
-                ["y"] = 294.3, 
-                ["z"] = 108.7
-            }
-        },
-        ["products"] = Config.Products["weapons"],
-    },
-    ["ammunation8"] = {
-        ["label"] = "Ammunation",
-        ["type"] = "weapon",
-        ["coords"] = {
-            [1] = {
-                ["x"] = -1117.5, 
-                ["y"] = 2698.6, 
-                ["z"] = 18.5
-            }
-        },
-        ["products"] = Config.Products["weapons"],
-    },
-    ["ammunation9"] = {
-        ["label"] = "Ammunation",
-        ["type"] = "weapon",
-        ["coords"] = {
-            [1] = {
-                ["x"] = 842.4, 
-                ["y"] = -1033.4, 
-                ["z"] = 28.1
-            }
+            [1] = {["x"] = -662.1, ["y"] = -935.3, ["z"] = 21.8},
+            [2] = {["x"] = 810.2, ["y"] = -2157.3, ["z"] = 29.6},
+            [3] = {["x"] = 1693.4, ["y"] = 3759.5, ["z"] = 34.7},
+            [4] = {["x"] = -330.2, ["y"] = 6083.8, ["z"] = 31.4},
+            [5] = {["x"] = 252.3, ["y"] = -50.0, ["z"] = 69.9},
+            [6] = {["x"] = 22.0, ["y"] = -1107.2, ["z"] = 29.8},
+            [7] = {["x"] = 2567.6, ["y"] = 294.3, ["z"] = 108.7},
+            [8] = {["x"] = -1117.5, ["y"] = 2698.6, ["z"] = 18.5},
+            [9] = {["x"] = 842.4, ["y"] = -1033.4, ["z"] = 28.1}
         },
         ["products"] = Config.Products["weapons"],
     },
