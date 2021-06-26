@@ -923,7 +923,7 @@ Config.Locations = {
         ["products"] = Config.Products["gearshop"],
     },
     ["leisureshop"] = {
-        ["label"] = "Vrijetijdswinkel",
+        ["label"] = "Leisure Shop",
         ["type"] = "leisure",
         ["coords"] = {
             [1] = {
