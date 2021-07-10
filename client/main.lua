@@ -49,6 +49,8 @@ Citizen.CreateThread(function()
         local InRange = false
         local PlayerPed = PlayerPedId()
         local PlayerPos = GetEntityCoords(PlayerPed)
+        local PlayerData = QBCore.Functions.GetPlayerData()
+        local weaponLicense = PlayerData.metadata["licences"]["weapon"]
 
         for shop, _ in pairs(Config.Locations) do
             local position = Config.Locations[shop]["coords"]
@@ -60,12 +62,24 @@ Citizen.CreateThread(function()
                     if dist < 1 then
                         DrawText3Ds(loc["x"], loc["y"], loc["z"] + 0.15, '~g~E~w~ - Shop')
                         if IsControlJustPressed(0, 38) then -- E
-			    SetWeaponSeries()
-                            local ShopItems = {}
-                            ShopItems.label = Config.Locations[shop]["label"]
-                            ShopItems.items = Config.Locations[shop]["products"]
-                            ShopItems.slots = 30
-                            TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_"..shop, ShopItems)
+                            SetWeaponSeries()
+                            if Config.Locations[shop]["type"] == "weapon" then
+                                if weaponLicense then
+                                    local ShopItems = {}
+                                    ShopItems.label = Config.Locations[shop]["label"]
+                                    ShopItems.items = Config.Locations[shop]["products"]
+                                    ShopItems.slots = 30
+                                    TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_"..shop, ShopItems)
+                                else
+                                    QBCore.Functions.Notify("You don't have a valid weapons license.", "error", 5000)
+                                end
+                            else
+                                local ShopItems = {}
+                                ShopItems.label = Config.Locations[shop]["label"]
+                                ShopItems.items = Config.Locations[shop]["products"]
+                                ShopItems.slots = 30
+                                TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_"..shop, ShopItems)
+                            end
                         end
                     end
                 end
