@@ -1,3 +1,5 @@
+isLoggedIn = false
+
 function DrawText3Ds(x, y, z, text)
 	SetTextScale(0.35, 0.35)
     SetTextFont(4)
@@ -44,41 +46,53 @@ function SetWeaponSeries()
     end
 end
 
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+    isLoggedIn = true
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerUnload')
+AddEventHandler('QBCore:Client:OnPlayerUnload', function()
+    isLoggedIn = false
+end)
+
 Citizen.CreateThread(function()
     while true do
         local InRange = false
-        local PlayerPed = PlayerPedId()
-        local PlayerPos = GetEntityCoords(PlayerPed)
-        local PlayerData = QBCore.Functions.GetPlayerData()
-        local weaponLicense = PlayerData.metadata["licences"]["weapon"]
+        if isLoggedIn then
+            local PlayerPed = PlayerPedId()
+            local PlayerPos = GetEntityCoords(PlayerPed)
+            local PlayerData = QBCore.Functions.GetPlayerData()
+            local weaponLicense = PlayerData.metadata["licences"]["weapon"]
 
-        for shop, _ in pairs(Config.Locations) do
-            local position = Config.Locations[shop]["coords"]
-            for _, loc in pairs(position) do
-                local dist = #(PlayerPos - vector3(loc["x"], loc["y"], loc["z"]))
-                if dist < 10 then
-                    InRange = true
-                    DrawMarker(2, loc["x"], loc["y"], loc["z"], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.25, 0.2, 0.1, 255, 255, 255, 155, 0, 0, 0, 1, 0, 0, 0)
-                    if dist < 1 then
-                        DrawText3Ds(loc["x"], loc["y"], loc["z"] + 0.15, '~g~E~w~ - Shop')
-                        if IsControlJustPressed(0, 38) then -- E
-                            SetWeaponSeries()
-                            if Config.Locations[shop]["type"] == "weapon" then
-                                if weaponLicense then
+            for shop, _ in pairs(Config.Locations) do
+                local position = Config.Locations[shop]["coords"]
+                for _, loc in pairs(position) do
+                    local dist = #(PlayerPos - vector3(loc["x"], loc["y"], loc["z"]))
+                    if dist < 10 then
+                        InRange = true
+                        DrawMarker(2, loc["x"], loc["y"], loc["z"], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.25, 0.2, 0.1, 255, 255, 255, 155, 0, 0, 0, 1, 0, 0, 0)
+                        if dist < 1 then
+                            DrawText3Ds(loc["x"], loc["y"], loc["z"] + 0.15, '~g~E~w~ - Shop')
+                            if IsControlJustPressed(0, 38) then -- E
+                                SetWeaponSeries()
+                                if Config.Locations[shop]["type"] == "weapon" then
+                                    if weaponLicense then
+                                        local ShopItems = {}
+                                        ShopItems.label = Config.Locations[shop]["label"]
+                                        ShopItems.items = Config.Locations[shop]["products"]
+                                        ShopItems.slots = 30
+                                        TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_"..shop, ShopItems)
+                                    else
+                                        QBCore.Functions.Notify("You don't have a valid weapons license.", "error", 5000)
+                                    end
+                                else
                                     local ShopItems = {}
                                     ShopItems.label = Config.Locations[shop]["label"]
                                     ShopItems.items = Config.Locations[shop]["products"]
                                     ShopItems.slots = 30
                                     TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_"..shop, ShopItems)
-                                else
-                                    QBCore.Functions.Notify("You don't have a valid weapons license.", "error", 5000)
                                 end
-                            else
-                                local ShopItems = {}
-                                ShopItems.label = Config.Locations[shop]["label"]
-                                ShopItems.items = Config.Locations[shop]["products"]
-                                ShopItems.slots = 30
-                                TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_"..shop, ShopItems)
                             end
                         end
                     end
