@@ -351,7 +351,7 @@ Config.Products = {
             slot = 1,
         },
         [2] = {
-            name = "weapon_switchblade",
+            name = "weapon_bat",
             price = 250,
             amount = 250,
             info = {},
@@ -365,6 +365,33 @@ Config.Products = {
             info = {},
             type = "item",
             slot = 3,
+        },
+        [4] = {
+            name = "weapon_pistol",
+            price = 2500,
+            amount = 5,
+            info = {},
+            type = "item",
+            slot = 4,
+            requiresLicense = true
+        },
+        [5] = {
+            name = "weapon_snspistol",
+            price = 1500,
+            amount = 5,
+            info = {},
+            type = "item",
+            slot = 5,
+            requiresLicense = true
+        },
+        [6] = {
+            name = "weapon_vintagepistol",
+            price = 4000,
+            amount = 5,
+            info = {},
+            type = "item",
+            slot = 6,
+            requiresLicense = true
         },
     },
     ["coffeeplace"] = {

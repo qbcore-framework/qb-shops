@@ -60,12 +60,27 @@ Citizen.CreateThread(function()
                     if dist < 1 then
                         DrawText3Ds(loc["x"], loc["y"], loc["z"] + 0.15, '~g~E~w~ - Shop')
                         if IsControlJustPressed(0, 38) then -- E
-			    SetWeaponSeries()
+			                SetWeaponSeries()
                             local ShopItems = {}
-                            ShopItems.label = Config.Locations[shop]["label"]
-                            ShopItems.items = Config.Locations[shop]["products"]
-                            ShopItems.slots = 30
-                            TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_"..shop, ShopItems)
+                            ShopItems.items = {}
+                            QBCore.Functions.TriggerCallback('qb-shops:server:getLicenseStatus', function(result)
+                                ShopItems.label = Config.Locations[shop]["label"]
+                                if Config.Locations[shop].type == "weapon" then
+                                    if result then
+                                        ShopItems.items = Config.Locations[shop]["products"]
+                                    else
+                                        for i = 1, #Config.Locations[shop]["products"] do
+                                            if not Config.Locations[shop]["products"][i].requiresLicense then
+                                                table.insert(ShopItems.items, Config.Locations[shop]["products"][i])
+                                            end
+                                        end
+                                    end
+                                else
+                                    ShopItems.items = Config.Locations[shop]["products"]
+                                end
+                                ShopItems.slots = 30
+                                TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_"..shop, ShopItems)
+                            end)
                         end
                     end
                 end

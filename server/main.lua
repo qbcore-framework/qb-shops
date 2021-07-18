@@ -17,3 +17,15 @@ AddEventHandler('qb-shops:server:RestockShopItems', function(shop)
         TriggerClientEvent('qb-shops:client:RestockShopItems', -1, shop, randAmount)
     end
 end)
+
+QBCore.Functions.CreateCallback('qb-shops:server:getLicenseStatus', function(source, cb)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local licenseTable = Player.PlayerData.metadata["licences"]
+
+    if licenseTable.weapon then
+        cb(true)
+    else
+        cb(false)
+    end
+end)
