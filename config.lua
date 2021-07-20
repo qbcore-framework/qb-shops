@@ -90,14 +90,6 @@ Config.Products = {
             type = "item",
             slot = 11,
         },
-        --[12] = {
-        --    name = "walkstick",
-        --    price = 50,
-        --    amount = 50,
-        --    info = {},
-        --    type = "item",
-        --    slot = 12,
-        },
         [12] = {
             name = "rolling_paper",
             price = 2,
