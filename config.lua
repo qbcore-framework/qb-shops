@@ -90,21 +90,21 @@ Config.Products = {
             type = "item",
             slot = 11,
         },
-        [12] = {
-            name = "walkstick",
-            price = 50,
-            amount = 50,
-            info = {},
-            type = "item",
-            slot = 12,
+        --[12] = {
+        --    name = "walkstick",
+        --    price = 50,
+        --    amount = 50,
+        --    info = {},
+        --    type = "item",
+        --    slot = 12,
         },
-        [13] = {
+        [12] = {
             name = "rolling_paper",
             price = 2,
             amount = 5000,
             info = {},
             type = "item",
-            slot = 13,
+            slot = 12,
         },
     },
     ["hardware"] = {
@@ -415,9 +415,9 @@ Config.Locations = {
         ["type"] = "normal",
         ["coords"] = {
             [1] = {
-                ["x"] = 948.71,
-                ["y"] = 33.95,
-                ["z"] = 71.84,
+                ['x'] = 978.09631, 
+                ['y'] = 40.819992, 
+                ['z'] = 74.881919,
             },
         },
         ["products"] = Config.Products["casino"],
@@ -453,6 +453,18 @@ Config.Locations = {
                 ["y"] = -1344.99,
                 ["z"] = 29.49,
             }
+        },
+        ["products"] = Config.Products["normal"],
+    },
+    ["robsliquor6"] = {
+        ["label"] = "Casino Bar",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = {
+                ['x'] = 964.24298, 
+                ['y'] = 33.837673, 
+                ['z'] = 74.876853,
+            },
         },
         ["products"] = Config.Products["normal"],
     },
