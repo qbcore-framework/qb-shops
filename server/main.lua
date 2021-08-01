@@ -1,6 +1,6 @@
 RegisterServerEvent('qb-shops:server:UpdateShopItems')
 AddEventHandler('qb-shops:server:UpdateShopItems', function(shop, itemData, amount)
-    Config.Locations[shop]["products"][itemData.slot].amount =  Config.Locations[shop]["products"][itemData.slot].amount - amount
+    Config.Locations[shop]["products"][itemData.slot].amount = Config.Locations[shop]["products"][itemData.slot].amount - amount
     if Config.Locations[shop]["products"][itemData.slot].amount <= 0 then 
         Config.Locations[shop]["products"][itemData.slot].amount = 0
     end
