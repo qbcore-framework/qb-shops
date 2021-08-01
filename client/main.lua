@@ -67,7 +67,7 @@ Citizen.CreateThread(function()
                                 ShopItems.label = Config.Locations[shop]["label"]
                                 if Config.Locations[shop].type == "weapon" then
                                     if result then
-                                        ShopItems.items = Config.Products.weapons
+                                        ShopItems.items = Config.Locations[shop]["products"]
                                     else
                                         for i = 1, #Config.Locations[shop]["products"] do
                                             if not Config.Locations[shop]["products"][i].requiresLicense then
