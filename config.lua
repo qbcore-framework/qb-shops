@@ -639,7 +639,7 @@ Config.Locations = {
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
     },
-    ["247supermarket9"] = {
+    ["247supermarket10"] = {
         ["label"] = "24/7 Supermarket",
         ["type"] = "normal",
         ["coords"] = {
