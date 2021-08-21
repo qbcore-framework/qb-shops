@@ -19,7 +19,7 @@ Config.Products = {
             slot = 2,
         },
         [3] = {
-            name = "kurkakola",
+            name = "cocacola",
             price = 2,
             amount = 50,
             info = {},
