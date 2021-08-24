@@ -30,31 +30,20 @@ Citizen.CreateThread(function()
                         DrawText3Ds(loc["x"], loc["y"], loc["z"] + 0.15, '~g~E~w~ - Shop')
                         if IsControlJustPressed(0, 38) then -- E
                             local ShopItems = {}
-                            ShopItems.items = {}
                             QBCore.Functions.TriggerCallback('qb-shops:server:getLicenseStatus', function(result)
                                 ShopItems.label = Config.Locations[shop]["label"]
                                 if Config.Locations[shop].type == "weapon" then
                                     if result then
-                                        for i = 1, #Config.Locations[shop]["products"] do
-                                            if not Config.Locations[shop]["products"][i].requiredJob or QBCore.Functions.GetPlayerData().job.name == Config.Locations[shop]["products"][i].requiredJob then
-                                                table.insert(ShopItems.items, Config.Locations[shop]["products"][i])
-                                            end
-                                        end
+                                        ShopItems.items = SetupItems(shop)
                                     else
                                         for i = 1, #Config.Locations[shop]["products"] do
                                             if not Config.Locations[shop]["products"][i].requiresLicense then
-                                                if not Config.Locations[shop]["products"][i].requiredJob or QBCore.Functions.GetPlayerData().job.name == Config.Locations[shop]["products"][i].requiredJob then
-                                                    table.insert(ShopItems.items, Config.Locations[shop]["products"][i])
-                                                end
+                                                ShopItems.items = SetupItems(shop)
                                             end
                                         end
                                     end
                                 else
-                                    for i = 1, #Config.Locations[shop]["products"] do
-                                        if not Config.Locations[shop]["products"][i].requiredJob or QBCore.Functions.GetPlayerData().job.name == Config.Locations[shop]["products"][i].requiredJob then
-                                            table.insert(ShopItems.items, Config.Locations[shop]["products"][i])
-                                        end
-                                    end
+                                    ShopItems.items = SetupItems(shop)
                                 end
                                 for k, v in pairs(ShopItems.items) do
                                     ShopItems.items[k].slot = k
@@ -74,6 +63,26 @@ Citizen.CreateThread(function()
         Citizen.Wait(5)
     end
 end)
+
+function SetupItems(shop)
+    local products = Config.Locations[shop].products
+    local playerJob = QBCore.Functions.GetPlayerData().job.name
+    local items = {}
+
+    for i = 1, #products do
+        if not products[i].requiredJob then
+            table.insert(items, products[i])
+        else
+            for i2 = 1, #products[i].requiredJob do
+                if playerJob == products[i].requiredJob[i2] then
+                    table.insert(items, products[i])
+                end
+            end
+        end
+    end
+
+    return items
+end
 
 RegisterNetEvent('qb-shops:client:UpdateShop')
 AddEventHandler('qb-shops:client:UpdateShop', function(shop, itemData, amount)
