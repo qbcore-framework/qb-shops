@@ -35,16 +35,29 @@ Citizen.CreateThread(function()
                                 ShopItems.label = Config.Locations[shop]["label"]
                                 if Config.Locations[shop].type == "weapon" then
                                     if result then
-                                        ShopItems.items = Config.Locations[shop]["products"]
+                                        for i = 1, #Config.Locations[shop]["products"] do
+                                            if not Config.Locations[shop]["products"][i].requiredJob or QBCore.Functions.GetPlayerData().job.name == Config.Locations[shop]["products"][i].requiredJob then
+                                                table.insert(ShopItems.items, Config.Locations[shop]["products"][i])
+                                            end
+                                        end
                                     else
                                         for i = 1, #Config.Locations[shop]["products"] do
                                             if not Config.Locations[shop]["products"][i].requiresLicense then
-                                                table.insert(ShopItems.items, Config.Locations[shop]["products"][i])
+                                                if not Config.Locations[shop]["products"][i].requiredJob or QBCore.Functions.GetPlayerData().job.name == Config.Locations[shop]["products"][i].requiredJob then
+                                                    table.insert(ShopItems.items, Config.Locations[shop]["products"][i])
+                                                end
                                             end
                                         end
                                     end
                                 else
-                                    ShopItems.items = Config.Locations[shop]["products"]
+                                    for i = 1, #Config.Locations[shop]["products"] do
+                                        if not Config.Locations[shop]["products"][i].requiredJob or QBCore.Functions.GetPlayerData().job.name == Config.Locations[shop]["products"][i].requiredJob then
+                                            table.insert(ShopItems.items, Config.Locations[shop]["products"][i])
+                                        end
+                                    end
+                                end
+                                for k, v in pairs(ShopItems.items) do
+                                    ShopItems.items[k].slot = k
                                 end
                                 ShopItems.slots = 30
                                 TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_"..shop, ShopItems)
