@@ -433,7 +433,7 @@ Config.Locations = {
             [1] = vector3(978.09631, 40.819992, 74.881919)
         },
         ["products"] = Config.Products["casino"],
-        ["showblip"] = true,
+        ["showblip"] = false,
     },
     ["ltdgasoline"] = {
         ["label"] = "LTD Gasoline",
