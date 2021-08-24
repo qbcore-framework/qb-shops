@@ -21,6 +21,7 @@ Citizen.CreateThread(function()
 
         for shop, _ in pairs(Config.Locations) do
             local position = Config.Locations[shop]["coords"]
+            local products = Config.Locations[shop].products
             for _, loc in pairs(position) do
                 local dist = #(PlayerPos - vector3(loc["x"], loc["y"], loc["z"]))
                 if dist < 10 then
@@ -30,15 +31,24 @@ Citizen.CreateThread(function()
                         DrawText3Ds(loc["x"], loc["y"], loc["z"] + 0.15, '~g~E~w~ - Shop')
                         if IsControlJustPressed(0, 38) then -- E
                             local ShopItems = {}
+                            ShopItems.items = {}
                             QBCore.Functions.TriggerCallback('qb-shops:server:getLicenseStatus', function(result)
                                 ShopItems.label = Config.Locations[shop]["label"]
                                 if Config.Locations[shop].type == "weapon" then
                                     if result then
                                         ShopItems.items = SetupItems(shop)
                                     else
-                                        for i = 1, #Config.Locations[shop]["products"] do
-                                            if not Config.Locations[shop]["products"][i].requiresLicense then
-                                                ShopItems.items = SetupItems(shop)
+                                        for i = 1, #products do
+                                            if not products[i].requiredJob then
+                                                if not products[i].requiresLicense then
+                                                    table.insert(ShopItems.items, products[i])
+                                                end
+                                            else
+                                                for i2 = 1, #products[i].requiredJob do
+                                                    if QBCore.Functions.GetPlayerData().job.name == products[i].requiredJob[i2] and not products[i].requiresLicense then
+                                                        table.insert(ShopItems.items, products[i])
+                                                    end
+                                                end
                                             end
                                         end
                                     end
