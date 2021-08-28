@@ -781,7 +781,7 @@ Config.Locations = {
         ["label"] = "Leisure Shop",
         ["type"] = "leisure",
         ["coords"] = {
-            [1] = vector3(-1508.774, 1509.015, 115.2903)
+            [1] = vector3(-1505.34, 1511.69, 115.29)
         },
         ["products"] = Config.Products["leisureshop"],
         ["showblip"] = true,
