@@ -131,6 +131,7 @@ Config.Products = {
             info = {},
             type = "item",
             slot = 4,
+            requiredJob = { "mechanic", "police" }
         },
         [5] = {
             name = "screwdriverset",
@@ -357,6 +358,7 @@ Config.Products = {
             info = {},
             type = "item",
             slot = 3,
+            requiredJob = { "mechanic", "police" }
         },
         [4] = {
             name = "weapon_pistol",
