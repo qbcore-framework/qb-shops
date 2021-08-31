@@ -22,10 +22,25 @@ QBCore.Functions.CreateCallback('qb-shops:server:getLicenseStatus', function(sou
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local licenseTable = Player.PlayerData.metadata["licences"]
+    local licenseItem = Player.Functions.GetItemByName("weaponlicense")
 
     if licenseTable.weapon then
-        cb(true)
+        if licenseItem then
+            TriggerClientEvent('QBCore:Notify', src, "The dealer verifies your weapons license", "success")
+            Citizen.Wait(1000)
+            cb(true)
+        else
+            TriggerClientEvent('QBCore:Notify', src, "The dealer declines to show you firearms", "error")
+            Citizen.Wait(500)
+            TriggerClientEvent('QBCore:Notify', src, "Go pickup a copy of your firearms license from City Hall", "error")
+            Citizen.Wait(1000)
+            cb(false)
+        end
     else
+        TriggerClientEvent('QBCore:Notify', src, "The dealer declines to show you firearms", "error")
+        Citizen.Wait(500)
+        TriggerClientEvent('QBCore:Notify', src, "Speak with law enforcement to get a firearms license", "error")
+        Citizen.Wait(1000)
         cb(false)
     end
 end)
