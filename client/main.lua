@@ -32,11 +32,13 @@ Citizen.CreateThread(function()
                         if IsControlJustPressed(0, 38) then -- E
                             local ShopItems = {}
                             ShopItems.items = {}
-                            QBCore.Functions.TriggerCallback('qb-shops:server:getLicenseStatus', function(result)
+                            QBCore.Functions.TriggerCallback('qb-shops:server:getLicenseStatus', function(hasLicense, hasLicenseItem)
                                 ShopItems.label = Config.Locations[shop]["label"]
                                 if Config.Locations[shop].type == "weapon" then
-                                    if result then
+                                    if hasLicense and hasLicenseItem then
                                         ShopItems.items = SetupItems(shop)
+                                        QBCore.Functions.Notify("The dealer verifies your license", "success")
+                                        Citizen.Wait(500)
                                     else
                                         for i = 1, #products do
                                             if not products[i].requiredJob then
@@ -51,6 +53,10 @@ Citizen.CreateThread(function()
                                                 end
                                             end
                                         end
+                                        QBCore.Functions.Notify("The dealer declines to show you firearms", "error")
+                                        Citizen.Wait(500)
+                                        QBCore.Functions.Notify("Speak with law enforcement to get a firearms license", "error")
+                                        Citizen.Wait(1000)
                                     end
                                 else
                                     ShopItems.items = SetupItems(shop)

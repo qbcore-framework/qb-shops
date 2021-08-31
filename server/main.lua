@@ -22,10 +22,7 @@ QBCore.Functions.CreateCallback('qb-shops:server:getLicenseStatus', function(sou
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local licenseTable = Player.PlayerData.metadata["licences"]
+    local licenseItem = Player.Functions.GetItemByName("weaponlicense")
 
-    if licenseTable.weapon then
-        cb(true)
-    else
-        cb(false)
-    end
+    cb(licenseTable.weapon, licenseItem)
 end)
