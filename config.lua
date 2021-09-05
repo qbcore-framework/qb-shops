@@ -470,7 +470,7 @@ Config.Locations = {
         ["label"] = "Casino Bar",
         ["type"] = "normal",
         ["coords"] = {
-            [1] = vector3(964.24298, 33.837673, 74.876853)
+            [1] = vector3(936.1185, 28.61719, 71.833)
         },
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
