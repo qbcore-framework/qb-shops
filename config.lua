@@ -126,7 +126,7 @@ Config.Products = {
         },
         [4] = {
             name = "repairkit",
-            price = 500,
+            price = 250,
             amount = 50,
             info = {},
             type = "item",
@@ -213,6 +213,15 @@ Config.Products = {
             type = "item",
             slot = 14,
         },
+        [15] = {
+            name = "advancedrepairkit",
+            price = 500,
+            amount = 50,
+            info = {},
+            type = "item",
+            slot = 15,
+            requiredJob = { "mechanic" }
+        },        
     },
     ["coffeeshop"] = {
         [1] = {
