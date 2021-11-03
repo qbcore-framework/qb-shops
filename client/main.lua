@@ -43,12 +43,12 @@ Citizen.CreateThread(function()
                                         for i = 1, #products do
                                             if not products[i].requiredJob then
                                                 if not products[i].requiresLicense then
-                                                    table.insert(ShopItems.items, products[i])
+                                                    ShopItems.items[#ShopItems.items+1] = products[i]
                                                 end
                                             else
                                                 for i2 = 1, #products[i].requiredJob do
                                                     if QBCore.Functions.GetPlayerData().job.name == products[i].requiredJob[i2] and not products[i].requiresLicense then
-                                                        table.insert(ShopItems.items, products[i])
+                                                        ShopItems.items[#ShopItems.items+1] = products[i]
                                                     end
                                                 end
                                             end
@@ -84,19 +84,17 @@ function SetupItems(shop)
     local products = Config.Locations[shop].products
     local playerJob = QBCore.Functions.GetPlayerData().job.name
     local items = {}
-
     for i = 1, #products do
         if not products[i].requiredJob then
-            table.insert(items, products[i])
+            items[#items+1] = products[i]
         else
             for i2 = 1, #products[i].requiredJob do
                 if playerJob == products[i].requiredJob[i2] then
-                    table.insert(items, products[i])
+                    items[#items+1] = products[i]
                 end
             end
         end
     end
-
     return items
 end
 
@@ -112,8 +110,8 @@ end)
 
 RegisterNetEvent('qb-shops:client:RestockShopItems')
 AddEventHandler('qb-shops:client:RestockShopItems', function(shop, amount)
-    if Config.Locations[shop]["products"] ~= nil then 
-        for k, v in pairs(Config.Locations[shop]["products"]) do 
+    if Config.Locations[shop]["products"] ~= nil then
+        for k, v in pairs(Config.Locations[shop]["products"]) do
             Config.Locations[shop]["products"][k].amount = Config.Locations[shop]["products"][k].amount + amount
         end
     end
@@ -143,11 +141,11 @@ Citizen.CreateThread(function()
 	    elseif Config.Locations[store]["products"] == Config.Products["leisureshop"] then
 	        SetBlipSprite(StoreBlip, 52)
 	        SetBlipScale(StoreBlip, 0.6)
-	        SetBlipColour(StoreBlip, 3)           
+	        SetBlipColour(StoreBlip, 3)
 	    elseif Config.Locations[store]["products"] == Config.Products["mustapha"] then
 	        SetBlipSprite(StoreBlip, 225)
 	        SetBlipScale(StoreBlip, 0.6)
-	        SetBlipColour(StoreBlip, 3)              
+	        SetBlipColour(StoreBlip, 3)
 	    elseif Config.Locations[store]["products"] == Config.Products["coffeeshop"] then
 	        SetBlipSprite(StoreBlip, 140)
 	        SetBlipScale(StoreBlip, 0.55)
