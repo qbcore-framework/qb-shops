@@ -1,5 +1,6 @@
-RegisterServerEvent('qb-shops:server:UpdateShopItems')
-AddEventHandler('qb-shops:server:UpdateShopItems', function(shop, itemData, amount)
+local QBCore = exports['qb-core']:GetCoreObject()
+
+RegisterNetEvent('qb-shops:server:UpdateShopItems', function(shop, itemData, amount)
     Config.Locations[shop]["products"][itemData.slot].amount =  Config.Locations[shop]["products"][itemData.slot].amount - amount
     if Config.Locations[shop]["products"][itemData.slot].amount <= 0 then 
         Config.Locations[shop]["products"][itemData.slot].amount = 0
@@ -7,8 +8,7 @@ AddEventHandler('qb-shops:server:UpdateShopItems', function(shop, itemData, amou
     TriggerClientEvent('qb-shops:client:SetShopItems', -1, shop, Config.Locations[shop]["products"])
 end)
 
-RegisterServerEvent('qb-shops:server:RestockShopItems')
-AddEventHandler('qb-shops:server:RestockShopItems', function(shop)
+RegisterNetEvent('qb-shops:server:RestockShopItems', function(shop)
     if Config.Locations[shop]["products"] ~= nil then 
         local randAmount = math.random(10, 50)
         for k, v in pairs(Config.Locations[shop]["products"]) do 
