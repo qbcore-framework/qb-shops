@@ -5,7 +5,6 @@ description 'QB-Shops'
 version '1.0.0'
 
 shared_scripts { 
-	'@qb-core/import.lua',
 	'config.lua'
 }
 
