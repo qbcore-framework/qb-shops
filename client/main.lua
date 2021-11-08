@@ -2,7 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 -- Functions
 
-function SetupItems(shop)
+local function SetupItems(shop)
     local products = Config.Locations[shop].products
     local playerJob = QBCore.Functions.GetPlayerData().job.name
     local items = {}
@@ -20,7 +20,7 @@ function SetupItems(shop)
     return items
 end
 
-function DrawText3Ds(x, y, z, text)
+local function DrawText3Ds(x, y, z, text)
 	SetTextScale(0.35, 0.35)
     SetTextFont(4)
     SetTextProportional(1)
