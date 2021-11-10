@@ -4,13 +4,8 @@ game 'gta5'
 description 'QB-Shops'
 version '1.0.0'
 
-shared_scripts { 
-	'config.lua'
-}
-
+shared_script 'config.lua'
 client_script 'client/main.lua'
 server_script 'server/main.lua'
 
-dependencies {
-	'qb-inventory'
-}
+lua54 'yes'
