@@ -411,58 +411,12 @@ Config.Products = {
 }
 
 Config.Locations = {
-    ["beancoffee"] = {
-        ["label"] = "Bean Machine Coffee",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(-633.72, 236.15, 81.88)
-        },
-        ["products"] = Config.Products["coffeeplace"],
-        ["showblip"] = true,
-    },
-    ["casino"] = {
-        ["label"] = "Diamond Casino",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(948.3834, 34.21247, 71.839)
-        },
-        ["products"] = Config.Products["casino"],
-        ["showblip"] = true,
-    },
     ["ltdgasoline"] = {
         ["label"] = "LTD Gasoline",
         ["type"] = "normal",
         ["coords"] = {
             [1] = vector3(-48.44, -1757.86, 29.42),
             [2] = vector3(-47.23, -1756.58, 29.42)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-    },
-    ["247supermarket"] = {
-        ["label"] = "24/7 Supermarket",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(25.7, -1347.3, 29.49),
-            [2] = vector3(25.7, -1344.99, 29.49)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-    },
-    ["robsliquor6"] = {
-        ["label"] = "Casino Bar",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(936.1185, 28.61719, 71.833)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-    },
-    ["robsliquor"] = {
-        ["label"] = "Rob's Liqour",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(-1222.77, -907.19, 12.32)
         },
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
@@ -477,15 +431,6 @@ Config.Locations = {
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
     },
-    ["robsliquor2"] = {
-        ["label"] = "Rob's Liqour",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(-1487.7, -378.53, 40.16)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-    },
     ["ltdgasoline3"] = {
         ["label"] = "LTD Gasoline",
         ["type"] = "normal",
@@ -496,11 +441,32 @@ Config.Locations = {
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
     },
-    ["robsliquor3"] = {
-        ["label"] = "Rob's Liqour",
+    ["ltdgasoline4"] = {
+        ["label"] = "LTD Gasoline",
         ["type"] = "normal",
         ["coords"] = {
-            [1] = vector3(-2967.79, 391.64, 15.04)
+            [1] = vector3(1163.7, -323.92, 69.2),
+            [2] = vector3(1163.4, -322.24, 69.2)
+        },
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+    },
+    ["ltdgasoline5"] = {
+        ["label"] = "LTD Gasoline",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(1697.99, 4924.4, 42.06),
+            [2] = vector3(1699.44, 4923.47, 42.06)
+        },
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+    },
+    ["247supermarket"] = {
+        ["label"] = "24/7 Supermarket",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(25.7, -1347.3, 29.49),
+            [2] = vector3(25.7, -1344.99, 29.49)
         },
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
@@ -539,8 +505,8 @@ Config.Locations = {
         ["label"] = "24/7 Supermarket",
         ["type"] = "normal",
         ["coords"] = {
-            [1] = vector3(1697.99, 4924.4, 42.06),
-            [2] = vector3(1699.44, 4923.47, 42.06)
+            [1] = vector3(1961.48, 3739.96, 32.34),
+            [2] = vector3(1960.22, 3742.12, 32.34)
         },
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
@@ -549,8 +515,65 @@ Config.Locations = {
         ["label"] = "24/7 Supermarket",
         ["type"] = "normal",
         ["coords"] = {
-            [1] = vector3(1961.48, 3739.96, 32.34),
-            [2] = vector3(1960.22, 3742.12, 32.34)
+            [1] = vector3(547.79, 2671.79, 42.15),
+            [2] = vector3(548.1, 2669.38, 42.15)
+        },
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+    },
+    ["247supermarket7"] = {
+        ["label"] = "24/7 Supermarket",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(2679.25, 3280.12, 55.24),
+            [2] = vector3(2677.13, 281.38, 55.24)
+        },
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+    },
+    ["247supermarket8"] = {
+        ["label"] = "24/7 Supermarket",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(2557.94, 382.05, 108.62),
+            [2] = vector3(2555.53, 382.18, 108.62)
+        },
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+    },
+    ["247supermarket9"] = {
+        ["label"] = "24/7 Supermarket",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(373.55, 325.56, 103.56),
+            [2] = vector3(374.29, 327.9, 103.56)
+        },
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+    },
+    ["robsliquor"] = {
+        ["label"] = "Rob's Liqour",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(-1222.77, -907.19, 12.32)
+        },
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+    },
+    ["robsliquor2"] = {
+        ["label"] = "Rob's Liqour",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(-1487.7, -378.53, 40.16)
+        },
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+    },
+    ["robsliquor3"] = {
+        ["label"] = "Rob's Liqour",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(-2967.79, 391.64, 15.04)
         },
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
@@ -564,81 +587,11 @@ Config.Locations = {
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
     },
-    ["247supermarket7"] = {
-        ["label"] = "24/7 Supermarket",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(547.79, 2671.79, 42.15),
-            [2] = vector3(548.1, 2669.38, 42.15)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-    },
-    ["247supermarket8"] = {
-        ["label"] = "24/7 Supermarket",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(2679.25, 3280.12, 55.24),
-            [2] = vector3(2677.13, 281.38, 55.24)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-    },
-    ["247supermarket9"] = {
-        ["label"] = "24/7 Supermarket",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(2557.94, 382.05, 108.62),
-            [2] = vector3(2555.53, 382.18, 108.62)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-    },
-    ["delvecchioliquor"] = {
-        ["label"] = "Del Vecchio Liquor",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(-159.36, 6321.59, 31.58),
-            [2] = vector3(-160.66, 6322.85, 31.58)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-    },
-    ["donscountrystore"] = {
-        ["label"] = "Don's Country Store",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(161.41, 6640.78, 31.69),
-            [2] = vector3(163.04, 6642.45, 31.70)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-    },
-    ["ltdgasoline4"] = {
-        ["label"] = "LTD Gasoline",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(1163.7, -323.92, 69.2),
-            [2] = vector3(1163.4, -322.24, 69.2)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-    },
     ["robsliquor5"] = {
         ["label"] = "Rob's Liqour",
         ["type"] = "normal",
         ["coords"] = {
             [1] = vector3(1135.66, -982.76, 46.41)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-    },
-    ["247supermarket10"] = {
-        ["label"] = "24/7 Supermarket",
-        ["type"] = "normal",
-        ["coords"] = {
-            [1] = vector3(373.55, 325.56, 103.56),
-            [2] = vector3(374.29, 327.9, 103.56)
         },
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
@@ -670,15 +623,6 @@ Config.Locations = {
         ["products"] = Config.Products["hardware"],
         ["showblip"] = true,
     },   
-    ["coffeeshop"] = {
-        ["label"] = "Superfly",
-        ["type"] = "hardware",
-        ["coords"] = {
-            [1] = vector3(-1172.43, -1572.24, 4.66)
-        },
-        ["products"] = Config.Products["coffeeshop"],
-        ["showblip"] = true,
-    },
     ["ammunation1"] = {
         ["label"] = "Ammunation",
         ["type"] = "weapon",
@@ -760,6 +704,15 @@ Config.Locations = {
         ["products"] = Config.Products["weapons"],
         ["showblip"] = true,
     },
+    ["coffeeshop"] = {
+        ["label"] = "Superfly",
+        ["type"] = "hardware",
+        ["coords"] = {
+            [1] = vector3(-1172.43, -1572.24, 4.66)
+        },
+        ["products"] = Config.Products["coffeeshop"],
+        ["showblip"] = true,
+    },
     ["seaword1"] = {
         ["label"] = "Sea Word",
         ["type"] = "sea",
@@ -776,6 +729,53 @@ Config.Locations = {
             [1] = vector3(-1505.91, 1511.78, 115.29)
         },
         ["products"] = Config.Products["leisureshop"],
+        ["showblip"] = true,
+    },
+    ["beancoffee"] = {
+        ["label"] = "Bean Machine Coffee",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(-633.72, 236.15, 81.88)
+        },
+        ["products"] = Config.Products["coffeeplace"],
+        ["showblip"] = true,
+    },
+    ["casino"] = {
+        ["label"] = "Diamond Casino",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(948.3834, 34.21247, 71.839)
+        },
+        ["products"] = Config.Products["casino"],
+        ["showblip"] = true,
+    },
+    ["casino2"] = {
+        ["label"] = "Casino Bar",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(936.1185, 28.61719, 71.833)
+        },
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+    },
+    ["delvecchioliquor"] = {
+        ["label"] = "Del Vecchio Liquor",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(-159.36, 6321.59, 31.58),
+            [2] = vector3(-160.66, 6322.85, 31.58)
+        },
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+    },
+    ["donscountrystore"] = {
+        ["label"] = "Don's Country Store",
+        ["type"] = "normal",
+        ["coords"] = {
+            [1] = vector3(161.41, 6640.78, 31.69),
+            [2] = vector3(163.04, 6642.45, 31.70)
+        },
+        ["products"] = Config.Products["normal"],
         ["showblip"] = true,
     },
 }
