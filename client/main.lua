@@ -128,7 +128,7 @@ CreateThread(function()
             for i = 1, #Config.Locations[store]["coords"] do
                 StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"][i]["x"], Config.Locations[store]["coords"][i]["y"], Config.Locations[store]["coords"][i]["z"])
                 SetBlipColour(StoreBlip, 0)
-                SetBlipSprite(Config.Locations[store]["blipsprite"])
+                SetBlipSprite(StoreBlip, Config.Locations[store]["blipsprite"])
                 SetBlipScale(StoreBlip, 0.6)
                 SetBlipDisplay(StoreBlip, 4)
                 SetBlipAsShortRange(StoreBlip, true)
