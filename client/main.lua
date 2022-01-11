@@ -70,16 +70,16 @@ CreateThread(function()
                     InRange = true
                     DrawMarker(2, loc["x"], loc["y"], loc["z"], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.25, 0.2, 0.1, 255, 255, 255, 155, 0, 0, 0, 1, 0, 0, 0)
                     if dist < 1 then
-                        DrawText3Ds(loc["x"], loc["y"], loc["z"] + 0.15, '~g~[E]~w~ - Shop')
+                        DrawText3Ds(loc["x"], loc["y"], loc["z"] + 0.15, Lang:t("info.interact"))
                         if IsControlJustPressed(0, 38) then -- E
                             local ShopItems = {}
                             ShopItems.items = {}
-                            QBCore.Functions.TriggerCallback('qb-shops:server:getLicenseStatus', function(hasLicense, hasLicenseItem)
+                            QBCore.Functions.TriggerCallback("qb-shops:server:getLicenseStatus", function(hasLicense, hasLicenseItem)
                                 ShopItems.label = Config.Locations[shop]["label"]
                                 if Config.Locations[shop].type == "weapon" then
                                     if hasLicense and hasLicenseItem then
                                         ShopItems.items = SetupItems(shop)
-                                        QBCore.Functions.Notify("The dealer verifies your license", "success")
+                                        QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
                                         Wait(500)
                                     else
                                         for i = 1, #products do
@@ -95,9 +95,9 @@ CreateThread(function()
                                                 end
                                             end
                                         end
-                                        QBCore.Functions.Notify("The dealer declines to show you firearms", "error")
+                                        QBCore.Functions.Notify(Lang:t("error.dealer_decline"), "error")
                                         Wait(500)
-                                        QBCore.Functions.Notify("Speak with law enforcement to get a firearms license", "error")
+                                        QBCore.Functions.Notify(Lang:t("error.talk_cop"), "error")
                                         Wait(1000)
                                     end
                                 else
