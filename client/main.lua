@@ -76,7 +76,7 @@ CreateThread(function()
                             ShopItems.items = {}
                             QBCore.Functions.TriggerCallback("qb-shops:server:getLicenseStatus", function(hasLicense, hasLicenseItem)
                                 ShopItems.label = Config.Locations[shop]["label"]
-                                if Config.Locations[shop].type == "weapon" then
+                                if Config.Locations[shop].products == Config.Products["weapons"] then
                                     if hasLicense and hasLicenseItem then
                                         ShopItems.items = SetupItems(shop)
                                         QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
