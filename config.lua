@@ -713,6 +713,15 @@ Config.Locations = {
         ["showblip"] = true,
         ["blipsprite"] = 110
     },
+    ["ammunation10"] = {
+        ["label"] = "Ammunation",
+        ["coords"] = {
+            [1] = vector3(-1305.62, -394.24, 36.7)
+        },
+        ["products"] = Config.Products["weapons"],
+        ["showblip"] = true,
+        ["blipsprite"] = 110
+    },
 
     -- Casino Locations
     ["casino"] = {
