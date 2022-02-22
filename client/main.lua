@@ -126,15 +126,18 @@ CreateThread(function()
     for store, _ in pairs(Config.Locations) do
         if Config.Locations[store]["showblip"] then
             for i = 1, #Config.Locations[store]["coords"] do
-                StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"][i]["x"], Config.Locations[store]["coords"][i]["y"], Config.Locations[store]["coords"][i]["z"])
-                SetBlipColour(StoreBlip, 0)
-                SetBlipSprite(StoreBlip, Config.Locations[store]["blipsprite"])
-                SetBlipScale(StoreBlip, 0.6)
-                SetBlipDisplay(StoreBlip, 4)
-                SetBlipAsShortRange(StoreBlip, true)
-                BeginTextCommandSetBlipName("STRING")
-                AddTextComponentSubstringPlayerName(Config.Locations[store]["label"])
-                EndTextCommandSetBlipName(StoreBlip)
+                if Config.Locations[store]["coords"][1] then -- as we always have atleast 1 set of coords in the shops but we also want to stop (break) after its done
+                    StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"][i]["x"], Config.Locations[store]["coords"][i]["y"], Config.Locations[store]["coords"][i]["z"])
+                    SetBlipColour(StoreBlip, 0)
+                    SetBlipSprite(StoreBlip, Config.Locations[store]["blipsprite"])
+                    SetBlipScale(StoreBlip, 0.6)
+                    SetBlipDisplay(StoreBlip, 4)
+                    SetBlipAsShortRange(StoreBlip, true)
+                    BeginTextCommandSetBlipName("STRING")
+                    AddTextComponentSubstringPlayerName(Config.Locations[store]["label"])
+                    EndTextCommandSetBlipName(StoreBlip)
+                    break -- we simple stop at the first result we get from the list, independend if the amount
+                end
             end
         end
     end
