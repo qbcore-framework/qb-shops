@@ -1,5 +1,5 @@
 Config = {}
-Config.UseTarget = false
+Config.UseTarget = GetConvar('UseTarget', false)
 
 Config.Products = {
     ["normal"] = {
