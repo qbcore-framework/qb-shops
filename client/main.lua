@@ -111,10 +111,7 @@ if not Config.UseTarget then
     CreateThread(function()
         for shop, _ in pairs(Config.Locations) do
             for i = 1, #Config.Locations[shop]["coords"] do
-                local shopZone = CircleZone:Create(Config.Locations[shop]["coords"][i], Config.Locations[shop]["radius"], {
-                    useZ = true,
-                    debugPoly = false,
-                })
+                local shopZone = CircleZone:Create(Config.Locations[shop]["coords"][i], Config.Locations[shop]["radius"], {useZ = true})
                 shopZone:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside)
                     if isPointInside then
                         inShop = true
@@ -146,10 +143,7 @@ if Config.UseTarget then
             for i = 1, #Config.Locations[store]["coords"] do
                 coords = Config.Locations[store]["coords"][i]
                 radius = Config.Locations[store]["radius"]
-                exports["qb-target"]:AddCircleZone(coords, coords, radius, {
-                    useZ = true,
-                    debugPoly = true,
-                }, {
+                exports["qb-target"]:AddCircleZone(coords, coords, radius, {useZ = true}, {
                     options = {
                         {
                             type = "client",
