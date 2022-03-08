@@ -490,7 +490,8 @@ Config.Locations = {
             [6] = vector3(22.0, -1107.2, 29.8),         -- AMMU 6
             [7] = vector3(2567.6, 294.3, 108.7),        -- AMMU 7
             [8] = vector3(-1117.5, 2698.6, 18.5),       -- AMMU 8
-            [9] = vector3(842.4, -1033.4, 28.1)         -- AMMU 9
+            [9] = vector3(842.4, -1033.4, 28.1),        -- AMMU 9
+            [10] = vector3(-1305.62, -394.24, 36.7)     -- AMMU 10
         },
         ["radius"] = 2.2,
         ["products"] = Config.Products["weapons"],
