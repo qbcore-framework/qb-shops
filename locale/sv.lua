@@ -1,6 +1,6 @@
 local Translations = {
     info = {
-        interact = "~g~E~w~ - Affär"
+        interact = "[E] Affär"
     },
     error = {
         dealer_decline = "Handlaren har nekat att visa dig sina vapen",

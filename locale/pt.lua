@@ -1,6 +1,6 @@
 local Translations = {
     info = {
-        interact = "~g~E~w~ - Abrir Loja"
+        interact = "[E] Abrir Loja"
     },
     error = {
         dealer_decline = "O Vendedor recusou mostrar o armeiro",
