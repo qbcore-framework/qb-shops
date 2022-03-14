@@ -1,4 +1,5 @@
 local QBCore = exports["qb-core"]:GetCoreObject()
+inShop = false
 
 -- Functions
 local function SetupItems(shop)
@@ -43,8 +44,9 @@ RegisterNetEvent("qb-shops:client:openShop", function()
         local position = Config.Locations[shop]["coords"]
         local products = Config.Locations[shop].products
         for _, loc in pairs(position) do
+            --TODO: Get rid of distance check somehow (its used for getting the correct shop from the config)
             local dist = #(PlayerPos - vector3(loc["x"], loc["y"], loc["z"]))
-            if dist < 3 then
+            if dist < Config.Locations[shop]["radius"] then
                 local ShopItems = {}
                 ShopItems.items = {}
                 QBCore.Functions.TriggerCallback("qb-shops:server:getLicenseStatus", function(hasLicense, hasLicenseItem)
@@ -107,12 +109,11 @@ CreateThread(function()
 end)
 
 if not Config.UseTarget then
-    local inShop = false
     CreateThread(function()
         for shop, _ in pairs(Config.Locations) do
             for i = 1, #Config.Locations[shop]["coords"] do
-                local shopZone = CircleZone:Create(Config.Locations[shop]["coords"][i], Config.Locations[shop]["radius"], {useZ = true})
-                shopZone:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside)
+                local shopZone = CircleZone:Create(vector3(Config.Locations[shop]["coords"][i]["x"], Config.Locations[shop]["coords"][i]["y"], Config.Locations[shop]["coords"][i]["z"]), Config.Locations[shop]["radius"], {useZ = true, debugPoly=false, debugColor = {255,0,255}})
+                shopZone:onPlayerInOut(function(isPointInside)
                     if isPointInside then
                         inShop = true
                         exports["qb-core"]:DrawText(Lang:t("info.interact"))
@@ -120,19 +121,15 @@ if not Config.UseTarget then
                         inShop = false
                         exports["qb-core"]:HideText()
                     end
-                end, 100)
+                    while inShop do
+                        if IsControlJustPressed(0, 38) then -- E
+                            exports["qb-core"]:KeyPressed()
+                            TriggerEvent("qb-shops:client:openShop")
+                        end
+                        Wait(5)
+                    end
+                end)
             end
-        end
-    end)
-    CreateThread(function()
-        while true do
-            if IsControlJustPressed(0, 38) then -- E
-                if inShop then
-                    exports["qb-core"]:KeyPressed()
-                    TriggerEvent("qb-shops:client:openShop")
-                end
-            end
-            Wait(5)
         end
     end)
 end
@@ -141,18 +138,26 @@ if Config.UseTarget then
     CreateThread(function()
         for store, _ in pairs(Config.Locations) do
             for i = 1, #Config.Locations[store]["coords"] do
-                coords = Config.Locations[store]["coords"][i]
-                radius = Config.Locations[store]["radius"]
-                exports["qb-target"]:AddCircleZone(coords, coords, radius, {useZ = true}, {
-                    options = {
-                        {
-                            type = "client",
-                            event = "qb-shops:client:openShop",
-                            icon = "fas fa-shopping-basket",
-                            label = "Open Shop",
-                        }
-                    },
-                    distance = 3.0
+                exports['qb-target']:SpawnPed({
+                    [i] = {
+                        model = Config.Locations[store]["ped"]["model"],
+                        coords = Config.Locations[store]["coords"][i],
+                        minusOne = true,
+                        freeze = true,
+                        invincible = true,
+                        blockevents = true,
+                        target = {
+                            options = {
+                                {
+                                    type = 'client',
+                                    event = 'qb-shops:client:openShop',
+                                    icon = 'fas fa-shopping-basket',
+                                    label = 'Open Shop',
+                                },
+                            },
+                            distance = 4.0,
+                        },
+                    }
                 })
             end
         end

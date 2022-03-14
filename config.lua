@@ -1,5 +1,5 @@
 Config = {}
-Config.UseTarget = GetConvar('UseTarget', false)
+Config.UseTarget = GetConvar('UseTarget', 'false') == 'true'
 
 Config.Products = {
     ["normal"] = {
@@ -381,24 +381,6 @@ Config.Products = {
             requiresLicense = true
         },
     },
-    ["coffeeplace"] = {
-        [1] = {
-            name = "coffee",
-            price = 5,
-            amount = 500,
-            info = {},
-            type = "item",
-            slot = 1,
-        },
-        [2] = {
-            name = "lighter",
-            price = 2,
-            amount = 50,
-            info = {},
-            type = "item",
-            slot = 2,
-        },
-    },
     ["casino"] = {
         [1] = {
             name = 'casinochips',
@@ -416,15 +398,18 @@ Config.Locations = {
     ["247supermarket"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [1] = vector3(25.68, -1346.51, 29.5),       -- 24/7 1
-            [2] = vector3(-3039.99, 585.54, 7.91),      -- 24/7 2
-            [3] = vector3(-3242.91, 1001.25, 12.83),    -- 24/7 3
-            [4] = vector3(1729.23, 6415.35, 35.04),     -- 24/7 4
-            [5] = vector3(1960.82, 3741.28, 32.34),     -- 24/7 5
-            [6] = vector3(547.87, 2670.43, 42.16),      -- 24/7 6
-            [7] = vector3(2677.97, 3280.86, 55.24),     -- 24/7 7
-            [8] = vector3(2556.45, 382.04, 108.62),     -- 24/7 8
-            [9] = vector3(373.91, 326.86, 103.57),      -- 24/7 9
+            [1] = vector4(24.47, -1346.62, 29.5, 271.66),       -- 24/7 1
+            [2] = vector4(-3039.54, 584.38, 7.91, 17.27),       -- 24/7 2
+            [3] = vector4(-3242.97, 1000.01, 12.83, 357.57),    -- 24/7 3
+            [4] = vector4(1728.07, 6415.63, 35.04, 242.95),     -- 24/7 4
+            [5] = vector4(1959.82, 3740.48, 32.34, 301.57),     -- 24/7 5
+            [6] = vector4(549.13, 2670.85, 42.16, 99.39),       -- 24/7 6
+            [7] = vector4(2677.47, 3279.76, 55.24, 335.08),     -- 24/7 7
+            [8] = vector4(2556.66, 380.84, 108.62, 356.67),     -- 24/7 8
+            [9] = vector4(372.66, 326.98, 103.57, 253.73),      -- 24/7 9
+        },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
         },
         ["radius"] = 2.2,
         ["products"] = Config.Products["normal"],
@@ -436,11 +421,14 @@ Config.Locations = {
     ["ltdgasoline"] = {
         ["label"] = "LTD Gasoline",
         ["coords"] = {
-            [1] = vector3(-47.89, -1757.25, 29.42),     -- LTD 1
-            [2] = vector3(-707.31, -913.74, 19.22),     -- LTD 2
-            [3] = vector3(-1821.0, 793.29, 138.11),     -- LTD 3
-            [4] = vector3(1163.53, -323.11, 69.21),     -- LTD 4
-            [5] = vector3(1698.66, 4923.98, 42.06)      -- LTD 5
+            [1] = vector4(-47.02, -1758.23, 29.42, 45.05),      -- LTD 1
+            [2] = vector4(-706.06, -913.97, 19.22, 88.04),      -- LTD 2
+            [3] = vector4(-1820.02, 794.03, 138.09, 135.45),    -- LTD 3
+            [4] = vector4(1164.71, -322.94, 69.21, 101.72),     -- LTD 4
+            [5] = vector4(1697.87, 4922.96, 42.06, 324.71)      -- LTD 5
+        },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
         },
         ["radius"] = 2.2,
         ["products"] = Config.Products["normal"],
@@ -452,11 +440,14 @@ Config.Locations = {
     ["robsliquor"] = {
         ["label"] = "Rob's Liqour",
         ["coords"] = {
-            [1] = vector3(-1222.77, -907.19, 12.32),    -- ROB 1
-            [2] = vector3(-1487.7, -378.53, 40.16),     -- ROB 2
-            [3] = vector3(-2967.79, 391.64, 15.04),     -- ROB 3
-            [4] = vector3(1165.28, 2709.4, 38.15),      -- ROB 4
-            [5] = vector3(1135.66, -982.76, 46.41)      -- ROB 5
+            [1] = vector4(-1221.58, -908.15, 12.33, 35.49),     -- ROB 1
+            [2] = vector4(-1486.59, -377.68, 40.16, 139.51),    -- ROB 2
+            [3] = vector4(-2966.39, 391.42, 15.04, 87.48),      -- ROB 3
+            [4] = vector4(1165.17, 2710.88, 38.16, 179.43),     -- ROB 4
+            [5] = vector4(1134.2, -982.91, 46.42, 277.24)       -- ROB 5
+        },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
         },
         ["radius"] = 2.2,
         ["products"] = Config.Products["normal"],
@@ -468,9 +459,12 @@ Config.Locations = {
     ["hardware"] = {
         ["label"] = "Hardware Store",
         ["coords"] = {
-            [1] = vector3(45.55, -1749.01, 29.6),       -- HDWR 1
-            [2] = vector3(2747.8, 3472.86, 55.67),      -- HDWR 2
-            [3] = vector3(-421.84, 6136.09, 31.78)      -- HDWR 3
+            [1] = vector4(45.68, -1749.04, 29.61, 53.13),       -- HDWR 1
+            [2] = vector4(2747.71, 3472.85, 55.67, 255.08),     -- HDWR 2
+            [3] = vector4(-421.83, 6136.13, 31.88, 228.2)       -- HDWR 3
+        },
+        ["ped"] = {
+            ["model"] = 'mp_m_waremech_01'
         },
         ["radius"] = 2.2,
         ["products"] = Config.Products["hardware"],
@@ -482,16 +476,19 @@ Config.Locations = {
     ["ammunation"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(-662.1, -935.3, 21.8),        -- AMMU 1
-            [2] = vector3(810.2, -2157.3, 29.6),        -- AMMU 2
-            [3] = vector3(1693.4, 3759.5, 34.7),        -- AMMU 3
-            [4] = vector3(-330.2, 6083.8, 31.4),        -- AMMU 4
-            [5] = vector3(252.3, -50.0, 69.9),          -- AMMU 5
-            [6] = vector3(22.0, -1107.2, 29.8),         -- AMMU 6
-            [7] = vector3(2567.6, 294.3, 108.7),        -- AMMU 7
-            [8] = vector3(-1117.5, 2698.6, 18.5),       -- AMMU 8
-            [9] = vector3(842.4, -1033.4, 28.1),        -- AMMU 9
-            [10] = vector3(-1305.62, -394.24, 36.7)     -- AMMU 10
+            [1] = vector4(-661.96, -933.53, 21.83, 177.05),        -- AMMU 1
+            [2] = vector4(809.68, -2159.13, 29.62, 1.43),        -- AMMU 2
+            [3] = vector4(1692.67, 3761.38, 34.71, 227.65),        -- AMMU 3
+            [4] = vector4(-331.23, 6085.37, 31.45, 228.02),        -- AMMU 4
+            [5] = vector4(253.63, -51.02, 69.94, 72.91),          -- AMMU 5
+            [6] = vector4(23.0, -1105.67, 29.8, 162.91),         -- AMMU 6
+            [7] = vector4(2567.48, 292.59, 108.73, 349.68),        -- AMMU 7
+            [8] = vector4(-1118.59, 2700.05, 18.55, 221.89),       -- AMMU 8
+            [9] = vector4(841.92, -1035.32, 28.19, 1.56),        -- AMMU 9
+            [10] = vector4(-1304.19, -395.12, 36.7, 75.03)     -- AMMU 10
+        },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
         },
         ["radius"] = 2.2,
         ["products"] = Config.Products["weapons"],
@@ -503,7 +500,10 @@ Config.Locations = {
     ["casino"] = {
         ["label"] = "Diamond Casino",
         ["coords"] = {
-            [1] = vector3(948.3834, 34.21247, 71.839)
+            [1] = vector4(950.21, 33.11, 71.84, 54.11)
+        },
+        ["ped"] = {
+            ["model"] = 's_m_y_casino_01'
         },
         ["radius"] = 2.2,
         ["products"] = Config.Products["casino"],
@@ -513,7 +513,10 @@ Config.Locations = {
     ["casino2"] = {
         ["label"] = "Casino Bar",
         ["coords"] = {
-            [1] = vector3(936.1185, 28.61719, 71.833)
+            [1] = vector4(937.45, 27.22, 71.83, 61.21)
+        },
+        ["ped"] = {
+            ["model"] = 'a_m_y_smartcaspat_01'
         },
         ["radius"] = 2.2,
         ["products"] = Config.Products["normal"],
@@ -525,7 +528,10 @@ Config.Locations = {
     ["weedshop"] = {
         ["label"] = "Smoke on the water",
         ["coords"] = {
-            [1] = vector3(-1172.43, -1572.24, 4.66)
+            [1] = vector4(-1171.31, -1570.89, 4.66, 130.03)
+        },
+        ["ped"] = {
+            ["model"] = 'a_m_y_hippy_01'
         },
         ["radius"] = 2.2,
         ["products"] = Config.Products["weedshop"],
@@ -533,23 +539,14 @@ Config.Locations = {
         ["blipsprite"] = 140
     },
 
-    -- Bean Coffee Locations
-    ["beancoffee"] = {
-        ["label"] = "Bean Machine Coffee",
-        ["coords"] = {
-            [1] = vector3(-633.72, 236.15, 81.88)
-        },
-        ["radius"] = 2.2,
-        ["products"] = Config.Products["coffeeplace"],
-        ["showblip"] = true,
-        ["blipsprite"] = 52
-    },
-
     -- Sea Word Locations
     ["seaword1"] = {
         ["label"] = "Sea Word",
         ["coords"] = {
-            [1] = vector3(-1686.9, -1072.23, 13.15)
+            [1] = vector4(-1687.03, -1072.18, 13.15, 52.93)
+        },
+        ["ped"] = {
+            ["model"] = 'a_m_y_beach_01'
         },
         ["radius"] = 2.2,
         ["products"] = Config.Products["gearshop"],
@@ -561,7 +558,10 @@ Config.Locations = {
     ["leisureshop"] = {
         ["label"] = "Leisure Shop",
         ["coords"] = {
-            [1] = vector3(-1505.91, 1511.78, 115.29)
+            [1] = vector4(-1505.91, 1511.95, 115.29, 257.13)
+        },
+        ["ped"] = {
+            ["model"] = 'a_m_y_beach_01'
         },
         ["radius"] = 2.2,
         ["products"] = Config.Products["leisureshop"],
