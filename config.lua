@@ -1,5 +1,5 @@
 Config = {}
-Config.UseTarget = GetConvar('UseTarget', 'false') == 'true'
+Config.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add `setr UseTarget true` to use this and just that from true to false or the other way around)
 
 Config.Products = {
     ["normal"] = {
@@ -476,16 +476,16 @@ Config.Locations = {
     ["ammunation"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector4(-661.96, -933.53, 21.83, 177.05),        -- AMMU 1
+            [1] = vector4(-661.96, -933.53, 21.83, 177.05),      -- AMMU 1
             [2] = vector4(809.68, -2159.13, 29.62, 1.43),        -- AMMU 2
-            [3] = vector4(1692.67, 3761.38, 34.71, 227.65),        -- AMMU 3
-            [4] = vector4(-331.23, 6085.37, 31.45, 228.02),        -- AMMU 4
-            [5] = vector4(253.63, -51.02, 69.94, 72.91),          -- AMMU 5
+            [3] = vector4(1692.67, 3761.38, 34.71, 227.65),      -- AMMU 3
+            [4] = vector4(-331.23, 6085.37, 31.45, 228.02),      -- AMMU 4
+            [5] = vector4(253.63, -51.02, 69.94, 72.91),         -- AMMU 5
             [6] = vector4(23.0, -1105.67, 29.8, 162.91),         -- AMMU 6
-            [7] = vector4(2567.48, 292.59, 108.73, 349.68),        -- AMMU 7
-            [8] = vector4(-1118.59, 2700.05, 18.55, 221.89),       -- AMMU 8
+            [7] = vector4(2567.48, 292.59, 108.73, 349.68),      -- AMMU 7
+            [8] = vector4(-1118.59, 2700.05, 18.55, 221.89),     -- AMMU 8
             [9] = vector4(841.92, -1035.32, 28.19, 1.56),        -- AMMU 9
-            [10] = vector4(-1304.19, -395.12, 36.7, 75.03)     -- AMMU 10
+            [10] = vector4(-1304.19, -395.12, 36.7, 75.03)       -- AMMU 10
         },
         ["ped"] = {
             ["model"] = 's_m_y_ammucity_01'
@@ -540,7 +540,7 @@ Config.Locations = {
     },
 
     -- Sea Word Locations
-    ["seaword1"] = {
+    ["seaword"] = {
         ["label"] = "Sea Word",
         ["coords"] = {
             [1] = vector4(-1687.03, -1072.18, 13.15, 52.93)
