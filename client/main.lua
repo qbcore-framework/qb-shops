@@ -61,10 +61,10 @@ local function openShop(shop, data)
     local products = data.products
     local ShopItems = {}
     ShopItems.items = {}
-    QBCore.Functions.TriggerCallback("qb-shops:server:getLicenseStatus", function(hasLicense)
+    QBCore.Functions.TriggerCallback("qb-shops:server:getLicenseStatus", function(hasLicense, hasLicenseItem)
         ShopItems.label = data["label"]
         if data.products == Config.Products["weapons"] then
-            if hasLicense then
+            if hasLicense and hasLicenseItem then
                 ShopItems.items = SetupItems(shop)
                 QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
                 Wait(500)

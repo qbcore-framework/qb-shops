@@ -19,10 +19,11 @@ RegisterNetEvent('qb-shops:server:RestockShopItems', function(shop)
 end)
 
 QBCore.Functions.CreateCallback('qb-shops:server:getLicenseStatus', function(source, cb)
-    local Player = QBCore.Functions.GetPlayer(source)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
     local licenseTable = Player.PlayerData.metadata["licences"]
-    
-    cb(licenseTable.weapon)
+    local licenseItem = Player.Functions.GetItemByName("weaponlicense")
+    cb(licenseTable.weapon, licenseItem)
 end)
 
 local ItemList = {
