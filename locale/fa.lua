@@ -1,6 +1,7 @@
 local Translations = {
     info = {
-        interact = "~g~E~w~ - Furushgah"
+        open_shop = "[E] Furushgah",
+        sell_chips = "[E] Sell Chips"
     },
     error = {
         dealer_decline = "Frushande Az Neshan Dadan Aslahe Be Shoma Khoddari Mikonad",

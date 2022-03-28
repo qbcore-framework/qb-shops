@@ -1,6 +1,7 @@
 local Translations = {
     info = {
-        interact = "~g~E~w~ - Negozio"
+        open_shop = "[E] Negozio",
+        sell_chips = "[E] Sell Chips"
     },
     error = {
         dealer_decline = "Il commerciante rifiuta di mostrarti le armi da fuoco",

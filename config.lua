@@ -1,4 +1,10 @@
 Config = {}
+Config.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add `setr UseTarget true` to use this and just that from true to false or the other way around)
+Config.SellCasinoChips = {
+    coords = vector4(950.37, 34.72, 71.87, 33.82),
+    radius = 1.5,
+    ped = 's_m_y_casino_01'
+}
 
 Config.Products = {
     ["normal"] = {
@@ -380,24 +386,6 @@ Config.Products = {
             requiresLicense = true
         },
     },
-    ["coffeeplace"] = {
-        [1] = {
-            name = "coffee",
-            price = 5,
-            amount = 500,
-            info = {},
-            type = "item",
-            slot = 1,
-        },
-        [2] = {
-            name = "lighter",
-            price = 2,
-            amount = 50,
-            info = {},
-            type = "item",
-            slot = 2,
-        },
-    },
     ["casino"] = {
         [1] = {
             name = 'casinochips',
@@ -415,9 +403,12 @@ Config.Locations = {
     ["247supermarket"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [1] = vector3(25.7, -1347.3, 29.49),
-            [2] = vector3(25.7, -1344.99, 29.49)
+            [1] = vector4(24.47, -1346.62, 29.5, 271.66)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -425,9 +416,12 @@ Config.Locations = {
     ["247supermarket2"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [1] = vector3(-3038.71, 585.9, 7.9),
-            [2] = vector3(-3041.04, 585.11, 7.9)
+            [1] = vector4(-3039.54, 584.38, 7.91, 17.27)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -435,9 +429,12 @@ Config.Locations = {
     ["247supermarket3"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [1] = vector3(-3241.47, 1001.14, 12.83),
-            [2] = vector3(-3243.98, 1001.35, 12.83)
+            [1] = vector4(-3242.97, 1000.01, 12.83, 357.57)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -445,19 +442,12 @@ Config.Locations = {
     ["247supermarket4"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [1] = vector3(1728.66, 6414.16, 35.03),
-            [2] = vector3(1729.72, 6416.27, 35.03)
+            [1] = vector4(1728.07, 6415.63, 35.04, 242.95)
         },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-        ["blipsprite"] = 52
-    },
-    ["247supermarket5"] = {
-        ["label"] = "24/7 Supermarket",
-        ["coords"] = {
-            [1] = vector3(1697.99, 4924.4, 42.06),
-            [2] = vector3(1699.44, 4923.47, 42.06)
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
         },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -465,9 +455,12 @@ Config.Locations = {
     ["247supermarket6"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [1] = vector3(1961.48, 3739.96, 32.34),
-            [2] = vector3(1960.22, 3742.12, 32.34)
+            [1] = vector4(1959.82, 3740.48, 32.34, 301.57)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -475,9 +468,12 @@ Config.Locations = {
     ["247supermarket7"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [1] = vector3(547.79, 2671.79, 42.15),
-            [2] = vector3(548.1, 2669.38, 42.15)
+            [7] = vector4(2677.47, 3279.76, 55.24, 335.08)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -485,9 +481,12 @@ Config.Locations = {
     ["247supermarket8"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [1] = vector3(2679.25, 3280.12, 55.24),
-            [2] = vector3(2677.13, 281.38, 55.24)
+            [8] = vector4(2556.66, 380.84, 108.62, 356.67)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -495,19 +494,12 @@ Config.Locations = {
     ["247supermarket9"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [1] = vector3(2557.94, 382.05, 108.62),
-            [2] = vector3(2555.53, 382.18, 108.62)
+            [9] = vector4(372.66, 326.98, 103.57, 253.73)
         },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-        ["blipsprite"] = 52
-    },
-    ["247supermarket10"] = {
-        ["label"] = "24/7 Supermarket",
-        ["coords"] = {
-            [1] = vector3(373.55, 325.56, 103.56),
-            [2] = vector3(374.29, 327.9, 103.56)
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
         },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -517,9 +509,12 @@ Config.Locations = {
     ["ltdgasoline"] = {
         ["label"] = "LTD Gasoline",
         ["coords"] = {
-            [1] = vector3(-48.44, -1757.86, 29.42),
-            [2] = vector3(-47.23, -1756.58, 29.42)
+            [1] = vector4(-47.02, -1758.23, 29.42, 45.05)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -527,9 +522,12 @@ Config.Locations = {
     ["ltdgasoline2"] = {
         ["label"] = "LTD Gasoline",
         ["coords"] = {
-            [1] = vector3(-707.41, -912.83, 19.21),
-            [2] = vector3(-707.32, -914.65, 19.21)
+            [1] = vector4(-706.06, -913.97, 19.22, 88.04)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -537,9 +535,12 @@ Config.Locations = {
     ["ltdgasoline3"] = {
         ["label"] = "LTD Gasoline",
         ["coords"] = {
-            [1] = vector3(-1820.33, 792.66, 138.1),
-            [2] = vector3(-1821.55, 793.98, 138.1)
+            [1] = vector4(-1820.02, 794.03, 138.09, 135.45)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -547,9 +548,25 @@ Config.Locations = {
     ["ltdgasoline4"] = {
         ["label"] = "LTD Gasoline",
         ["coords"] = {
-            [1] = vector3(1163.7, -323.92, 69.2),
-            [2] = vector3(1163.4, -322.24, 69.2)
+            [1] = vector4(1164.71, -322.94, 69.21, 101.72)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+        ["blipsprite"] = 52
+    },
+    ["ltdgasoline5"] = {
+        ["label"] = "LTD Gasoline",
+        ["coords"] = {
+            [1] = vector4(1697.87, 4922.96, 42.06, 324.71)
+        },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -559,8 +576,12 @@ Config.Locations = {
     ["robsliquor"] = {
         ["label"] = "Rob's Liqour",
         ["coords"] = {
-            [1] = vector3(-1222.77, -907.19, 12.32)
+            [1] = vector4(-1221.58, -908.15, 12.33, 35.49)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -568,8 +589,12 @@ Config.Locations = {
     ["robsliquor2"] = {
         ["label"] = "Rob's Liqour",
         ["coords"] = {
-            [1] = vector3(-1487.7, -378.53, 40.16)
+            [1] = vector4(-1486.59, -377.68, 40.16, 139.51)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -577,8 +602,12 @@ Config.Locations = {
     ["robsliquor3"] = {
         ["label"] = "Rob's Liqour",
         ["coords"] = {
-            [1] = vector3(-2967.79, 391.64, 15.04)
+            [1] = vector4(-2966.39, 391.42, 15.04, 87.48)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -586,8 +615,12 @@ Config.Locations = {
     ["robsliquor4"] = {
         ["label"] = "Rob's Liqour",
         ["coords"] = {
-            [1] = vector3(1165.28, 2709.4, 38.15)
+            [1] = vector4(1165.17, 2710.88, 38.16, 179.43)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -595,8 +628,12 @@ Config.Locations = {
     ["robsliquor5"] = {
         ["label"] = "Rob's Liqour",
         ["coords"] = {
-            [1] = vector3(1135.66, -982.76, 46.41)
+            [1] = vector4(1134.2, -982.91, 46.42, 277.24)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -606,8 +643,12 @@ Config.Locations = {
     ["hardware"] = {
         ["label"] = "Hardware Store",
         ["coords"] = {
-            [1] = vector3(45.55, -1749.01, 29.6)
+            [1] = vector4(45.68, -1749.04, 29.61, 53.13)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_waremech_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["hardware"],
         ["showblip"] = true,
         ["blipsprite"] = 402
@@ -615,8 +656,12 @@ Config.Locations = {
     ["hardware2"] = {
         ["label"] = "Hardware Store",
         ["coords"] = {
-            [1] = vector3(2747.8, 3472.86, 55.67)
+            [1] = vector4(2747.71, 3472.85, 55.67, 255.08)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_waremech_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["hardware"],
         ["showblip"] = true,
         ["blipsprite"] = 402
@@ -624,8 +669,12 @@ Config.Locations = {
     ["hardware3"] = {
         ["label"] = "Hardware Store",
         ["coords"] = {
-            [1] = vector3(-421.84, 6136.09, 31.78)
+            [1] = vector4(-421.83, 6136.13, 31.88, 228.2)
         },
+        ["ped"] = {
+            ["model"] = 'mp_m_waremech_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["hardware"],
         ["showblip"] = true,
         ["blipsprite"] = 402
@@ -635,8 +684,12 @@ Config.Locations = {
     ["ammunation"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(-662.1, -935.3, 21.8)
+            [1] = vector4(-661.96, -933.53, 21.83, 177.05)
         },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["weapons"],
         ["showblip"] = true,
         ["blipsprite"] = 110
@@ -644,8 +697,12 @@ Config.Locations = {
     ["ammunation2"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(810.2, -2157.3, 29.6)
+            [1] = vector4(809.68, -2159.13, 29.62, 1.43)
         },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["weapons"],
         ["showblip"] = true,
         ["blipsprite"] = 110
@@ -653,8 +710,12 @@ Config.Locations = {
     ["ammunation3"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(1693.4, 3759.5, 34.7)
+            [1] = vector4(1692.67, 3761.38, 34.71, 227.65)
         },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["weapons"],
         ["showblip"] = true,
         ["blipsprite"] = 110
@@ -662,8 +723,12 @@ Config.Locations = {
     ["ammunation4"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(-330.2, 6083.8, 31.4)
+            [1] = vector4(-331.23, 6085.37, 31.45, 228.02)
         },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["weapons"],
         ["showblip"] = true,
         ["blipsprite"] = 110
@@ -671,8 +736,12 @@ Config.Locations = {
     ["ammunation5"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(252.3, -50.0, 69.9)
+            [1] = vector4(253.63, -51.02, 69.94, 72.91)
         },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["weapons"],
         ["showblip"] = true,
         ["blipsprite"] = 110
@@ -680,8 +749,12 @@ Config.Locations = {
     ["ammunation6"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(22.0, -1107.2, 29.8)
+            [1] = vector4(23.0, -1105.67, 29.8, 162.91)
         },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["weapons"],
         ["showblip"] = true,
         ["blipsprite"] = 110
@@ -689,8 +762,12 @@ Config.Locations = {
     ["ammunation7"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(2567.6, 294.3, 108.7)
+            [1] = vector4(2567.48, 292.59, 108.73, 349.68)
         },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["weapons"],
         ["showblip"] = true,
         ["blipsprite"] = 110
@@ -698,8 +775,12 @@ Config.Locations = {
     ["ammunation8"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(-1117.5, 2698.6, 18.5)
+            [1] = vector4(-1118.59, 2700.05, 18.55, 221.89)
         },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["weapons"],
         ["showblip"] = true,
         ["blipsprite"] = 110
@@ -707,8 +788,38 @@ Config.Locations = {
     ["ammunation9"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(842.4, -1033.4, 28.1)
+            [1] = vector4(841.92, -1035.32, 28.19, 1.56)
         },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
+        },
+        ["radius"] = 1.5,
+        ["products"] = Config.Products["weapons"],
+        ["showblip"] = true,
+        ["blipsprite"] = 110
+    },
+    ["ammunation10"] = {
+        ["label"] = "Ammunation",
+        ["coords"] = {
+            [1] = vector4(-1304.19, -395.12, 36.7, 75.03)
+        },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
+        },
+        ["radius"] = 1.5,
+        ["products"] = Config.Products["weapons"],
+        ["showblip"] = true,
+        ["blipsprite"] = 110
+    },
+    ["ammunation11"] = {
+        ["label"] = "Ammunation",
+        ["coords"] = {
+            [1] = vector4(-3173.31, 1088.85, 20.84, 244.18)
+        },
+        ["ped"] = {
+            ["model"] = 's_m_y_ammucity_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["weapons"],
         ["showblip"] = true,
         ["blipsprite"] = 110
@@ -718,8 +829,12 @@ Config.Locations = {
     ["casino"] = {
         ["label"] = "Diamond Casino",
         ["coords"] = {
-            [1] = vector3(948.3834, 34.21247, 71.839)
+            [1] = vector4(949.25, 32.17, 71.95, 81.62)
         },
+        ["ped"] = {
+            ["model"] = 's_m_y_casino_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["casino"],
         ["showblip"] = true,
         ["blipsprite"] = 617
@@ -727,8 +842,12 @@ Config.Locations = {
     ["casino2"] = {
         ["label"] = "Casino Bar",
         ["coords"] = {
-            [1] = vector3(936.1185, 28.61719, 71.833)
+            [1] = vector4(937.45, 27.22, 71.83, 61.21)
         },
+        ["ped"] = {
+            ["model"] = 'a_m_y_smartcaspat_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -738,30 +857,27 @@ Config.Locations = {
     ["weedshop"] = {
         ["label"] = "Smoke on the water",
         ["coords"] = {
-            [1] = vector3(-1172.43, -1572.24, 4.66)
+            [1] = vector4(-1171.31, -1570.89, 4.66, 130.03)
         },
+        ["ped"] = {
+            ["model"] = 'a_m_y_hippy_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["weedshop"],
         ["showblip"] = true,
         ["blipsprite"] = 140
     },
 
-    -- Bean Coffee Locations
-    ["beancoffee"] = {
-        ["label"] = "Bean Machine Coffee",
-        ["coords"] = {
-            [1] = vector3(-633.72, 236.15, 81.88)
-        },
-        ["products"] = Config.Products["coffeeplace"],
-        ["showblip"] = true,
-        ["blipsprite"] = 52
-    },
-
     -- Sea Word Locations
-    ["seaword1"] = {
+    ["seaword"] = {
         ["label"] = "Sea Word",
         ["coords"] = {
-            [1] = vector3(-1686.9, -1072.23, 13.15)
+            [1] = vector4(-1687.03, -1072.18, 13.15, 52.93)
         },
+        ["ped"] = {
+            ["model"] = 'a_m_y_beach_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["gearshop"],
         ["showblip"] = true,
         ["blipsprite"] = 52
@@ -771,31 +887,13 @@ Config.Locations = {
     ["leisureshop"] = {
         ["label"] = "Leisure Shop",
         ["coords"] = {
-            [1] = vector3(-1505.91, 1511.78, 115.29)
+            [1] = vector4(-1505.91, 1511.95, 115.29, 257.13)
         },
+        ["ped"] = {
+            ["model"] = 'a_m_y_beach_01'
+        },
+        ["radius"] = 1.5,
         ["products"] = Config.Products["leisureshop"],
-        ["showblip"] = true,
-        ["blipsprite"] = 52
-    },
-
-    -- Local Store Locations
-    ["delvecchioliquor"] = {
-        ["label"] = "Del Vecchio Liquor",
-        ["coords"] = {
-            [1] = vector3(-159.36, 6321.59, 31.58),
-            [2] = vector3(-160.66, 6322.85, 31.58)
-        },
-        ["products"] = Config.Products["normal"],
-        ["showblip"] = true,
-        ["blipsprite"] = 52
-    },
-    ["donscountrystore"] = {
-        ["label"] = "Don's Country Store",
-        ["coords"] = {
-            [1] = vector3(161.41, 6640.78, 31.69),
-            [2] = vector3(163.04, 6642.45, 31.70)
-        },
-        ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52
     },
