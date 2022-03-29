@@ -452,10 +452,23 @@ Config.Locations = {
         ["showblip"] = true,
         ["blipsprite"] = 52
     },
-    ["247supermarket6"] = {
+    ["247supermarket5"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
             [1] = vector4(1959.82, 3740.48, 32.34, 301.57)
+        },
+        ["ped"] = {
+            ["model"] = 'mp_m_shopkeep_01'
+        },
+        ["radius"] = 1.5,
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = true,
+        ["blipsprite"] = 52
+    },
+    ["247supermarket6"] = {
+        ["label"] = "24/7 Supermarket",
+        ["coords"] = {
+            [1] = vector4(549.13, 2670.85, 42.16, 99.39)
         },
         ["ped"] = {
             ["model"] = 'mp_m_shopkeep_01'
