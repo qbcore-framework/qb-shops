@@ -494,7 +494,7 @@ Config.Locations = {
     ["247supermarket8"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [8] = vector4(2556.66, 380.84, 108.62, 356.67)
+            [1] = vector4(2556.66, 380.84, 108.62, 356.67)
         },
         ["ped"] = {
             ["model"] = 'mp_m_shopkeep_01'
@@ -507,7 +507,7 @@ Config.Locations = {
     ["247supermarket9"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [9] = vector4(372.66, 326.98, 103.57, 253.73)
+            [1] = vector4(372.66, 326.98, 103.57, 253.73)
         },
         ["ped"] = {
             ["model"] = 'mp_m_shopkeep_01'
