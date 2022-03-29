@@ -481,7 +481,7 @@ Config.Locations = {
     ["247supermarket7"] = {
         ["label"] = "24/7 Supermarket",
         ["coords"] = {
-            [7] = vector4(2677.47, 3279.76, 55.24, 335.08)
+            [1] = vector4(2677.47, 3279.76, 55.24, 335.08)
         },
         ["ped"] = {
             ["model"] = 'mp_m_shopkeep_01'
