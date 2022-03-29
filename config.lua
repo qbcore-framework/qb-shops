@@ -696,6 +696,7 @@ Config.Locations = {
     -- Ammunation Locations
     ["ammunation"] = {
         ["label"] = "Ammunation",
+        ["type"] = "weapon",
         ["coords"] = {
             [1] = vector4(-661.96, -933.53, 21.83, 177.05)
         },
@@ -709,6 +710,7 @@ Config.Locations = {
     },
     ["ammunation2"] = {
         ["label"] = "Ammunation",
+        ["type"] = "weapon",
         ["coords"] = {
             [1] = vector4(809.68, -2159.13, 29.62, 1.43)
         },
@@ -722,6 +724,7 @@ Config.Locations = {
     },
     ["ammunation3"] = {
         ["label"] = "Ammunation",
+        ["type"] = "weapon",
         ["coords"] = {
             [1] = vector4(1692.67, 3761.38, 34.71, 227.65)
         },
@@ -735,6 +738,7 @@ Config.Locations = {
     },
     ["ammunation4"] = {
         ["label"] = "Ammunation",
+        ["type"] = "weapon",
         ["coords"] = {
             [1] = vector4(-331.23, 6085.37, 31.45, 228.02)
         },
@@ -748,6 +752,7 @@ Config.Locations = {
     },
     ["ammunation5"] = {
         ["label"] = "Ammunation",
+        ["type"] = "weapon",
         ["coords"] = {
             [1] = vector4(253.63, -51.02, 69.94, 72.91)
         },
@@ -761,6 +766,7 @@ Config.Locations = {
     },
     ["ammunation6"] = {
         ["label"] = "Ammunation",
+        ["type"] = "weapon",
         ["coords"] = {
             [1] = vector4(23.0, -1105.67, 29.8, 162.91)
         },
@@ -774,6 +780,7 @@ Config.Locations = {
     },
     ["ammunation7"] = {
         ["label"] = "Ammunation",
+        ["type"] = "weapon",
         ["coords"] = {
             [1] = vector4(2567.48, 292.59, 108.73, 349.68)
         },
@@ -787,6 +794,7 @@ Config.Locations = {
     },
     ["ammunation8"] = {
         ["label"] = "Ammunation",
+        ["type"] = "weapon",
         ["coords"] = {
             [1] = vector4(-1118.59, 2700.05, 18.55, 221.89)
         },
@@ -800,6 +808,7 @@ Config.Locations = {
     },
     ["ammunation9"] = {
         ["label"] = "Ammunation",
+        ["type"] = "weapon",
         ["coords"] = {
             [1] = vector4(841.92, -1035.32, 28.19, 1.56)
         },
@@ -813,6 +822,7 @@ Config.Locations = {
     },
     ["ammunation10"] = {
         ["label"] = "Ammunation",
+        ["type"] = "weapon",
         ["coords"] = {
             [1] = vector4(-1304.19, -395.12, 36.7, 75.03)
         },
@@ -826,6 +836,7 @@ Config.Locations = {
     },
     ["ammunation11"] = {
         ["label"] = "Ammunation",
+        ["type"] = "weapon",
         ["coords"] = {
             [1] = vector4(-3173.31, 1088.85, 20.84, 244.18)
         },
