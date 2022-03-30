@@ -158,7 +158,7 @@ local function createPeds()
     while not HasModelLoaded(current) do
         Wait(0)
     end
-    ShopPed["casino"] = CreatePed(0, current, Config.SellCasinoChips.coords.x, Config.SellCasinoChips.coords..y, Config.SellCasinoChips.coords..z-1, Config.SellCasinoChips.coords..w, false, false)
+    ShopPed["casino"] = CreatePed(0, current, Config.SellCasinoChips.coords.x, Config.SellCasinoChips.coords.y, Config.SellCasinoChips.coords.z-1, Config.SellCasinoChips.coords.w, false, false)
     FreezeEntityPosition(ShopPed["casino"], true)
     SetEntityInvincible(ShopPed["casino"], true)
     SetBlockingOfNonTemporaryEvents(ShopPed["casino"], true)
