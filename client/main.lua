@@ -97,7 +97,6 @@ local function openShop(shop, data)
     end)
 end
 
--- Threads
 local listen = false
 local function Listen4Control()
     CreateThread(function()
@@ -118,42 +117,6 @@ local function Listen4Control()
         end
     end)
 end
-
-local NewZones = {}
-CreateThread(function()
-    if not Config.UseTarget then
-        for shop, _ in pairs(Config.Locations) do
-            NewZones[#NewZones+1] = CircleZone:Create(vector3(Config.Locations[shop]["coords"]["x"], Config.Locations[shop]["coords"]["y"], Config.Locations[shop]["coords"]["z"]), Config.Locations[shop]["radius"], {
-                useZ = true,
-                debugPoly = false,
-                name = shop,
-            })
-        end
-
-        local combo = ComboZone:Create(NewZones, {name = "RandomZOneName", debugPoly = true})
-        combo:onPlayerInOut(function(isPointInside, point, zone)
-            if isPointInside then
-                currentShop = zone.name
-                currentData = Config.Locations[zone.name]
-                exports["qb-core"]:DrawText(Lang:t("info.open_shop"))
-                Listen4Control()
-            else
-                exports["qb-core"]:HideText()
-            end
-        end)
-
-        local sellChips = CircleZone:Create(vector3(Config.SellCasinoChips.coords["x"], Config.SellCasinoChips.coords["y"], Config.SellCasinoChips.coords["z"]), Config.SellCasinoChips.radius, {useZ = true})
-        sellChips:onPlayerInOut(function(isPointInside)
-            if isPointInside then
-                inChips = true
-                exports["qb-core"]:DrawText(Lang:t("info.sell_chips"))
-            else
-                inChips = false
-                exports["qb-core"]:HideText()
-            end
-        end)
-    end
-end)
 
 local function createPeds()
     if pedSpawned then return end
@@ -186,6 +149,35 @@ local function createPeds()
             })
         end
     end
+
+    if not ShopPed["casino"] then ShopPed["casino"] = {} end
+    local current = Config.SellCasinoChips.ped
+    current = type(current) == 'string' and GetHashKey(current) or current
+    RequestModel(current)
+
+    while not HasModelLoaded(current) do
+        Wait(0)
+    end
+    ShopPed["casino"] = CreatePed(0, current, Config.SellCasinoChips.coords.x, Config.SellCasinoChips.coords..y, Config.SellCasinoChips.coords..z-1, Config.SellCasinoChips.coords..w, false, false)
+    FreezeEntityPosition(ShopPed["casino"], true)
+    SetEntityInvincible(ShopPed["casino"], true)
+    SetBlockingOfNonTemporaryEvents(ShopPed["casino"], true)
+
+    if Config.UseTarget then
+        exports['qb-target']:AddTargetEntity(ShopPed["casino"], {
+            options = {
+                {
+                    label = 'Sell Chips',
+                    icon = 'fa-solid fa-cookie',
+                    action = function()
+                        TriggerServerEvent("qb-shops:server:sellChips")
+                    end
+                }
+            },
+            distance = 2.0
+        })
+    end
+
     pedSpawned = true
 end
 
@@ -197,6 +189,43 @@ local function deletePeds()
     end
 end
 
+-- Threads
+
+local NewZones = {}
+CreateThread(function()
+    if not Config.UseTarget then
+        for shop, _ in pairs(Config.Locations) do
+            NewZones[#NewZones+1] = CircleZone:Create(vector3(Config.Locations[shop]["coords"]["x"], Config.Locations[shop]["coords"]["y"], Config.Locations[shop]["coords"]["z"]), Config.Locations[shop]["radius"], {
+                useZ = true,
+                debugPoly = false,
+                name = shop,
+            })
+        end
+
+        local combo = ComboZone:Create(NewZones, {name = "RandomZOneName", debugPoly = false})
+        combo:onPlayerInOut(function(isPointInside, point, zone)
+            if isPointInside then
+                currentShop = zone.name
+                currentData = Config.Locations[zone.name]
+                exports["qb-core"]:DrawText(Lang:t("info.open_shop"))
+                Listen4Control()
+            else
+                exports["qb-core"]:HideText()
+            end
+        end)
+
+        local sellChips = CircleZone:Create(vector3(Config.SellCasinoChips.coords["x"], Config.SellCasinoChips.coords["y"], Config.SellCasinoChips.coords["z"]), Config.SellCasinoChips.radius, {useZ = true})
+        sellChips:onPlayerInOut(function(isPointInside)
+            if isPointInside then
+                inChips = true
+                exports["qb-core"]:DrawText(Lang:t("info.sell_chips"))
+            else
+                inChips = false
+                exports["qb-core"]:HideText()
+            end
+        end)
+    end
+end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     createBlips()
