@@ -1,7 +1,8 @@
 local QBCore = exports["qb-core"]:GetCoreObject()
-local inShop = false
 local inChips = false
 local currentShop, currentData
+local pedSpawned = false
+local ShopPed = {}
 
 -- Functions
 local function SetupItems(shop)
@@ -25,17 +26,15 @@ end
 local function createBlips()
     for store, _ in pairs(Config.Locations) do
         if Config.Locations[store]["showblip"] then
-            for i = 1, #Config.Locations[store]["coords"] do
-                StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"][i]["x"], Config.Locations[store]["coords"][i]["y"], Config.Locations[store]["coords"][i]["z"])
-                SetBlipColour(StoreBlip, 0)
-                SetBlipSprite(StoreBlip, Config.Locations[store]["blipsprite"])
-                SetBlipScale(StoreBlip, 0.6)
-                SetBlipDisplay(StoreBlip, 4)
-                SetBlipAsShortRange(StoreBlip, true)
-                BeginTextCommandSetBlipName("STRING")
-                AddTextComponentSubstringPlayerName(Config.Locations[store]["label"])
-                EndTextCommandSetBlipName(StoreBlip)
-            end
+            StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"]["x"], Config.Locations[store]["coords"]["y"], Config.Locations[store]["coords"]["z"])
+            SetBlipColour(StoreBlip, 0)
+            SetBlipSprite(StoreBlip, Config.Locations[store]["blipsprite"])
+            SetBlipScale(StoreBlip, 0.6)
+            SetBlipDisplay(StoreBlip, 4)
+            SetBlipAsShortRange(StoreBlip, true)
+            BeginTextCommandSetBlipName("STRING")
+            AddTextComponentSubstringPlayerName(Config.Locations[store]["label"])
+            EndTextCommandSetBlipName(StoreBlip)
         end
     end
 end
@@ -98,69 +97,123 @@ local function openShop(shop, data)
     end)
 end
 
--- Threads
-CreateThread(function()
-    createBlips()
-    for shop, _ in pairs(Config.Locations) do
-        for i = 1, #Config.Locations[shop]["coords"] do
-            if not Config.UseTarget then
-                local shopZone = CircleZone:Create(vector3(Config.Locations[shop]["coords"][i]["x"], Config.Locations[shop]["coords"][i]["y"], Config.Locations[shop]["coords"][i]["z"]), Config.Locations[shop]["radius"], {useZ = true})
-                shopZone:onPlayerInOut(function(isPointInside)
-                    if isPointInside then
-                        inShop = true
-                        currentShop = shop
-                        currentData = Config.Locations[shop]
-                        exports["qb-core"]:DrawText(Lang:t("info.open_shop"))
-                    else
-                        inShop = false
-                        exports["qb-core"]:HideText()
-                    end
-                end)
-            else
-                exports["qb-target"]:SpawnPed({
-                    model = Config.Locations[shop]["ped"]["model"],
-                    coords = Config.Locations[shop]["coords"][i],
-                    minusOne = true,
-                    freeze = true,
-                    invincible = true,
-                    blockevents = true,
-                    target = {
-                        options = {
-                            {
-                                type = "client",
-                                icon = "fas fa-shopping-basket",
-                                label = "Open Shop",
-                                action = function()
-                                    openShop(shop, Config.Locations[shop])
-                                end
-                            }
-                        },
-                        distance = Config.Locations[shop]["radius"],
-                    }
-                })
-                exports["qb-target"]:SpawnPed({
-                    model = Config.SellCasinoChips.ped,
-                    coords = Config.SellCasinoChips.coords - 5,
-                    minusOne = true,
-                    freeze = true,
-                    invincible = true,
-                    blockevents = true,
-                    target = {
-                        options = {
-                            {
-                                type = "server",
-                                icon = "fas fa-coins",
-                                label = "Sell Chips",
-                                event = "qb-shops:server:sellChips"
-                            }
-                        },
-                        distance = Config.SellCasinoChips.Radius,
-                    }
-                })
+local listen = false
+local function Listen4Control()
+    CreateThread(function()
+        listen = true
+        while listen do
+            if IsControlJustPressed(0, 38) then -- E
+                if inChips then
+                    exports["qb-core"]:KeyPressed()
+                    TriggerServerEvent("qb-shops:server:sellChips")
+                else
+                    exports["qb-core"]:KeyPressed()
+                    openShop(currentShop, currentData)
+                end
+                listen = false
+                break
             end
+            Wait(1)
+        end
+    end)
+end
+
+local function createPeds()
+    if pedSpawned then return end
+    for k, v in pairs(Config.Locations) do
+        if not ShopPed[k] then ShopPed[k] = {} end
+        local current = v["ped"]
+        current = type(current) == 'string' and GetHashKey(current) or current
+        RequestModel(current)
+
+        while not HasModelLoaded(current) do
+            Wait(0)
+        end
+        ShopPed[k] = CreatePed(0, current, v["coords"].x, v["coords"].y, v["coords"].z-1, v["coords"].w, false, false)
+        FreezeEntityPosition(ShopPed[k], true)
+        SetEntityInvincible(ShopPed[k], true)
+        SetBlockingOfNonTemporaryEvents(ShopPed[k], true)
+
+        if Config.UseTarget then
+            exports['qb-target']:AddTargetEntity(ShopPed[k], {
+                options = {
+                    {
+                        label = 'Open Shop',
+                        icon = 'fa-solid fa-basket-shopping',
+                        action = function()
+                            openShop(k, Config.Locations[k])
+                        end
+                    }
+                },
+                distance = 2.0
+            })
         end
     end
+
+    if not ShopPed["casino"] then ShopPed["casino"] = {} end
+    local current = Config.SellCasinoChips.ped
+    current = type(current) == 'string' and GetHashKey(current) or current
+    RequestModel(current)
+
+    while not HasModelLoaded(current) do
+        Wait(0)
+    end
+    ShopPed["casino"] = CreatePed(0, current, Config.SellCasinoChips.coords.x, Config.SellCasinoChips.coords.y, Config.SellCasinoChips.coords.z-1, Config.SellCasinoChips.coords.w, false, false)
+    FreezeEntityPosition(ShopPed["casino"], true)
+    SetEntityInvincible(ShopPed["casino"], true)
+    SetBlockingOfNonTemporaryEvents(ShopPed["casino"], true)
+
+    if Config.UseTarget then
+        exports['qb-target']:AddTargetEntity(ShopPed["casino"], {
+            options = {
+                {
+                    label = 'Sell Chips',
+                    icon = 'fa-solid fa-cookie',
+                    action = function()
+                        TriggerServerEvent("qb-shops:server:sellChips")
+                    end
+                }
+            },
+            distance = 2.0
+        })
+    end
+
+    pedSpawned = true
+end
+
+local function deletePeds()
+    if pedSpawned then
+        for k, v in pairs(ShopPed) do
+            DeletePed(v)
+        end
+    end
+end
+
+-- Threads
+
+local NewZones = {}
+CreateThread(function()
     if not Config.UseTarget then
+        for shop, _ in pairs(Config.Locations) do
+            NewZones[#NewZones+1] = CircleZone:Create(vector3(Config.Locations[shop]["coords"]["x"], Config.Locations[shop]["coords"]["y"], Config.Locations[shop]["coords"]["z"]), Config.Locations[shop]["radius"], {
+                useZ = true,
+                debugPoly = false,
+                name = shop,
+            })
+        end
+
+        local combo = ComboZone:Create(NewZones, {name = "RandomZOneName", debugPoly = false})
+        combo:onPlayerInOut(function(isPointInside, point, zone)
+            if isPointInside then
+                currentShop = zone.name
+                currentData = Config.Locations[zone.name]
+                exports["qb-core"]:DrawText(Lang:t("info.open_shop"))
+                Listen4Control()
+            else
+                exports["qb-core"]:HideText()
+            end
+        end)
+
         local sellChips = CircleZone:Create(vector3(Config.SellCasinoChips.coords["x"], Config.SellCasinoChips.coords["y"], Config.SellCasinoChips.coords["z"]), Config.SellCasinoChips.radius, {useZ = true})
         sellChips:onPlayerInOut(function(isPointInside)
             if isPointInside then
@@ -172,24 +225,26 @@ CreateThread(function()
             end
         end)
     end
-    while true do
-        local sleep = 1000
-        if inShop then
-            sleep = 0
-            if IsControlJustPressed(0, 38) then -- E
-                sleep = 1000
-                exports["qb-core"]:KeyPressed()
-                openShop(currentShop, currentData)
-            end
-        end
-        if inChips then
-            sleep = 0
-            if IsControlJustPressed(0, 38) then -- E
-                sleep = 1000
-                exports["qb-core"]:KeyPressed()
-                TriggerServerEvent("qb-shops:server:sellChips")
-            end
-        end
-        Wait(sleep)
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    createBlips()
+    createPeds()
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
+    deletePeds()
+end)
+
+AddEventHandler('onResourceStart', function(resourceName)
+    if GetCurrentResourceName() == resourceName then
+        createBlips()
+        createPeds()
+    end
+end)
+
+AddEventHandler('onResourceStop', function(resourceName)
+    if GetCurrentResourceName() == resourceName then
+        deletePeds()
     end
 end)
