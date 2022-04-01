@@ -106,6 +106,32 @@ Config.Products = {
             slot = 12,
         },
     },
+    ["liquor"] = {
+        [1] = {
+            name = "beer",
+            price = 7,
+            amount = 50,
+            info = {},
+            type = "item",
+            slot = 1,
+        },
+        [2] = {
+            name = "whiskey",
+            price = 10,
+            amount = 50,
+            info = {},
+            type = "item",
+            slot = 2,
+        },
+        [3] = {
+            name = "vodka",
+            price = 12,
+            amount = 50,
+            info = {},
+            type = "item",
+            slot = 3,
+        },
+    },
     ["hardware"] = {
         [1] = {
             name = "lockpick",
@@ -607,7 +633,7 @@ Config.Locations = {
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
         ["targetLabel"] = "Open Shop",
-        ["products"] = Config.Products["normal"],
+        ["products"] = Config.Products["liquor"],
         ["showblip"] = true,
         ["blipsprite"] = 52,
         ["blipcolor"] = 0
@@ -621,7 +647,7 @@ Config.Locations = {
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
         ["targetLabel"] = "Open Shop",
-        ["products"] = Config.Products["normal"],
+        ["products"] = Config.Products["liquor"],
         ["showblip"] = true,
         ["blipsprite"] = 52,
         ["blipcolor"] = 0
@@ -635,7 +661,7 @@ Config.Locations = {
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
         ["targetLabel"] = "Open Shop",
-        ["products"] = Config.Products["normal"],
+        ["products"] = Config.Products["liquor"],
         ["showblip"] = true,
         ["blipsprite"] = 52,
         ["blipcolor"] = 0
@@ -649,7 +675,7 @@ Config.Locations = {
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
         ["targetLabel"] = "Open Shop",
-        ["products"] = Config.Products["normal"],
+        ["products"] = Config.Products["liquor"],
         ["showblip"] = true,
         ["blipsprite"] = 52,
         ["blipcolor"] = 0
@@ -663,7 +689,7 @@ Config.Locations = {
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
         ["targetLabel"] = "Open Shop",
-        ["products"] = Config.Products["normal"],
+        ["products"] = Config.Products["liquor"],
         ["showblip"] = true,
         ["blipsprite"] = 52,
         ["blipcolor"] = 0
@@ -710,7 +736,6 @@ Config.Locations = {
         ["showblip"] = true,
         ["blipsprite"] = 402,
         ["blipcolor"] = 0,
-        ["blipcolor"] = 0
     },
 
     -- Ammunation Locations
@@ -892,7 +917,7 @@ Config.Locations = {
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-wine-bottle",
         ["targetLabel"] = "Open Casino Bar",
-        ["products"] = Config.Products["normal"],
+        ["products"] = Config.Products["liquor"],
         ["showblip"] = false,
         ["blipsprite"] = 52,
         ["blipcolor"] = 0
@@ -909,7 +934,7 @@ Config.Locations = {
         ["targetLabel"] = "Open Weed Shop",
         ["products"] = Config.Products["weedshop"],
         ["showblip"] = true,
-        ["blipsprite"] = 140.
+        ["blipsprite"] = 140,
         ["blipcolor"] = 0
     },
 
