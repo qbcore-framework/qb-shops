@@ -138,7 +138,7 @@ local function createPeds()
             exports['qb-target']:AddTargetEntity(ShopPed[k], {
                 options = {
                     {
-                        label = 'Open Shop',
+                        label = 'Handla',
                         icon = 'fa-solid fa-basket-shopping',
                         action = function()
                             openShop(k, Config.Locations[k])
@@ -167,7 +167,7 @@ local function createPeds()
         exports['qb-target']:AddTargetEntity(ShopPed["casino"], {
             options = {
                 {
-                    label = 'Sell Chips',
+                    label = 'Byt in Casinomarker',
                     icon = 'fa-solid fa-cookie',
                     action = function()
                         TriggerServerEvent("qb-shops:server:sellChips")
