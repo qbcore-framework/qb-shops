@@ -27,10 +27,10 @@ local function createBlips()
     for store, _ in pairs(Config.Locations) do
         if Config.Locations[store]["showblip"] then
             StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"]["x"], Config.Locations[store]["coords"]["y"], Config.Locations[store]["coords"]["z"])
-            SetBlipColour(StoreBlip, 0)
             SetBlipSprite(StoreBlip, Config.Locations[store]["blipsprite"])
             SetBlipScale(StoreBlip, 0.6)
             SetBlipDisplay(StoreBlip, 4)
+            SetBlipColour(StoreBlip, Config.Locations[store]["blipcolor"])
             SetBlipAsShortRange(StoreBlip, true)
             BeginTextCommandSetBlipName("STRING")
             AddTextComponentSubstringPlayerName(Config.Locations[store]["label"])
@@ -130,6 +130,7 @@ local function createPeds()
             Wait(0)
         end
         ShopPed[k] = CreatePed(0, current, v["coords"].x, v["coords"].y, v["coords"].z-1, v["coords"].w, false, false)
+        TaskStartScenarioInPlace(ShopPed[k], v["scenario"], true)
         FreezeEntityPosition(ShopPed[k], true)
         SetEntityInvincible(ShopPed[k], true)
         SetBlockingOfNonTemporaryEvents(ShopPed[k], true)
@@ -138,8 +139,8 @@ local function createPeds()
             exports['qb-target']:AddTargetEntity(ShopPed[k], {
                 options = {
                     {
-                        label = 'Open Shop',
-                        icon = 'fa-solid fa-basket-shopping',
+                        label = v["targetLabel"],
+                        icon = v["targetIcon"],
                         action = function()
                             openShop(k, Config.Locations[k])
                         end
@@ -168,7 +169,7 @@ local function createPeds()
             options = {
                 {
                     label = 'Sell Chips',
-                    icon = 'fa-solid fa-cookie',
+                    icon = 'fa-solid fa-coins',
                     action = function()
                         TriggerServerEvent("qb-shops:server:sellChips")
                     end
