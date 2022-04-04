@@ -735,7 +735,7 @@ Config.Locations = {
         ["products"] = Config.Products["hardware"],
         ["showblip"] = true,
         ["blipsprite"] = 402,
-        ["blipcolor"] = 0,
+        ["blipcolor"] = 0
     },
 
     -- Ammunation Locations
