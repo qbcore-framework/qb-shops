@@ -116,32 +116,6 @@ Config.Products = {
             slot = 3,
         },
     },
-    ["liquor"] = {
-        [1] = {
-            name = "beer",
-            price = 7,
-            amount = 50,
-            info = {},
-            type = "item",
-            slot = 1,
-        },
-        [2] = {
-            name = "whiskey",
-            price = 10,
-            amount = 50,
-            info = {},
-            type = "item",
-            slot = 2,
-        },
-        [3] = {
-            name = "vodka",
-            price = 12,
-            amount = 50,
-            info = {},
-            type = "item",
-            slot = 3,
-        },
-    },
     ["hardware"] = {
         [1] = {
             name = "lockpick",
@@ -351,14 +325,6 @@ Config.Products = {
             type = "item",
             slot = 3,
         },
-        -- [4] = {
-        --     name = "smoketrailred",
-        --     price = 250,
-        --     amount = 50,
-        --     info = {},
-        --     type = "item",
-        --     slot = 4,
-        -- },
     },
     ["weapons"] = {
         [1] = {
@@ -439,11 +405,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 59
-        ["blipcolor"] = 0
+        ["blipsprite"] = 59,
+        ["blipcolor"] = 4
     },
     ["ICA2"] = {
         ["label"] = "ICA",
@@ -453,13 +419,12 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 59
-        ["blipcolor"] = 0
+        ["blipsprite"] = 59,
+        ["blipcolor"] = 4
     },
-
     ["ICA3"] = {
         ["label"] = "ICA",
         ["coords"] = vector4(-3242.97, 1000.01, 12.83, 357.57),
@@ -467,13 +432,12 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 59
-        ["blipcolor"] = 0
+        ["blipsprite"] = 59,
+        ["blipcolor"] = 4
     },
-
     ["ICA4"] = {
         ["label"] = "ICA",
         ["coords"] = vector4(1728.07, 6415.63, 35.04, 242.95),
@@ -481,11 +445,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 59
-        ["blipcolor"] = 0
+        ["blipsprite"] = 59,
+        ["blipcolor"] = 4
     },
     ["ICA5"] = {
         ["label"] = "ICA",
@@ -495,11 +459,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 59
-        ["blipcolor"] = 0
+        ["blipsprite"] = 59,
+        ["blipcolor"] = 4
     },
     ["ICA6"] = {
         ["label"] = "ICA",
@@ -509,11 +473,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 59
-        ["blipcolor"] = 0
+        ["blipsprite"] = 59,
+        ["blipcolor"] = 4
     },
     ["ICA7"] = {
         ["label"] = "ICA",
@@ -523,11 +487,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 59
-        ["blipcolor"] = 0
+        ["blipsprite"] = 59,
+        ["blipcolor"] = 4
     },
     ["ICA8"] = {
         ["label"] = "ICA",
@@ -537,11 +501,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 59
-        ["blipcolor"] = 0
+        ["blipsprite"] = 59,
+        ["blipcolor"] = 4
     },
     ["ICA9"] = {
         ["label"] = "ICA",
@@ -551,11 +515,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 59
-        ["blipcolor"] = 0
+        ["blipsprite"] = 59,
+        ["blipcolor"] = 4
     },
 
     -- Circle K Locations
@@ -566,11 +530,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 361
-        ["blipcolor"] = 0
+        ["blipsprite"] = 361,
+        ["blipcolor"] = 4
     },
     ["circlek2"] = {
         ["label"] = "Circle K",
@@ -579,11 +543,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 361
-        ["blipcolor"] = 0
+        ["blipsprite"] = 361,
+        ["blipcolor"] = 4
     },
     ["circlek3"] = {
         ["label"] = "Circle K",
@@ -592,11 +556,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 361
-        ["blipcolor"] = 0
+        ["blipsprite"] = 361,
+        ["blipcolor"] = 4
     },
     ["circlek4"] = {
         ["label"] = "Circle K",
@@ -608,8 +572,8 @@ Config.Locations = {
         ["targetLabel"] = "Open Open Shop",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 361
-        ["blipcolor"] = 0
+        ["blipsprite"] = 361,
+        ["blipcolor"] = 4
     },
     ["circlek5"] = {
         ["label"] = "Circle K",
@@ -618,11 +582,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
-        ["blipsprite"] = 361
-        ["blipcolor"] = 0
+        ["blipsprite"] = 361,
+        ["blipcolor"] = 4
     },
 
     -- Rob's Liquor Locations
@@ -633,11 +597,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["products"] = Config.Products["systembolaget"],
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["targetIcon"] = "fas fa-shopping-basket",
         ["showblip"] = true,
-        ["blipsprite"] = 85
-        ["blipcolor"] = 0
+        ["blipsprite"] = 85,
+        ["blipcolor"] = 4
     },
     ["systembolag2"] = {
         ["label"] = "Systembolaget",
@@ -647,10 +611,10 @@ Config.Locations = {
         ["radius"] = 1.5,
         ["products"] = Config.Products["systembolaget"],
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["showblip"] = true,
-        ["blipsprite"] = 85
-        ["blipcolor"] = 0
+        ["blipsprite"] = 85,
+        ["blipcolor"] = 4
     },
     ["systembolag3"] = {
         ["label"] = "Systembolaget",
@@ -660,10 +624,10 @@ Config.Locations = {
         ["radius"] = 1.5,
         ["products"] = Config.Products["systembolaget"],
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["showblip"] = true,
-        ["blipsprite"] = 85
-        ["blipcolor"] = 0
+        ["blipsprite"] = 85,
+        ["blipcolor"] = 4
     },
     ["systembolag4"] = {
         ["label"] = "Systembolaget",
@@ -673,10 +637,10 @@ Config.Locations = {
         ["radius"] = 1.5,
         ["products"] = Config.Products["systembolaget"],
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["showblip"] = true,
-        ["blipsprite"] = 85
-        ["blipcolor"] = 0
+        ["blipsprite"] = 85,
+        ["blipcolor"] = 4
     },
     ["systembolag5"] = {
         ["label"] = "Systembolaget",
@@ -686,10 +650,10 @@ Config.Locations = {
         ["radius"] = 1.5,
         ["products"] = Config.Products["systembolaget"],
         ["targetIcon"] = "fas fa-shopping-basket",
-        ["targetLabel"] = "Open Shop",
+        ["targetLabel"] = "Handla",
         ["showblip"] = true,
-        ["blipsprite"] = 85
-        ["blipcolor"] = 0
+        ["blipsprite"] = 85,
+        ["blipcolor"] = 4
     },
 
     -- Jula Locations
@@ -700,11 +664,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_CLIPBOARD",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-wrench",
-        ["targetLabel"] = "Open Hardware Store",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["hardware"],
         ["showblip"] = true,
         ["blipsprite"] = 402,
-        ["blipcolor"] = 0
+        ["blipcolor"] = 4
     },
     ["jula2"] = {
         ["label"] = "Jula",
@@ -713,11 +677,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_CLIPBOARD",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-wrench",
-        ["targetLabel"] = "Open Hardware Store",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["hardware"],
         ["showblip"] = true,
         ["blipsprite"] = 402,
-        ["blipcolor"] = 0
+        ["blipcolor"] = 4
     },
     ["jula3"] = {
         ["label"] = "Jula",
@@ -726,11 +690,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_CLIPBOARD",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-wrench",
-        ["targetLabel"] = "Hardware Store",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["hardware"],
         ["showblip"] = true,
         ["blipsprite"] = 402,
-        ["blipcolor"] = 0
+        ["blipcolor"] = 4
     },
 
     -- Black Market Locations
@@ -741,14 +705,13 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_COP_IDLES",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-gun",
-        ["targetLabel"] = "Open Ammunation",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["weapons"],
         ["showblip"] = false,
-        ["blipsprite"] = 110
-        ["blipcolor"] = 0
+        ["blipsprite"] = 110,
+        ["blipcolor"] = 4
     },
-    },
-
+    
     -- Casino Locations
     ["casino1"] = {
         ["label"] = "Diamond Casino",
@@ -757,11 +720,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-coins",
-        ["targetLabel"] = "Buy Chips",
+        ["targetLabel"] = "Köp Casinomarker",
         ["products"] = Config.Products["casino"],
         ["showblip"] = true,
         ["blipsprite"] = 617,
-        ["blipcolor"] = 0
+        ["blipcolor"] = 4
     },
 
     ["casinobar"] = {
@@ -771,11 +734,11 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_VALET",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-wine-bottle",
-        ["targetLabel"] = "Open Casino Bar",
-        ["products"] = Config.Products["liquor"],
+        ["targetLabel"] = "Handla",
+        ["products"] = Config.Products["systembolaget"],
         ["showblip"] = false,
         ["blipsprite"] = 52,
-        ["blipcolor"] = 0
+        ["blipcolor"] = 4
     },
 
     -- Weedshop Locations
@@ -786,26 +749,26 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_AA_SMOKE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-cannabis",
-        ["targetLabel"] = "Open Weed Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["weedshop"],
         ["showblip"] = true,
         ["blipsprite"] = 140,
-        ["blipcolor"] = 0
+        ["blipcolor"] = 4
     },
 
     -- Sea World Locations
     ["seaword"] = {
-        ["label"] = "Sea Word",
+        ["label"] = "Sea World",
         ["coords"] = vector4(-1687.03, -1072.18, 13.15, 52.93),
         ["ped"] = 'a_m_y_beach_01',
         ["scenario"] = "WORLD_HUMAN_STAND_IMPATIENT",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-fish",
-        ["targetLabel"] = "Sea Word",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["gearshop"],
         ["showblip"] = true,
         ["blipsprite"] = 52,
-        ["blipcolor"] = 0
+        ["blipcolor"] = 4
     },
 
     -- Leisure Shop Locations
@@ -816,10 +779,10 @@ Config.Locations = {
         ["scenario"] = "WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE",
         ["radius"] = 1.5,
         ["targetIcon"] = "fas fa-leaf",
-        ["targetLabel"] = "Open Leisure Shop",
+        ["targetLabel"] = "Handla",
         ["products"] = Config.Products["leisureshop"],
         ["showblip"] = true,
         ["blipsprite"] = 52,
-        ["blipcolor"] = 0
+        ["blipcolor"] = 4
     },
 }
