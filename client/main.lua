@@ -212,6 +212,7 @@ CreateThread(function()
                 Listen4Control()
             else
                 exports["qb-core"]:HideText()
+                listen = false
             end
         end)
 
