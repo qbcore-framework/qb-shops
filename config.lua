@@ -97,6 +97,14 @@ Config.Products = {
             type = "item",
             slot = 11,
         },
+        [12] = {
+            name = "head_bag",
+            price = 17,
+            amount = 50,
+            info = {},
+            type = "item",
+            slot = 12,
+        },
     },
     ["systembolaget"] = {
         [1] = {
