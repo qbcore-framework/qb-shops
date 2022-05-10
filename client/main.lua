@@ -141,9 +141,12 @@ local function createPeds()
                     {
                         label = v["targetLabel"],
                         icon = v["targetIcon"],
+                        item = v["item"],
                         action = function()
                             openShop(k, Config.Locations[k])
-                        end
+                        end,
+                        job = v["job"],
+                        gang = v["gang"],
                     }
                 },
                 distance = 2.0
