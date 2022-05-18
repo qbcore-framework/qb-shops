@@ -35,7 +35,7 @@ RegisterNetEvent('qb-shops:server:sellChips', function()
     local Player = QBCore.Functions.GetPlayer(src)
     local xItem = Player.Functions.GetItemByName("casinochips")
     if xItem ~= nil then
-        for k, _ in pairs(Player.PlayerData.items) do
+        for k in pairs(Player.PlayerData.items) do
             if Player.PlayerData.items[k] ~= nil then
                 if ItemList[Player.PlayerData.items[k].name] ~= nil then
                     local price = ItemList[Player.PlayerData.items[k].name] * Player.PlayerData.items[k].amount
