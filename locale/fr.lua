@@ -12,4 +12,4 @@ local Translations = {
     },
 }
 
-Lang = Locale:new({phrases = Translations}) 
+Lang = Locale:new({phrases = Translations})

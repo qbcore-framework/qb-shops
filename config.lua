@@ -254,7 +254,7 @@ Config.Products = {
             type = "item",
             slot = 15,
             requiredJob = { "mechanic" }
-        },        
+        },
     },
     ["weedshop"] = {
         [1] = {
@@ -332,7 +332,7 @@ Config.Products = {
             info = {},
             type = "item",
             slot = 2,
-        },    
+        },
         [3] = {
             name = "diving_gear",
             price = 2500,

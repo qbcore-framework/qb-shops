@@ -26,7 +26,7 @@ end
 local function createBlips()
     for store, _ in pairs(Config.Locations) do
         if Config.Locations[store]["showblip"] then
-            StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"]["x"], Config.Locations[store]["coords"]["y"], Config.Locations[store]["coords"]["z"])
+            local StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"]["x"], Config.Locations[store]["coords"]["y"], Config.Locations[store]["coords"]["z"])
             SetBlipSprite(StoreBlip, Config.Locations[store]["blipsprite"])
             SetBlipScale(StoreBlip, 0.6)
             SetBlipDisplay(StoreBlip, 4)
@@ -50,7 +50,7 @@ end)
 
 RegisterNetEvent("qb-shops:client:RestockShopItems", function(shop, amount)
     if Config.Locations[shop]["products"] ~= nil then
-        for k, v in pairs(Config.Locations[shop]["products"]) do
+        for k in pairs(Config.Locations[shop]["products"]) do
             Config.Locations[shop]["products"][k].amount = Config.Locations[shop]["products"][k].amount + amount
         end
     end
@@ -89,7 +89,7 @@ local function openShop(shop, data)
         else
             ShopItems.items = SetupItems(shop)
         end
-        for k, v in pairs(ShopItems.items) do
+        for k in pairs(ShopItems.items) do
             ShopItems.items[k].slot = k
         end
         ShopItems.slots = 30
@@ -187,7 +187,7 @@ end
 
 local function deletePeds()
     if pedSpawned then
-        for k, v in pairs(ShopPed) do
+        for _, v in pairs(ShopPed) do
             DeletePed(v)
         end
     end
@@ -207,7 +207,7 @@ CreateThread(function()
         end
 
         local combo = ComboZone:Create(NewZones, {name = "RandomZOneName", debugPoly = false})
-        combo:onPlayerInOut(function(isPointInside, point, zone)
+        combo:onPlayerInOut(function(isPointInside, _, zone)
             if isPointInside then
                 currentShop = zone.name
                 currentData = Config.Locations[zone.name]
