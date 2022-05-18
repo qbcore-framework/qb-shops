@@ -89,7 +89,7 @@ local function openShop(shop, data)
         else
             ShopItems.items = SetupItems(shop)
         end
-        for k, _ in pairs(ShopItems.items) do
+        for k in pairs(ShopItems.items) do
             ShopItems.items[k].slot = k
         end
         ShopItems.slots = 30
