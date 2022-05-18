@@ -11,7 +11,7 @@ end)
 RegisterNetEvent('qb-shops:server:RestockShopItems', function(shop)
     if Config.Locations[shop]["products"] ~= nil then
         local randAmount = math.random(10, 50)
-        for k, _ in pairs(Config.Locations[shop]["products"]) do
+        for k in pairs(Config.Locations[shop]["products"]) do
             Config.Locations[shop]["products"][k].amount = Config.Locations[shop]["products"][k].amount + randAmount
         end
         TriggerClientEvent('qb-shops:client:RestockShopItems', -1, shop, randAmount)
