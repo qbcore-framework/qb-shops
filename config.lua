@@ -221,7 +221,6 @@ Config.Products = {
             type = "item",
             slot = 11,
         },
-
         [12] = {
             name = "weapon_briefcase",
             price = 275,
@@ -239,21 +238,29 @@ Config.Products = {
             slot = 13,
         },
         [14] = {
+            name = "duffel-bag",
+            price = 300,
+            amount = 50,
+            info = {},
+            type = "item",
+            slot = 14,
+        },
+        [15] = {
             name = "repairkit",
             price = 250,
             amount = 50,
             info = {},
             type = "item",
-            slot = 14,
+            slot = 15,
             requiredJob = { "mechanic", "police" }
         },
-        [15] = {
+        [16] = {
             name = "advancedrepairkit",
             price = 450,
             amount = 50,
             info = {},
             type = "item",
-            slot = 15,
+            slot = 16,
             requiredJob = { "mechanic" }
         },
     },
