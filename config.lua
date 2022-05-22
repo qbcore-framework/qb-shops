@@ -332,7 +332,7 @@ Config.Products = {
             info = {},
             type = "item",
             slot = 2,
-        },    
+        },
         [3] = {
             name = "diving_gear",
             price = 2500,
