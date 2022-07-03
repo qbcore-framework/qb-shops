@@ -123,7 +123,7 @@ local function createPeds()
     for k, v in pairs(Config.Locations) do
         if not ShopPed[k] then ShopPed[k] = {} end
         local current = v["ped"]
-        current = type(current) == 'string' and GetHashKey(current) or current
+        current = type(current) == 'string' and joaat(current) or current
         RequestModel(current)
 
         while not HasModelLoaded(current) do
@@ -156,7 +156,7 @@ local function createPeds()
 
     if not ShopPed["casino"] then ShopPed["casino"] = {} end
     local current = Config.SellCasinoChips.ped
-    current = type(current) == 'string' and GetHashKey(current) or current
+    current = type(current) == 'string' and joaat(current) or current
     RequestModel(current)
 
     while not HasModelLoaded(current) do
