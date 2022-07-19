@@ -12,8 +12,8 @@ local function SetupItems(shop)
     local products = Config.Locations[shop].products
     local playerJob = PlayerData.job.name
     local playerGang = PlayerData.gang.name
-    local curJob = nil
-    local curGang = nil
+    local curJob
+    local curGang
     local items = {}
     for i = 1, #products do
         curJob = products[i].requiredJob
@@ -46,7 +46,7 @@ local function SetupItems(shop)
 end
 
 local function createBlips()
-    if pedsSpawned then return end
+    if pedSpawned then return end
     for store in pairs(Config.Locations) do
         if Config.Locations[store]["showblip"] then
             local StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"]["x"], Config.Locations[store]["coords"]["y"], Config.Locations[store]["coords"]["z"])
@@ -63,7 +63,6 @@ local function createBlips()
 end
 
 local function openShop(shop, data)
-    local products = data.products
     local ShopItems = {}
     ShopItems.items = {}
     QBCore.Functions.TriggerCallback("qb-shops:server:getLicenseStatus", function(hasLicense, hasLicenseItem)
