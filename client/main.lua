@@ -1,30 +1,53 @@
 local QBCore = exports["qb-core"]:GetCoreObject()
+local PlayerData = QBCore.Functions.GetPlayerData()
 local inChips = false
 local currentShop, currentData
 local pedSpawned = false
+local listen = false
 local ShopPed = {}
+local NewZones = {}
 
 -- Functions
 local function SetupItems(shop)
     local products = Config.Locations[shop].products
-    local playerJob = QBCore.Functions.GetPlayerData().job.name
+    local playerJob = PlayerData.job.name
+    local playerGang = PlayerData.gang.name
+    local curJob = nil
+    local curGang = nil
     local items = {}
     for i = 1, #products do
-        if not products[i].requiredJob then
-            items[#items + 1] = products[i]
-        else
-            for i2 = 1, #products[i].requiredJob do
-                if playerJob == products[i].requiredJob[i2] then
-                    items[#items + 1] = products[i]
-                end
+        curJob = products[i].requiredJob
+        curGang = products[i].requiredGang
+
+        if curJob then goto jobCheck end
+        if curGang then goto gangCheck end
+
+        items[#items + 1] = products[i]
+        goto nextIteration
+
+        :: jobCheck ::
+        for i2 = 1, #curJob do
+            if playerJob == curJob[i2] then
+                items[#items + 1] = products[i]
             end
         end
+        goto nextIteration
+
+        :: gangCheck ::
+        for i2 = 1, #curGang do
+            if playerGang == curGang[i2] then
+                items[#items + 1] = products[i]
+            end
+        end
+        
+        :: nextIteration ::
     end
     return items
 end
 
 local function createBlips()
-    for store, _ in pairs(Config.Locations) do
+    if pedsSpawned then return end
+    for store in pairs(Config.Locations) do
         if Config.Locations[store]["showblip"] then
             local StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"]["x"], Config.Locations[store]["coords"]["y"], Config.Locations[store]["coords"]["z"])
             SetBlipSprite(StoreBlip, Config.Locations[store]["blipsprite"])
@@ -39,23 +62,6 @@ local function createBlips()
     end
 end
 
--- Events
-RegisterNetEvent("qb-shops:client:UpdateShop", function(shop, itemData, amount)
-    TriggerServerEvent("qb-shops:server:UpdateShopItems", shop, itemData, amount)
-end)
-
-RegisterNetEvent("qb-shops:client:SetShopItems", function(shop, shopProducts)
-    Config.Locations[shop]["products"] = shopProducts
-end)
-
-RegisterNetEvent("qb-shops:client:RestockShopItems", function(shop, amount)
-    if Config.Locations[shop]["products"] ~= nil then
-        for k in pairs(Config.Locations[shop]["products"]) do
-            Config.Locations[shop]["products"][k].amount = Config.Locations[shop]["products"][k].amount + amount
-        end
-    end
-end)
-
 local function openShop(shop, data)
     local products = data.products
     local ShopItems = {}
@@ -68,19 +74,7 @@ local function openShop(shop, data)
                 QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
                 Wait(500)
             else
-                for i = 1, #products do
-                    if not products[i].requiredJob then
-                        if not products[i].requiresLicense then
-                            ShopItems.items[#ShopItems.items + 1] = products[i]
-                        end
-                    else
-                        for i2 = 1, #products[i].requiredJob do
-                            if QBCore.Functions.GetPlayerData().job.name == products[i].requiredJob[i2] and not products[i].requiresLicense then
-                                ShopItems.items[#ShopItems.items + 1] = products[i]
-                            end
-                        end
-                    end
-                end
+                ShopItems.items = SetupItems(shop)
                 QBCore.Functions.Notify(Lang:t("error.dealer_decline"), "error")
                 Wait(500)
                 QBCore.Functions.Notify(Lang:t("error.talk_cop"), "error")
@@ -97,8 +91,7 @@ local function openShop(shop, data)
     end)
 end
 
-local listen = false
-local function Listen4Control()
+local function listenForControl()
     CreateThread(function()
         listen = true
         while listen do
@@ -113,7 +106,7 @@ local function Listen4Control()
                 listen = false
                 break
             end
-            Wait(1)
+            Wait(0)
         end
     end)
 end
@@ -186,19 +179,59 @@ local function createPeds()
 end
 
 local function deletePeds()
-    if pedSpawned then
-        for _, v in pairs(ShopPed) do
-            DeletePed(v)
-        end
+    if not pedSpawned then return end
+    for _, v in pairs(ShopPed) do
+        DeletePed(v)
     end
 end
 
+-- Events
+RegisterNetEvent("qb-shops:client:UpdateShop", function(shop, itemData, amount)
+    TriggerServerEvent("qb-shops:server:UpdateShopItems", shop, itemData, amount)
+end)
+
+RegisterNetEvent("qb-shops:client:SetShopItems", function(shop, shopProducts)
+    Config.Locations[shop]["products"] = shopProducts
+end)
+
+RegisterNetEvent("qb-shops:client:RestockShopItems", function(shop, amount)
+    if not Config.Locations[shop]["products"] then return end
+    for k in pairs(Config.Locations[shop]["products"]) do
+        Config.Locations[shop]["products"][k].amount = Config.Locations[shop]["products"][k].amount + amount
+    end
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    createBlips()
+    createPeds()
+    PlayerData = QBCore.Functions.GetPlayerData()
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
+    deletePeds()
+    PlayerData = {}
+end)
+
+RegisterNetEvent('QBCore:Client:SetPlayerData', function(val)
+    PlayerData = val
+end)
+
+AddEventHandler('onResourceStart', function(resourceName)
+    if GetCurrentResourceName() ~= resourceName then return end
+    createBlips()
+    createPeds()
+end)
+
+AddEventHandler('onResourceStop', function(resourceName)
+    if GetCurrentResourceName() ~= resourceName then return end
+    deletePeds()
+end)
+
 -- Threads
 
-local NewZones = {}
 CreateThread(function()
     if not Config.UseTarget then
-        for shop, _ in pairs(Config.Locations) do
+        for shop in pairs(Config.Locations) do
             NewZones[#NewZones+1] = CircleZone:Create(vector3(Config.Locations[shop]["coords"]["x"], Config.Locations[shop]["coords"]["y"], Config.Locations[shop]["coords"]["z"]), Config.Locations[shop]["radius"], {
                 useZ = true,
                 debugPoly = false,
@@ -212,7 +245,7 @@ CreateThread(function()
                 currentShop = zone.name
                 currentData = Config.Locations[zone.name]
                 exports["qb-core"]:DrawText(Lang:t("info.open_shop"))
-                Listen4Control()
+                listenForControl()
             else
                 exports["qb-core"]:HideText()
                 listen = false
@@ -229,27 +262,5 @@ CreateThread(function()
                 exports["qb-core"]:HideText()
             end
         end)
-    end
-end)
-
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-    createBlips()
-    createPeds()
-end)
-
-RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
-    deletePeds()
-end)
-
-AddEventHandler('onResourceStart', function(resourceName)
-    if GetCurrentResourceName() == resourceName then
-        createBlips()
-        createPeds()
-    end
-end)
-
-AddEventHandler('onResourceStop', function(resourceName)
-    if GetCurrentResourceName() == resourceName then
-        deletePeds()
     end
 end)
