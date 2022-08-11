@@ -11,9 +11,38 @@ local NewZones = {}
 
 local function SetupItems(shop)
     local products = Config.Locations[shop].products
+    local curJob
+    local curGang
     local items = {}
     for i = 1, #products do
+        curJob = products[i].requiredJob
+        curGang = products[i].requiredGang
+
+        if curJob then goto jobCheck end
+        if curGang then goto gangCheck end
+
         items[#items + 1] = products[i]
+
+        goto nextIteration
+
+        :: jobCheck ::
+
+        for i2 = 1, #curJob do
+            if PlayerData.job.name == curJob[i2] then
+                items[#items + 1] = products[i]
+            end
+        end
+
+        goto nextIteration
+
+        :: gangCheck ::
+        for i2 = 1, #curGang do
+            if PlayerData.gang.name == curGang[i2] then
+                items[#items + 1] = products[i]
+            end
+        end
+
+        :: nextIteration ::
     end
     return items
 end
