@@ -66,6 +66,7 @@ local function createBlips()
 end
 
 local function openShop(shop, data)
+    local products = data.products
     local ShopItems = {}
     ShopItems.items = {}
     ShopItems.label = data["label"]
@@ -76,7 +77,19 @@ local function openShop(shop, data)
             QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
             Wait(500)
         else
-            ShopItems.items = SetupItems(shop)
+            for i = 1, #products do
+                if not products[i].requiredJob then
+                    if not products[i].requiresLicense then
+                        ShopItems.items[#ShopItems.items + 1] = products[i]
+                    end
+                else
+                    for i2 = 1, #products[i].requiredJob do
+                        if QBCore.Functions.GetPlayerData().job.name == products[i].requiredJob[i2] and not products[i].requiresLicense then
+                            ShopItems.items[#ShopItems.items + 1] = products[i]
+                        end
+                    end
+                end
+            end
             QBCore.Functions.Notify(Lang:t("error.dealer_decline"), "error")
             Wait(500)
             QBCore.Functions.Notify(Lang:t("error.talk_cop"), "error")
