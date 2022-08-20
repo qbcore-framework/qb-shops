@@ -9,7 +9,7 @@ local NewZones = {}
 
 -- Functions
 
-local function SetupItems(shop)
+local function SetupItems(shop, checkLicense)
     local products = Config.Locations[shop].products
     local curJob
     local curGang
@@ -20,13 +20,13 @@ local function SetupItems(shop)
 
         if curJob then goto jobCheck end
         if curGang then goto gangCheck end
+        if checkLicense then goto licenseCheck end
 
         items[#items + 1] = products[i]
 
         goto nextIteration
 
         :: jobCheck ::
-
         for i2 = 1, #curJob do
             if PlayerData.job.name == curJob[i2] then
                 items[#items + 1] = products[i]
@@ -40,6 +40,13 @@ local function SetupItems(shop)
             if PlayerData.gang.name == curGang[i2] then
                 items[#items + 1] = products[i]
             end
+        end
+
+        goto nextIteration
+
+        :: licenseCheck ::
+        if not products[i].requiresLicense then
+            items[#items + 1] = products[i]
         end
 
         :: nextIteration ::
@@ -76,7 +83,7 @@ local function openShop(shop, data)
             QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
             Wait(500)
         else
-            ShopItems.items = SetupItems(shop)
+            ShopItems.items = SetupItems(shop, true)
             QBCore.Functions.Notify(Lang:t("error.dealer_decline"), "error")
             Wait(500)
             QBCore.Functions.Notify(Lang:t("error.talk_cop"), "error")
@@ -89,8 +96,6 @@ local function openShop(shop, data)
     for k in pairs(ShopItems.items) do
         ShopItems.items[k].slot = k
     end
-
-    ShopItems.slots = 30
 
     TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_" .. shop, ShopItems)
 end
