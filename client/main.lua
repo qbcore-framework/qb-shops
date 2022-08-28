@@ -61,7 +61,7 @@ local function createBlips()
         if Config.Locations[store]["showblip"] then
             local StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"]["x"], Config.Locations[store]["coords"]["y"], Config.Locations[store]["coords"]["z"])
             SetBlipSprite(StoreBlip, Config.Locations[store]["blipsprite"])
-            SetBlipScale(StoreBlip, 0.6)
+            SetBlipScale(StoreBlip, Config.Locations[store]["blipscale"])
             SetBlipDisplay(StoreBlip, 4)
             SetBlipColour(StoreBlip, Config.Locations[store]["blipcolor"])
             SetBlipAsShortRange(StoreBlip, true)
