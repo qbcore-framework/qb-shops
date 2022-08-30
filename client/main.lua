@@ -23,7 +23,6 @@ end
 
 local function SetupItems(shop, checkLicense)
     local products = deepCopy(Config.Locations[shop].products)
-    local originalPrices = {}
     local bmMargin = Config.BlackMarket.markup
     local bmReduction = Config.BlackMarket.quantityreduction
     local curJob
@@ -33,8 +32,6 @@ local function SetupItems(shop, checkLicense)
     for i = 1, #products do
         curJob = products[i].requiredJob
         curGang = products[i].requiredGang
-
-        products[i].old = {}
 
         -- If shop is a blackmarket and the product requires a license
         if Config.Locations[shop].blackmarket and products[i].requiresLicense then
@@ -47,18 +44,18 @@ local function SetupItems(shop, checkLicense)
                     products[i].amount = math.floor((products[i].amount - (products[i].amount*bmReduction))+0.5)
                 end
             else
-                if not (products[i].price == Config.Locations[shop].products[i].price) then
+                if products[i].price ~= Config.Locations[shop].products[i].price then
                     products[i].price = Config.Locations[shop].products[i].price
                 end
-                if not (products[i].amount == Config.Locations[shop].products[i].amount) then
+                if products[i].amount ~= Config.Locations[shop].products[i].amount then
                     products[i].amount = Config.Locations[shop].products[i].amount
                 end
             end
         else
-            if not (products[i].price == Config.Locations[shop].products[i].price) then
+            if products[i].price ~= Config.Locations[shop].products[i].price then
                 products[i].price = Config.Locations[shop].products[i].price
             end
-            if not (products[i].amount == Config.Locations[shop].products[i].amount) then
+            if products[i].amount ~= Config.Locations[shop].products[i].amount then
                 products[i].amount = Config.Locations[shop].products[i].amount
             end
         end
