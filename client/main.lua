@@ -37,7 +37,7 @@ local function SetupItems(shop, checkLicense)
         if Config.Locations[shop].blackmarket and products[i].requiresLicense then
             if not (QBCore.Functions.HasItem("weaponlicense")) then
                 -- if player does not have weapons license
-                if products[i].price == Config.Locations[shop].products[i].price then                
+                if products[i].price == Config.Locations[shop].products[i].price then
                     products[i].price = math.floor((products[i].price * bmMargin)+0.5)
                 end
                 if products[i].amount == Config.Locations[shop].products[i].amount then
