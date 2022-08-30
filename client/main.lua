@@ -6,17 +6,63 @@ local pedSpawned = false
 local listen = false
 local ShopPed = {}
 local NewZones = {}
+local OldPrices = {}
+
 
 -- Functions
+local function deepCopy(original)
+	local copy = {}
+	for k, v in pairs(original) do
+		if type(v) == "table" then
+			v = deepCopy(v)
+		end
+		copy[k] = v
+	end
+	return copy
+end
 
 local function SetupItems(shop, checkLicense)
-    local products = Config.Locations[shop].products
+    local products = deepCopy(Config.Locations[shop].products)
+    local originalPrices = {}
+    local bmMargin = Config.BlackMarket.markup
+    local bmReduction = Config.BlackMarket.quantityreduction
     local curJob
     local curGang
     local items = {}
+
     for i = 1, #products do
         curJob = products[i].requiredJob
         curGang = products[i].requiredGang
+
+        products[i].old = {}
+
+        -- If shop is a blackmarket and the product requires a license
+        if Config.Locations[shop].blackmarket and products[i].requiresLicense then
+            if not (QBCore.Functions.HasItem("weaponlicense")) then
+                -- if player does not have weapons license
+                if products[i].price == Config.Locations[shop].products[i].price then                
+                    products[i].price = math.floor((products[i].price * bmMargin)+0.5)
+                end
+                if products[i].amount == Config.Locations[shop].products[i].amount then
+                    products[i].amount = math.floor((products[i].amount - (products[i].amount*bmReduction))+0.5)
+                end
+            else
+                if not (products[i].price == Config.Locations[shop].products[i].price) then
+                    products[i].price = Config.Locations[shop].products[i].price
+                end
+                if not (products[i].amount == Config.Locations[shop].products[i].amount) then
+                    products[i].amount = Config.Locations[shop].products[i].amount
+                end
+            end
+        else
+            if not (products[i].price == Config.Locations[shop].products[i].price) then
+                products[i].price = Config.Locations[shop].products[i].price
+            end
+            if not (products[i].amount == Config.Locations[shop].products[i].amount) then
+                products[i].amount = Config.Locations[shop].products[i].amount
+            end
+        end
+        -- end blackmarket shop
 
         if curJob then goto jobCheck end
         if curGang then goto gangCheck end
@@ -78,16 +124,22 @@ local function openShop(shop, data)
     ShopItems.label = data["label"]
 
     if data.type == "weapon" then
-        if PlayerData.metadata["licences"].weapon and QBCore.Functions.HasItem("weaponlicense") then
+        if PlayerData.metadata["licences"].weapon and QBCore.Functions.HasItem("weaponlicense") then -- check for player license
             ShopItems.items = SetupItems(shop)
             QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
             Wait(500)
-        else
-            ShopItems.items = SetupItems(shop, true)
-            QBCore.Functions.Notify(Lang:t("error.dealer_decline"), "error")
-            Wait(500)
-            QBCore.Functions.Notify(Lang:t("error.talk_cop"), "error")
-            Wait(1000)
+        else -- player does not have license
+            if data.blackmarket then -- if the shop is marked as blackmarket then display the items anyways.
+                QBCore.Functions.Notify(Lang:t("error.black_market"), "error")
+                ShopItems.items = SetupItems(shop)
+                Wait(500)
+            else
+                ShopItems.items = SetupItems(shop, true)
+                QBCore.Functions.Notify(Lang:t("error.dealer_decline"), "error")
+                Wait(500)
+                QBCore.Functions.Notify(Lang:t("error.talk_cop"), "error")
+                Wait(1000)
+            end
         end
     else
         ShopItems.items = SetupItems(shop)

@@ -425,6 +425,11 @@ Config.Products = {
     },
 }
 
+Config.BlackMarket = {
+    markup = 2.5, -- markup percentage
+    quantityreduction = 0.5 -- reduce by percentage
+}
+
 Config.Locations = {
     -- 24/7 Locations
     ["247supermarket"] = {
@@ -865,7 +870,7 @@ Config.Locations = {
         ["blipscale"] = 0.6,
         ["blipcolor"] = 0
     },
-    ["ammunation8"] = {
+    ["ammunation8"] = { -- blackmarket ammunation
         ["label"] = "Ammunation",
         ["type"] = "weapon",
         ["coords"] = vector4(-1118.59, 2700.05, 18.55, 221.89),
@@ -876,6 +881,7 @@ Config.Locations = {
         ["targetLabel"] = "Open Ammunation",
         ["products"] = Config.Products["weapons"],
         ["showblip"] = true,
+        ["blackmarket"] = true,
         ["blipsprite"] = 110,
         ["blipscale"] = 0.6,
         ["blipcolor"] = 0

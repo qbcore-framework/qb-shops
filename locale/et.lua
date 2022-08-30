@@ -5,7 +5,8 @@ local Translations = {
     },
     error = {
         dealer_decline = "Relvadiiler keeldub sulle relvade näitamisest.",
-        talk_cop = "Räägi riigiametnikuga, et endale relvaluba taodelda."
+        talk_cop = "Räägi riigiametnikuga, et endale relvaluba taodelda.",
+        black_market = "We notice you don't have a license, check out these black market items"
     },
     success = {
         dealer_verify = "Diiler kinnitas su relvaloa."
