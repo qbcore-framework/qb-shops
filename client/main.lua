@@ -6,8 +6,6 @@ local pedSpawned = false
 local listen = false
 local ShopPed = {}
 local NewZones = {}
-local OldPrices = {}
-
 
 -- Functions
 local function deepCopy(original)
