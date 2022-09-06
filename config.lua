@@ -438,6 +438,7 @@ Config.Locations = {
         ["products"] = Config.Products["normal"],
         ["showblip"] = true,
         ["blipsprite"] = 52,
+        ["blipscale"] = 0.6,
         ["blipcolor"] = 0
     },
 
