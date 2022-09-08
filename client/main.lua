@@ -77,7 +77,7 @@ local function openShop(shop, data)
     ShopItems.items = {}
     ShopItems.label = data["label"]
 
-    if data.type == "weapon" then
+    if data.type == "weapon" and Config.FirearmsLicenseCheck then
         if PlayerData.metadata["licences"].weapon and QBCore.Functions.HasItem("weaponlicense") then
             ShopItems.items = SetupItems(shop)
             QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
