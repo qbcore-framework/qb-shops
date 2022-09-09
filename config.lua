@@ -7,6 +7,8 @@ Config.SellCasinoChips = {
     ped = 's_m_y_casino_01'
 }
 
+Config.FirearmsLicenseCheck = true -- Whether a arms dealer checks for a firearms license
+
 Config.Products = {
     ["normal"] = {
         [1] = {
