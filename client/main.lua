@@ -76,7 +76,8 @@ local function openShop(shop, data)
     local ShopItems = {}
     ShopItems.items = {}
     ShopItems.label = data["label"]
-
+    local PlayerData = QBCore.Functions.GetPlayerData()
+    
     if data.type == "weapon" and Config.FirearmsLicenseCheck then
         if PlayerData.metadata["licences"].weapon and QBCore.Functions.HasItem("weaponlicense") then
             ShopItems.items = SetupItems(shop)
