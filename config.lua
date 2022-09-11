@@ -343,6 +343,14 @@ Config.Products = {
             type = "item",
             slot = 3,
         },
+        [4] = {
+            name = "diving_fill",
+            price = 500,
+            amount = 10,
+            info = {},
+            type = "item",
+            slot = 4,
+        },
         -- [4] = {
         --     name = "smoketrailred",
         --     price = 250,
