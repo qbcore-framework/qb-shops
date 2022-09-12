@@ -224,7 +224,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     table.wipe(PlayerData)
 end)
 
-RegisterNetEvent('QBCore:Client:SetPlayerData', function(val)
+RegisterNetEvent('QBCore:Client:SetPlayerData', function()
     PlayerData = QBCore.Functions.GetPlayerData()
 end)
 
