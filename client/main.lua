@@ -78,7 +78,7 @@ local function openShop(shop, data)
     ShopItems.label = data["label"]
 
     if data.type == "weapon" and Config.FirearmsLicenseCheck then
-        if PlayerData.metadata["licences"].weapon and QBCore.Functions.HasItem("weaponlicense") then
+        if PlayerData.metadata['licenses'] and PlayerData.metadata["licences"].weapon and QBCore.Functions.HasItem("weaponlicense") then
             ShopItems.items = SetupItems(shop)
             QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
             Wait(500)
@@ -206,7 +206,7 @@ RegisterNetEvent("qb-shops:client:SetShopItems", function(shop, shopProducts)
 end)
 
 RegisterNetEvent("qb-shops:client:RestockShopItems", function(shop, amount)
-    if not Config.Locations[shop]?["products"] then return end
+    if not Config.Locations[shop]["products"] then return end
 
     for k in pairs(Config.Locations[shop]["products"]) do
         Config.Locations[shop]["products"][k].amount = Config.Locations[shop]["products"][k].amount + amount
@@ -214,9 +214,9 @@ RegisterNetEvent("qb-shops:client:RestockShopItems", function(shop, amount)
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    PlayerData = QBCore.Functions.GetPlayerData()
     createBlips()
     createPeds()
-    PlayerData = QBCore.Functions.GetPlayerData()
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
@@ -224,7 +224,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     table.wipe(PlayerData)
 end)
 
-RegisterNetEvent('QBCore:Client:SetPlayerData', function(val)
+RegisterNetEvent('QBCore:Player:SetPlayerData', function(val)
     PlayerData = val
 end)
 
