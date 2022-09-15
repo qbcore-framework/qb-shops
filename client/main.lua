@@ -78,7 +78,7 @@ local function openShop(shop, data)
     ShopItems.label = data["label"]
 
     if data.type == "weapon" and Config.FirearmsLicenseCheck then
-        if PlayerData.metadata["licences"].weapon and QBCore.Functions.HasItem("weaponlicense") then
+        if PlayerData.metadata['licenses'] and PlayerData.metadata["licences"].weapon and QBCore.Functions.HasItem("weaponlicense") then
             ShopItems.items = SetupItems(shop)
             QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
             Wait(500)
@@ -224,8 +224,8 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     table.wipe(PlayerData)
 end)
 
-RegisterNetEvent('QBCore:Client:SetPlayerData', function()
-    PlayerData = QBCore.Functions.GetPlayerData()
+RegisterNetEvent('QBCore:Player:SetPlayerData', function(val)
+    PlayerData = val
 end)
 
 AddEventHandler('onResourceStart', function(resourceName)
