@@ -6,10 +6,9 @@ local pedSpawned = false
 local listen = false
 local ShopPed = {}
 local NewZones = {}
-
 -- Functions
-
 local function SetupItems(shop, checkLicense)
+    TriggerServerEvent('qb-shops:server:SetShopInv')
     local products = Config.Locations[shop].products
     local curJob
     local curGang
@@ -197,6 +196,9 @@ local function deletePeds()
 end
 
 -- Events
+RegisterNetEvent('qb-shops:client:SetShopInv',function(shopinv)
+    Config.Locations = shopinv
+end)
 RegisterNetEvent("qb-shops:client:UpdateShop", function(shop, itemData, amount)
     TriggerServerEvent("qb-shops:server:UpdateShopItems", shop, itemData, amount)
 end)
@@ -206,10 +208,9 @@ RegisterNetEvent("qb-shops:client:SetShopItems", function(shop, shopProducts)
 end)
 
 RegisterNetEvent("qb-shops:client:RestockShopItems", function(shop, amount)
-    if not Config.Locations[shop]["products"] then return end
-
-    for k in pairs(Config.Locations[shop]["products"]) do
-        Config.Locations[shop]["products"][k].amount = Config.Locations[shop]["products"][k].amount + amount
+    if not Config.Locations[shop].products then return end
+    for k in pairs(Config.Locations[shop].products) do
+        Config.Locations[shop].products[k].amount = Config.Locations[shop]["products"][k].amount + amount
     end
 end)
 
@@ -242,7 +243,6 @@ AddEventHandler('onResourceStop', function(resourceName)
 end)
 
 -- Threads
-
 if not Config.UseTarget then
     CreateThread(function()
         for shop in pairs(Config.Locations) do
@@ -286,7 +286,6 @@ CreateThread(function()
                 Config.Locations[k1].requiredJob[k] = 0
             end
         end
-
         if v.requiredGang and type(v.requiredGang) == "table" and table.type(v.requiredGang) == "array" then
             for k in pairs(v.requiredGang) do
                 Config.Locations[k1].requiredGang[k] = 0

@@ -1,31 +1,48 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-
+--Events
+RegisterNetEvent('qb-shops:server:SetShopInv',function()
+    local shopinv = LoadResourceFile(GetCurrentResourceName(), Config.ShopsInvJsonFile)
+    shopinv = json.decode(shopinv)
+    if next(shopinv) then
+        for k, v in pairs(shopinv) do
+            for k2, v2 in pairs(v.products) do Config.Locations[k].products[k2].amount = v2.amount end
+        end
+    else print('No shop inventory found -- defaults enabled') end
+    TriggerClientEvent('qb-shops:client:SetShopInv', -1, Config.Locations)
+end)
+RegisterNetEvent('qb-shops:server:SaveShopInv',function()
+    local shopinv = {}
+    for k, v in pairs(Config.Locations) do
+        shopinv[k] = {}
+        shopinv[k].products = {}
+        for kk, vv in pairs(v.products) do
+            shopinv[k].products[kk] = {}
+            shopinv[k].products[kk].amount = vv['amount']
+        end
+    end
+    SaveResourceFile(GetCurrentResourceName(), Config.ShopsInvJsonFile, json.encode(shopinv))
+end)
 RegisterNetEvent('qb-shops:server:UpdateShopItems', function(shop, itemData, amount)
     if not shop or not itemData or not amount then return end
-
-    Config.Locations[shop]["products"][itemData.slot].amount -= amount
-    if Config.Locations[shop]["products"][itemData.slot].amount < 0 then
-        Config.Locations[shop]["products"][itemData.slot].amount = 0
+    Config.Locations[shop].products[itemData.slot].amount -= amount
+    if Config.Locations[shop].products[itemData.slot].amount < 0 then
+        Config.Locations[shop].products[itemData.slot].amount = 0
     end
-
-    TriggerClientEvent('qb-shops:client:SetShopItems', -1, shop, Config.Locations[shop]["products"])
+    TriggerEvent('qb-shops:server:SaveShopInv')
+    TriggerClientEvent('qb-shops:client:SetShopItems', -1, shop, Config.Locations[shop].products)
 end)
-
 RegisterNetEvent('qb-shops:server:RestockShopItems', function(shop)
-    if not shop or not Config.Locations[shop]?["products"] then return end
-
+    if not shop or not Config.Locations[shop].products then return end
     local randAmount = math.random(10, 50)
-    for k in pairs(Config.Locations[shop]["products"]) do
-        Config.Locations[shop]["products"][k].amount += randAmount
+    for k in pairs(Config.Locations[shop].products) do
+        Config.Locations[shop].products[k].amount += randAmount
     end
-
+    TriggerEvent('qb-shops:server:SaveShopInv')
     TriggerClientEvent('qb-shops:client:RestockShopItems', -1, shop, randAmount)
 end)
-
 local ItemList = {
     ["casinochips"] = 1,
 }
-
 RegisterNetEvent('qb-shops:server:sellChips', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
@@ -37,7 +54,6 @@ RegisterNetEvent('qb-shops:server:sellChips', function()
                     local price = ItemList[Player.PlayerData.items[k].name] * Player.PlayerData.items[k].amount
                     Player.Functions.RemoveItem(Player.PlayerData.items[k].name, Player.PlayerData.items[k].amount, k)
                     Player.Functions.AddMoney("cash", price, "sold-casino-chips")
-
                     QBCore.Functions.Notify(src, "You sold your chips for $" .. price)
                     TriggerEvent("qb-log:server:CreateLog", "casino", "Chips", "blue", "**" .. GetPlayerName(src) .. "** got $" .. price .. " for selling the Chips")
                 end
@@ -46,4 +62,8 @@ RegisterNetEvent('qb-shops:server:sellChips', function()
     else
         QBCore.Functions.Notify(src, "You have no chips..")
     end
+end)
+-- Threads
+CreateThread(function()
+    TriggerEvent('qb-shops:server:SetShopInv')
 end)
