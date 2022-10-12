@@ -63,6 +63,17 @@ RegisterNetEvent('qb-shops:server:sellChips', function()
         QBCore.Functions.Notify(src, "You have no chips..")
     end
 end)
+RegisterNetEvent('qb-shops:server:SetShopList',function()
+    local shoplist = {}
+    cnt = 0
+    for k, v in pairs(Config.Locations) do
+        cnt = cnt + 1
+        shoplist[cnt] = {}
+        shoplist[cnt].name = k
+        shoplist[cnt].coords = v.delivery
+    end
+    TriggerClientEvent('qb-truckerjob:client:SetShopList',-1,shoplist)
+end)
 -- Threads
 CreateThread(function()
     TriggerEvent('qb-shops:server:SetShopInv')

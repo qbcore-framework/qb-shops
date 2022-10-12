@@ -218,6 +218,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
     createBlips()
     createPeds()
+    TriggerServerEvent('qb-shops:server:SetShopList')
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
