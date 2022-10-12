@@ -65,7 +65,7 @@ RegisterNetEvent('qb-shops:server:sellChips', function()
 end)
 RegisterNetEvent('qb-shops:server:SetShopList',function()
     local shoplist = {}
-    cnt = 0
+    local cnt = 0
     for k, v in pairs(Config.Locations) do
         cnt = cnt + 1
         shoplist[cnt] = {}
