@@ -137,6 +137,7 @@ local function createPeds()
         TaskStartScenarioInPlace(ShopPed[k], v["scenario"], 0, true)
         FreezeEntityPosition(ShopPed[k], true)
         SetEntityInvincible(ShopPed[k], true)
+        SetEntityDynamic(ShopPed[k], true)
         SetBlockingOfNonTemporaryEvents(ShopPed[k], true)
 
         if Config.UseTarget then
