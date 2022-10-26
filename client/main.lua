@@ -194,6 +194,7 @@ local function deletePeds()
     for _, v in pairs(ShopPed) do
         DeletePed(v)
     end
+    pedSpawned = false
 end
 
 -- Events
@@ -220,7 +221,6 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
-    pedSpawned = false
     deletePeds()
     table.wipe(PlayerData)
 end)
@@ -240,7 +240,6 @@ AddEventHandler('onResourceStop', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
 
     deletePeds()
-    pedSpawned = false
 end)
 
 -- Threads
