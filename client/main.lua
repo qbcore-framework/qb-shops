@@ -220,6 +220,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
+    pedSpawned = false
     deletePeds()
     table.wipe(PlayerData)
 end)
@@ -239,6 +240,7 @@ AddEventHandler('onResourceStop', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
 
     deletePeds()
+    pedSpawned = false
 end)
 
 -- Threads
