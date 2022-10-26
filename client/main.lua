@@ -194,6 +194,7 @@ local function deletePeds()
     for _, v in pairs(ShopPed) do
         DeletePed(v)
     end
+    pedSpawned = false
 end
 
 -- Events
