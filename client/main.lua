@@ -95,7 +95,7 @@ local function openShop(shop, data)
         end
         QBCore.Debug(ShopItems)
         TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_" .. shop, ShopItems)
-    end,shop)
+    end)
 end
 
 local function listenForControl()

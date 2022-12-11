@@ -1,8 +1,8 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 --Events
-QBCore.Functions.CreateCallback('qb-shops:server:SetShopInv', function(_,cb,shop)
+QBCore.Functions.CreateCallback('qb-shops:server:SetShopInv', function(_,cb)
     local shopInvJson = LoadResourceFile(GetCurrentResourceName(), Config.ShopsInvJsonFile)
-    cb(shopInvJson)
+    cb(shopInv[shop].products)
 end)
 RegisterNetEvent('qb-shops:server:SaveShopInv',function()
     if not Config.finiteInventory then return end
