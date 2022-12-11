@@ -1,4 +1,5 @@
 Config = {}
+Config.finiteInventory = false -- true = inventory dwindles and requires a truck to supply | false = shop inventory never runs out
 Config.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add `setr UseTarget true` to use this and just that from true to false or the other way around)
 Config.FirearmsLicenseCheck = false -- Whether a arms dealer checks for a firearms license
 Config.ShopsInvJsonFile = './json/shops-inventory.json' -- json file location

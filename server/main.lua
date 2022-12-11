@@ -1,16 +1,11 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 --Events
-RegisterNetEvent('qb-shops:server:SetShopInv',function()
-    local shopinv = LoadResourceFile(GetCurrentResourceName(), Config.ShopsInvJsonFile)
-    shopinv = json.decode(shopinv)
-    if next(shopinv) then
-        for k, v in pairs(shopinv) do
-            for k2, v2 in pairs(v.products) do Config.Locations[k].products[k2].amount = v2.amount end
-        end
-    else print('No shop inventory found -- defaults enabled') end
-    TriggerClientEvent('qb-shops:client:SetShopInv', -1, Config.Locations)
+QBCore.Functions.CreateCallback('qb-shops:server:SetShopInv', function(_,cb,shop)
+    local shopInvJson = LoadResourceFile(GetCurrentResourceName(), Config.ShopsInvJsonFile)
+    cb(shopInvJson)
 end)
 RegisterNetEvent('qb-shops:server:SaveShopInv',function()
+    if not Config.finiteInventory then return end
     local shopinv = {}
     for k, v in pairs(Config.Locations) do
         shopinv[k] = {}
@@ -23,6 +18,7 @@ RegisterNetEvent('qb-shops:server:SaveShopInv',function()
     SaveResourceFile(GetCurrentResourceName(), Config.ShopsInvJsonFile, json.encode(shopinv))
 end)
 RegisterNetEvent('qb-shops:server:UpdateShopItems', function(shop, itemData, amount)
+    if not Config.finiteInventory then return end
     if not shop or not itemData or not amount then return end
     Config.Locations[shop].products[itemData.slot].amount -= amount
     if Config.Locations[shop].products[itemData.slot].amount < 0 then
@@ -73,8 +69,4 @@ RegisterNetEvent('qb-shops:server:SetShopList',function()
         shoplist[cnt].coords = v.delivery
     end
     TriggerClientEvent('qb-truckerjob:client:SetShopList',-1,shoplist)
-end)
--- Threads
-CreateThread(function()
-    TriggerEvent('qb-shops:server:SetShopInv')
 end)
