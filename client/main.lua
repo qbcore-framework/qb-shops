@@ -6,54 +6,7 @@ local pedSpawned = false
 local listen = false
 local ShopPed = {}
 local NewZones = {}
-
 -- Functions
-
-local function SetupItems(shop, checkLicense)
-    local products = Config.Locations[shop].products
-    local curJob
-    local curGang
-    local items = {}
-    for i = 1, #products do
-        curJob = products[i].requiredJob
-        curGang = products[i].requiredGang
-
-        if curJob then goto jobCheck end
-        if curGang then goto gangCheck end
-        if checkLicense then goto licenseCheck end
-
-        items[#items + 1] = products[i]
-
-        goto nextIteration
-
-        :: jobCheck ::
-        for i2 = 1, #curJob do
-            if PlayerData.job.name == curJob[i2] then
-                items[#items + 1] = products[i]
-            end
-        end
-
-        goto nextIteration
-
-        :: gangCheck ::
-        for i2 = 1, #curGang do
-            if PlayerData.gang.name == curGang[i2] then
-                items[#items + 1] = products[i]
-            end
-        end
-
-        goto nextIteration
-
-        :: licenseCheck ::
-        if not products[i].requiresLicense then
-            items[#items + 1] = products[i]
-        end
-
-        :: nextIteration ::
-    end
-    return items
-end
-
 local function createBlips()
     if pedSpawned then return end
 
@@ -73,39 +26,84 @@ local function createBlips()
 end
 
 local function openShop(shop, data)
-    local ShopItems = {}
-    ShopItems.items = {}
-    ShopItems.label = data["label"]
-
-    if data.type == "weapon" and Config.FirearmsLicenseCheck then
-        if PlayerData.metadata["licences"] and PlayerData.metadata["licences"].weapon and QBCore.Functions.HasItem("weaponlicense") then
-            ShopItems.items = SetupItems(shop)
-            QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
-            Wait(500)
-        else
-            ShopItems.items = SetupItems(shop, true)
-            QBCore.Functions.Notify(Lang:t("error.dealer_decline"), "error")
-            Wait(500)
-            QBCore.Functions.Notify(Lang:t("error.talk_cop"), "error")
-            Wait(1000)
+    QBCore.Functions.TriggerCallback('qb-shops:server:SetShopInv', function(shopInvJson)
+        local function SetupItems(checkLicense)
+            local products =  Config.Locations[shop].products
+            local items = {}
+            local curJob
+            local curGang
+            shopInvJson = json.decode(shopInvJson)
+            if Config.UseTruckerJob and next(shopInvJson) and shopInvJson[shop] then
+                if next(shopInvJson) then
+                    for k, v in pairs(shopInvJson[shop].products) do
+                        products[k].amount = v.amount
+                    end
+                else print('No shop inventory found -- defaults enabled') end
+            end
+            for i = 1, #products do
+            curJob = products[i].requiredJob
+            curGang = products[i].requiredGang
+            if curJob then goto jobCheck end
+            if curGang then goto gangCheck end
+            if checkLicense then goto licenseCheck end
+            items[#items + 1] = products[i]
+            goto nextIteration
+            :: jobCheck ::
+            for i2 = 1, #curJob do
+                if PlayerData.job.name == curJob[i2] then
+                    items[#items + 1] = products[i]
+                end
+            end
+            goto nextIteration
+            :: gangCheck ::
+            for i2 = 1, #curGang do
+                if PlayerData.gang.name == curGang[i2] then
+                    items[#items + 1] = products[i]
+                end
+            end
+            goto nextIteration
+            :: licenseCheck ::
+            if not products[i].requiresLicense then
+                items[#items + 1] = products[i]
+            end
+            :: nextIteration ::
+            end
+            return items
         end
-    else
-        ShopItems.items = SetupItems(shop)
-    end
+        TriggerServerEvent('qb-shops:server:SetShopList')
+        local ShopItems = {}
+        ShopItems.items = {}
+        ShopItems.label = data["label"]
+        if data.type == "weapon" and Config.FirearmsLicenseCheck then
+            if PlayerData.metadata["licences"] and PlayerData.metadata["licences"].weapon and QBCore.Functions.HasItem("weaponlicense") then
+                ShopItems.items = SetupItems()
+                QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
+                Wait(500)
+            else
+                ShopItems.items = SetupItems(true)
+                QBCore.Functions.Notify(Lang:t("error.dealer_decline"), "error")
+                Wait(500)
+                QBCore.Functions.Notify(Lang:t("error.talk_cop"), "error")
+                Wait(1000)
+            end
+        else
+            ShopItems.items = SetupItems()
+        end
 
-    for k in pairs(ShopItems.items) do
-        ShopItems.items[k].slot = k
-    end
-
-    TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_" .. shop, ShopItems)
+        for k in pairs(ShopItems.items) do
+            ShopItems.items[k].slot = k
+        end
+        QBCore.Debug(ShopItems)
+        TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_" .. shop, ShopItems)
+    end)
 end
 
 local function listenForControl()
     if listen then return end
-
     CreateThread(function()
         listen = true
         while listen do
+            TriggerServerEvent('qb-shops:server:SetShopList')
             if IsControlJustPressed(0, 38) then -- E
                 if inChips then
                     exports["qb-core"]:KeyPressed()
@@ -207,10 +205,9 @@ RegisterNetEvent("qb-shops:client:SetShopItems", function(shop, shopProducts)
 end)
 
 RegisterNetEvent("qb-shops:client:RestockShopItems", function(shop, amount)
-    if not Config.Locations[shop]["products"] then return end
-
-    for k in pairs(Config.Locations[shop]["products"]) do
-        Config.Locations[shop]["products"][k].amount = Config.Locations[shop]["products"][k].amount + amount
+    if not Config.Locations[shop].products then return end
+    for k in pairs(Config.Locations[shop].products) do
+        Config.Locations[shop].products[k].amount = Config.Locations[shop]["products"][k].amount + amount
     end
 end)
 
@@ -218,11 +215,12 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
     createBlips()
     createPeds()
+    TriggerServerEvent('qb-shops:server:SetShopList')
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     deletePeds()
-    table.wipe(PlayerData)
+    PlayerData = nil
 end)
 
 RegisterNetEvent('QBCore:Player:SetPlayerData', function(val)
@@ -231,9 +229,9 @@ end)
 
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
-
     createBlips()
     createPeds()
+    TriggerServerEvent('qb-shops:server:SetShopList')
 end)
 
 AddEventHandler('onResourceStop', function(resourceName)
@@ -243,7 +241,6 @@ AddEventHandler('onResourceStop', function(resourceName)
 end)
 
 -- Threads
-
 if not Config.UseTarget then
     CreateThread(function()
         for shop in pairs(Config.Locations) do
@@ -258,6 +255,7 @@ if not Config.UseTarget then
         combo:onPlayerInOut(function(isPointInside, _, zone)
             if isPointInside then
                 currentShop = zone.name
+                TriggerServerEvent('qb-shops:server:SetShopList')
                 currentData = Config.Locations[zone.name]
                 exports["qb-core"]:DrawText(Lang:t("info.open_shop"))
                 listenForControl()
@@ -282,13 +280,12 @@ end
 
 CreateThread(function()
     for k1, v in pairs(Config.Locations) do
-        if v.requiredJob and type(v.requiredJob) == "table" and table.type(v.requiredJob) == "array" then
+        if v.requiredJob and next(v.requiredJob) then
             for k in pairs(v.requiredJob) do
                 Config.Locations[k1].requiredJob[k] = 0
             end
         end
-
-        if v.requiredGang and type(v.requiredGang) == "table" and table.type(v.requiredGang) == "array" then
+        if v.requiredGang and next(v.requiredGang) then
             for k in pairs(v.requiredGang) do
                 Config.Locations[k1].requiredGang[k] = 0
             end
