@@ -33,7 +33,7 @@ local function openShop(shop, data)
             local curJob
             local curGang
             shopInvJson = json.decode(shopInvJson)
-            if Config.finiteInventory and next(shopInvJson) and shopInvJson[shop] then
+            if Config.UseTruckerJob and next(shopInvJson) and shopInvJson[shop] then
                 if next(shopInvJson) then
                     for k, v in pairs(shopInvJson[shop].products) do
                         products[k].amount = v.amount
