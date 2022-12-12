@@ -5,7 +5,7 @@ QBCore.Functions.CreateCallback('qb-shops:server:SetShopInv', function(_,cb)
     cb(shopInvJson)
 end)
 RegisterNetEvent('qb-shops:server:SaveShopInv',function()
-    if not Config.finiteInventory then return end
+    if not Config.UseTruckerJob then return end
     local shopinv = {}
     for k, v in pairs(Config.Locations) do
         shopinv[k] = {}
@@ -18,7 +18,7 @@ RegisterNetEvent('qb-shops:server:SaveShopInv',function()
     SaveResourceFile(GetCurrentResourceName(), Config.ShopsInvJsonFile, json.encode(shopinv))
 end)
 RegisterNetEvent('qb-shops:server:UpdateShopItems', function(shop, itemData, amount)
-    if not Config.finiteInventory then return end
+    if not Config.UseTruckerJob then return end
     if not shop or not itemData or not amount then return end
     Config.Locations[shop].products[itemData.slot].amount -= amount
     if Config.Locations[shop].products[itemData.slot].amount < 0 then
