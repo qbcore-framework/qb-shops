@@ -93,7 +93,6 @@ local function openShop(shop, data)
         for k in pairs(ShopItems.items) do
             ShopItems.items[k].slot = k
         end
-        QBCore.Debug(ShopItems)
         TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_" .. shop, ShopItems)
     end)
 end
