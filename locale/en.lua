@@ -12,4 +12,7 @@ local Translations = {
     },
 }
 
-Lang = Locale:new({phrases = Translations})
+Lang = Lang or Locale:new({
+    phrases = Translations,
+    warnOnMissing = true
+})
