@@ -1,7 +1,7 @@
 local Translations = {
     info = {
         open_shop = "[E] Abrir Loja",
-        sell_chips = "[E] Sell Chips"
+        sell_chips = "[E] Vender Fichas"
     },
     error = {
         dealer_decline = "O Vendedor recusou mostrar o armeiro",
