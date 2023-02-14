@@ -103,7 +103,7 @@ local function listenForControl()
         listen = true
         while listen do
             if IsControlJustPressed(0, 38) then -- E
-            TriggerServerEvent('qb-shops:server:SetShopList')
+                TriggerServerEvent('qb-shops:server:SetShopList')
                 if inChips then
                     exports["qb-core"]:KeyPressed()
                     TriggerServerEvent("qb-shops:server:sellChips")
