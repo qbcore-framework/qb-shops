@@ -102,8 +102,8 @@ local function listenForControl()
     CreateThread(function()
         listen = true
         while listen do
-            TriggerServerEvent('qb-shops:server:SetShopList')
             if IsControlJustPressed(0, 38) then -- E
+                TriggerServerEvent('qb-shops:server:SetShopList')
                 if inChips then
                     exports["qb-core"]:KeyPressed()
                     TriggerServerEvent("qb-shops:server:sellChips")

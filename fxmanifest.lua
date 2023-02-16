@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 
 description 'QB-Shops'
-version '1.2.0'
+version '1.2.1'
 
 shared_scripts {
     '@PolyZone/client.lua',
