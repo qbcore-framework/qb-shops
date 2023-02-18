@@ -1,6 +1,10 @@
 # qb-shops
 Shops For QB-Core
 
+# Notice
+
+You must I repeat MUST use the latest version of qb-truckingjob with this resource!
+
 # License
 
     QBCore Framework
