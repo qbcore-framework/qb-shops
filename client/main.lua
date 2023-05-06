@@ -269,6 +269,7 @@ if not Config.UseTarget then
             if isPointInside then
                 inChips = true
                 exports["qb-core"]:DrawText(Lang:t("info.sell_chips"))
+                listenForControl()
             else
                 inChips = false
                 exports["qb-core"]:HideText()
