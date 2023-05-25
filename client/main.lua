@@ -123,7 +123,7 @@ local function createPeds()
     if pedSpawned then return end
 
     for k, v in pairs(Config.Locations) do
-        local current = type(v["ped"]) == "number" and v["ped"] or joaat(v["ped"])
+        local current = type(v["ped"]) == "number" and joaat(v["ped"]) or v["ped"]
 
         RequestModel(current)
         while not HasModelLoaded(current) do
