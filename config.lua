@@ -165,7 +165,7 @@ Config.Products = {
             info = {},
             type = "item",
             slot = 4,
-            requiredJob = { "mechanic", "police" }
+            requiredJob = { ["mechanic"] = 0, ["police"] = 0}
         },
         [5] = {
             name = "screwdriverset",
@@ -254,7 +254,7 @@ Config.Products = {
             info = {},
             type = "item",
             slot = 15,
-            requiredJob = { "mechanic" }
+            requiredJob = { ["mechanic"] = 0 }
         },
     },
     ["weedshop"] = {
@@ -383,7 +383,7 @@ Config.Products = {
             info = {},
             type = "item",
             slot = 3,
-            requiredJob = { "mechanic", "police" }
+            requiredJob = { ["mechanic"] = 0, ["police"] = 0 }
         },
         [4] = {
             name = "weapon_pistol",

@@ -49,15 +49,15 @@ local function openShop(shop, data)
             items[#items + 1] = products[i]
             goto nextIteration
             :: jobCheck ::
-            for i2 = 1, #curJob do
-                if PlayerData.job.name == curJob[i2] then
+            for k,v in pairs(curJob) do
+                if PlayerData.job.name == k and PlayerData.job.grade.level >= v then
                     items[#items + 1] = products[i]
                 end
             end
             goto nextIteration
             :: gangCheck ::
-            for i2 = 1, #curGang do
-                if PlayerData.gang.name == curGang[i2] then
+            for k,v in pairs(curGang) do
+                if PlayerData.gang.name == k and PlayerData.gang.grade.level >= v then
                     items[#items + 1] = products[i]
                 end
             end
