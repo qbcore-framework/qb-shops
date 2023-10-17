@@ -25,74 +25,73 @@ local function createBlips()
     end
 end
 
+local function tableCheck(val, list)
+    for _, v in ipairs(list) do
+        if v == val then return true end
+    end
+    return false
+end
+
+local function hasLicense(licenses, playerLicenses)
+    for _, license in ipairs(licenses) do
+        if playerLicenses[license] then return true end
+    end
+    return false
+end
+
 local function openShop(shop, data)
     QBCore.Functions.TriggerCallback('qb-shops:server:SetShopInv', function(shopInvJson)
-        local function SetupItems(checkLicense)
-            local products =  Config.Locations[shop].products
+        local function SetupItems()
+            local products = Config.Locations[shop].products
             local items = {}
-            local curJob
-            local curGang
+            local notifiedLicenses = {}
+
             shopInvJson = json.decode(shopInvJson)
-            if Config.UseTruckerJob and next(shopInvJson) and shopInvJson[shop] then
-                if next(shopInvJson) then
-                    for k, v in pairs(shopInvJson[shop].products) do
-                        products[k].amount = v.amount
-                    end
-                else print('No shop inventory found -- defaults enabled') end
+
+            if Config.UseTruckerJob and shopInvJson[shop] then
+                for k, v in pairs(shopInvJson[shop].products) do
+                    products[k].amount = v.amount
+                end
+            elseif not shopInvJson[shop] then
+                print('No shop inventory found -- defaults enabled')
             end
+
             for i = 1, #products do
-            curJob = products[i].requiredJob
-            curGang = products[i].requiredGang
-            if curJob then goto jobCheck end
-            if curGang then goto gangCheck end
-            if checkLicense then goto licenseCheck end
-            items[#items + 1] = products[i]
-            goto nextIteration
-            :: jobCheck ::
-            for i2 = 1, #curJob do
-                if PlayerData.job.name == curJob[i2] then
-                    items[#items + 1] = products[i]
+                local curProduct = products[i]
+                local addProduct = true
+
+                if curProduct.requiredJob and not tableCheck(PlayerData.job.name, curProduct.requiredJob) then
+                    addProduct = false
+                end
+
+                if curProduct.requiredGang and not tableCheck(PlayerData.gang.name, curProduct.requiredGang) then
+                    addProduct = false
+                end
+
+                if curProduct.requiredLicense and not hasLicense(curProduct.requiredLicense, PlayerData.metadata["licences"]) then
+                    addProduct = false
+                    for _, license in ipairs(curProduct.requiredLicense) do
+                        if not PlayerData.metadata["licences"][license] and not notifiedLicenses[license] then
+                            QBCore.Functions.Notify(string.format(Lang:t("error.missing_license"), license), "error")
+                            notifiedLicenses[license] = true
+                        end
+                    end
+                end
+
+                if addProduct then
+                    curProduct.slot = #items + 1
+                    items[#items + 1] = curProduct
                 end
             end
-            goto nextIteration
-            :: gangCheck ::
-            for i2 = 1, #curGang do
-                if PlayerData.gang.name == curGang[i2] then
-                    items[#items + 1] = products[i]
-                end
-            end
-            goto nextIteration
-            :: licenseCheck ::
-            if not products[i].requiresLicense then
-                items[#items + 1] = products[i]
-            end
-            :: nextIteration ::
-            end
+
             return items
         end
-        TriggerServerEvent('qb-shops:server:SetShopList')
-        local ShopItems = {}
-        ShopItems.items = {}
-        ShopItems.label = data["label"]
-        if data.type == "weapon" and Config.FirearmsLicenseCheck then
-            if PlayerData.metadata["licences"] and PlayerData.metadata["licences"].weapon and QBCore.Functions.HasItem("weaponlicense") then
-                ShopItems.items = SetupItems()
-                QBCore.Functions.Notify(Lang:t("success.dealer_verify"), "success")
-                Wait(500)
-            else
-                ShopItems.items = SetupItems(true)
-                QBCore.Functions.Notify(Lang:t("error.dealer_decline"), "error")
-                Wait(500)
-                QBCore.Functions.Notify(Lang:t("error.talk_cop"), "error")
-                Wait(1000)
-            end
-        else
-            ShopItems.items = SetupItems()
-        end
 
-        for k in pairs(ShopItems.items) do
-            ShopItems.items[k].slot = k
-        end
+        TriggerServerEvent('qb-shops:server:SetShopList')
+        local ShopItems = { items = {}, label = data["label"] }
+
+        ShopItems.items = SetupItems()
+
         TriggerServerEvent("inventory:server:OpenInventory", "shop", "Itemshop_" .. shop, ShopItems)
     end)
 end

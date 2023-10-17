@@ -1,9 +1,12 @@
 local QBCore = exports['qb-core']:GetCoreObject()
+
 --Events
+
 QBCore.Functions.CreateCallback('qb-shops:server:SetShopInv', function(_,cb)
     local shopInvJson = LoadResourceFile(GetCurrentResourceName(), Config.ShopsInvJsonFile)
     cb(shopInvJson)
 end)
+
 RegisterNetEvent('qb-shops:server:SaveShopInv',function()
     if not Config.UseTruckerJob then return end
     local shopinv = {}
@@ -17,6 +20,7 @@ RegisterNetEvent('qb-shops:server:SaveShopInv',function()
     end
     SaveResourceFile(GetCurrentResourceName(), Config.ShopsInvJsonFile, json.encode(shopinv))
 end)
+
 RegisterNetEvent('qb-shops:server:UpdateShopItems', function(shop, itemData, amount)
     if not Config.UseTruckerJob then return end
     if not shop or not itemData or not amount then return end
@@ -27,6 +31,7 @@ RegisterNetEvent('qb-shops:server:UpdateShopItems', function(shop, itemData, amo
     TriggerEvent('qb-shops:server:SaveShopInv')
     TriggerClientEvent('qb-shops:client:SetShopItems', -1, shop, Config.Locations[shop].products)
 end)
+
 RegisterNetEvent('qb-shops:server:RestockShopItems', function(shop)
     if not shop or not Config.Locations[shop].products then return end
     local randAmount = math.random(10, 50)
@@ -36,9 +41,11 @@ RegisterNetEvent('qb-shops:server:RestockShopItems', function(shop)
     TriggerEvent('qb-shops:server:SaveShopInv')
     TriggerClientEvent('qb-shops:client:RestockShopItems', -1, shop, randAmount)
 end)
+
 local ItemList = {
     ["casinochips"] = 1,
 }
+
 RegisterNetEvent('qb-shops:server:sellChips', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
@@ -59,6 +66,7 @@ RegisterNetEvent('qb-shops:server:sellChips', function()
         QBCore.Functions.Notify(src, "You have no chips..")
     end
 end)
+
 RegisterNetEvent('qb-shops:server:SetShopList',function()
     local shoplist = {}
     local cnt = 0
