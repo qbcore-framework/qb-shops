@@ -81,6 +81,21 @@ Config.Products = {
     },
 }
 
+Config.VendingMachines = {
+    { Prop = "prop_vend_coffe_01", Vending = "Coffee" },
+    { Prop = "prop_vend_fridge01", Vending = "Soda" },
+    { Prop = "prop_vend_snak_01", Vending = "Candy" },
+    { Prop = "prop_vend_soda_02", Vending = "Soda" },
+    { Prop = "prop_vend_water_01", Vending = "Water" },
+    { Prop = "prop_vend_snak_01_tu", Vending = "Candy" },
+    { Prop = "v_68_broeknvend", Vending = "Soda" },
+    { Prop = "prop_vend_soda_01", Vending = "Soda" },
+    { Prop = "ch_chint10_vending_smallroom_01", Vending = "Soda" },
+    { Prop = "sf_prop_sf_vend_drink_01a", Vending = "Soda" },
+    { Prop = "prop_watercooler", Vending = "Water" },
+    { Prop = "prop_watercooler_dark", Vending = "Water" },
+}
+
 Config.Locations = {
     -- 24/7 Locations
     ['247supermarket'] = {
