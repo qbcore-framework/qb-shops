@@ -6,6 +6,9 @@ local Translations = {
     error = {
         missing_license = 'Missing a %s license for certain products',
     },
+    menu = {
+        ["vending"] = "Vending Machine",
+    },
     success = {
         dealer_verify = 'The dealer verifies your license'
     },
