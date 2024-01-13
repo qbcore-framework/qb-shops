@@ -193,6 +193,15 @@ local function deletePeds()
     pedSpawned = false
 end
 
+---Opens the vending machine shop
+local function OpenVending()
+    local ShopItems = {}
+    ShopItems.label = 'Vending Machine'
+    ShopItems.items = Config.VendingItem
+    ShopItems.slots = #Config.VendingItem
+    TriggerServerEvent('inventory:server:OpenInventory', 'shop', 'Vendingshop_' .. math.random(1, 99), ShopItems)
+end
+
 -- Events
 RegisterNetEvent("qb-shops:client:UpdateShop", function(shop, itemData, amount)
     TriggerServerEvent("qb-shops:server:UpdateShopItems", shop, itemData, amount)
@@ -289,5 +298,22 @@ CreateThread(function()
                 Config.Locations[k1].requiredGang[k] = 0
             end
         end
+    end
+end)
+
+CreateThread(function()
+    if Config.UseTarget then
+        exports['qb-target']:AddTargetModel(Config.VendingObjects, {
+            options = {
+                {
+                    icon = 'fa-solid fa-cash-register',
+                    label = Lang:t('menu.vending'),
+                    action = function()
+                        OpenVending()
+                    end
+                },
+            },
+            distance = 2.5
+        })
     end
 end)
