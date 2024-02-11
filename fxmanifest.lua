@@ -1,7 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
-
-description 'QB-Shops'
+lua54 'yes'
+author 'Kakarot'
+description 'Allows players to purchase items from various shops around the map'
 version '1.2.1'
 
 shared_scripts {
@@ -20,4 +21,3 @@ client_script 'client/main.lua'
 server_script 'server/main.lua'
 
 file 'json/shops-inventory.json'
-lua54 'yes'
