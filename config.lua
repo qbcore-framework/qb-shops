@@ -37,7 +37,7 @@ Config.Products = {
         {name = 'lockpick',          price = 200, amount = 50,  info = {}, type = 'item'},
         {name = 'weapon_wrench',     price = 250, amount = 250, info = {}, type = 'item'},
         {name = 'weapon_hammer',     price = 250, amount = 250, info = {}, type = 'item'},
-        {name = 'repairkit',         price = 250, amount = 50,  info = {}, type = 'item', requiredJob  = { 'mechanic', 'police' }},
+        {name = 'repairkit',         price = 250, amount = 50,  info = {}, type = 'item', requiredJob  = { ['mechanic'] = 0, ['police'] = 0 }},
         {name = 'screwdriverset',    price = 350, amount = 50,  info = {}, type = 'item'},
         {name = 'phone',             price = 850, amount = 50,  info = {}, type = 'item'},
         {name = 'radio',             price = 250, amount = 50,  info = {}, type = 'item'},
@@ -48,7 +48,7 @@ Config.Products = {
         {name = 'firework4',         price = 50,  amount = 50,  info = {}, type = 'item'},
         {name = 'fitbit',            price = 400, amount = 150, info = {}, type = 'item'},
         {name = 'cleaningkit',       price = 150, amount = 150, info = {}, type = 'item'},
-        {name = 'advancedrepairkit', price = 500, amount = 50,  info = {}, type = 'item', requiredJob = { 'mechanic' }},
+        {name = 'advancedrepairkit', price = 500, amount = 50,  info = {}, type = 'item', requiredJob = { ['mechanic'] = 0 }},
     },
     ['weedshop'] = {
         {name = 'joint',          price = 10,  amount = 50,   info = {}, type = 'item'},

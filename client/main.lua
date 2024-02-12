@@ -25,9 +25,9 @@ local function createBlips()
     end
 end
 
-local function tableCheck(val, list)
-    for _, v in ipairs(list) do
-        if v == val then return true end
+local function tableCheck(val, val2, list)
+    for k, v in pairs(list) do
+        if k == val and v <= val2 then return true end
     end
     return false
 end
@@ -60,11 +60,11 @@ local function openShop(shop, data)
                 local curProduct = products[i]
                 local addProduct = true
 
-                if curProduct.requiredJob and not tableCheck(PlayerData.job.name, curProduct.requiredJob) then
+                if curProduct.requiredJob and not tableCheck(PlayerData.job.name, PlayerData.job.grade.level, curProduct.requiredJob) then
                     addProduct = false
                 end
 
-                if curProduct.requiredGang and not tableCheck(PlayerData.gang.name, curProduct.requiredGang) then
+                if curProduct.requiredGang and not tableCheck(PlayerData.gang.name, PlayerData.job.grade.level, curProduct.requiredGang) then
                     addProduct = false
                 end
 
