@@ -20,12 +20,6 @@ Config.Vehicles = {
     ['boxville2'] = { ['label'] = 'Boxville StepVan', ['cargodoors'] = { [0] = 2, [1] = 3 }, ['trunkpos'] = 1.5 },
 }
 
--- Shops
--- optional requiredJob = {'police', 'ambulance'}
--- optional requiredGang = {'ballas', 'vagps'}
--- optional requiredGrade = 3
--- optional requiredLicense = {'driver', 'business', 'weapon'}
-
 Config.Products = {
     ['normal'] = {
         { name = 'tosti',         price = 2,   amount = 50, },
@@ -61,7 +55,7 @@ Config.Products = {
         { name = 'firework4',         price = 50,  amount = 50, },
         { name = 'fitbit',            price = 400, amount = 150, },
         { name = 'cleaningkit',       price = 150, amount = 150, },
-        { name = 'advancedrepairkit', price = 500, amount = 50,  requiredJob = { 'mechanic' } },
+        { name = 'advancedrepairkit', price = 500, amount = 50,  requiredJob = 'mechanic' },
     },
     ['weedshop'] = {
         { name = 'joint',          price = 10,  amount = 50, },
@@ -84,10 +78,10 @@ Config.Products = {
         { name = 'weapon_knife',         price = 250,  amount = 250, },
         { name = 'weapon_bat',           price = 250,  amount = 250, },
         { name = 'weapon_hatchet',       price = 250,  amount = 250, },
-        { name = 'pistol_ammo',          price = 250,  amount = 250, requiredLicense = { 'weapon' } },
-        { name = 'weapon_pistol',        price = 2500, amount = 5,   requiredLicense = { 'weapon' } },
-        { name = 'weapon_snspistol',     price = 1500, amount = 5,   requiredLicense = { 'weapon' } },
-        { name = 'weapon_vintagepistol', price = 4000, amount = 5,   requiredLicense = { 'weapon' } },
+        { name = 'pistol_ammo',          price = 250,  amount = 250, requiredLicense = 'weapon' },
+        { name = 'weapon_pistol',        price = 2500, amount = 5,   requiredLicense = 'weapon' },
+        { name = 'weapon_snspistol',     price = 1500, amount = 5,   requiredLicense = 'weapon' },
+        { name = 'weapon_vintagepistol', price = 4000, amount = 5,   requiredLicense = 'weapon' },
     },
     ['prison'] = {
         { name = 'sandwich',     price = 4, amount = 50, },
@@ -142,12 +136,6 @@ Config.Products = {
         { name = 'tirerepairkit',     price = 5000, amount = 50 },
     }
 }
-
--- Shops
--- optional useStock
--- optional ped & scenario
--- optional radius
--- optional showBlip & data
 
 Config.Locations = {
     -- 24/7 Locations
@@ -745,8 +733,8 @@ Config.Locations = {
         ['targetIcon'] = 'fas fa-gun',
         ['targetLabel'] = 'Open Armory',
         ['products'] = Config.Products['police'],
-        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
-        ['requiredJob'] = 'police'
+        ['delivery'] = vector4(459.0441, -1008.0366, 28.2627, 271.4695),
+        ['requiredJob'] = 'police',
     },
 
     ['ambulance'] = {
@@ -758,57 +746,47 @@ Config.Locations = {
         ['targetIcon'] = 'fas fa-hand',
         ['targetLabel'] = 'Open Armory',
         ['products'] = Config.Products['ambulance'],
-        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['delivery'] = vector4(283.5821, -614.8570, 43.3792, 159.2903),
         ['requiredJob'] = 'ambulance'
     },
 
     ['mechanic'] = {
         ['label'] = 'Mechanic Shop',
         ['coords'] = vector4(-343.66, -140.78, 39.02, 0),
-        ['targetIcon'] = 'fas fa-cart-shopping',
-        ['targetLabel'] = 'Open Shop',
         ['products'] = Config.Products['mechanic'],
-        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
-        ['requiredJob'] = 'mechanic'
+        ['delivery'] = vector4(-354.3936, -128.2882, 39.4307, 251.4931),
+        ['requiredJob'] = 'mechanic',
     },
 
     ['mechanic2'] = {
         ['label'] = 'Mechanic Shop',
         ['coords'] = vector4(1189.36, 2641.00, 38.44, 0),
-        ['targetIcon'] = 'fas fa-cart-shopping',
-        ['targetLabel'] = 'Open Shop',
         ['products'] = Config.Products['mechanic'],
-        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['delivery'] = vector4(1189.9852, 2651.1873, 37.8351, 317.7137),
         ['requiredJob'] = 'mechanic2'
     },
 
     ['mechanic3'] = {
         ['label'] = 'Mechanic Shop',
         ['coords'] = vector4(-1156.56, -1999.85, 13.19, 0),
-        ['targetIcon'] = 'fas fa-cart-shopping',
-        ['targetLabel'] = 'Open Shop',
         ['products'] = Config.Products['mechanic'],
-        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['delivery'] = vector4(-1131.9661, -1972.0144, 13.1603, 358.8637),
         ['requiredJob'] = 'mechanic3'
     },
 
     ['bennys'] = {
         ['label'] = 'Mechanic Shop',
         ['coords'] = vector4(-195.80, -1318.24, 31.08, 0),
-        ['targetIcon'] = 'fas fa-cart-shopping',
-        ['targetLabel'] = 'Open Shop',
         ['products'] = Config.Products['mechanic'],
-        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['delivery'] = vector4(-232.5028, -1311.7202, 31.2960, 180.3716),
         ['requiredJob'] = 'bennys'
     },
 
     ['beeker'] = {
         ['label'] = 'Mechanic Shop',
         ['coords'] = vector4(100.92, 6616.00, 32.47, 0),
-        ['targetIcon'] = 'fas fa-cart-shopping',
-        ['targetLabel'] = 'Open Shop',
         ['products'] = Config.Products['mechanic'],
-        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['delivery'] = vector4(119.3033, 6626.7358, 31.9558, 46.1566),
         ['requiredJob'] = 'beeker'
     },
 
@@ -825,6 +803,6 @@ Config.Locations = {
         ['blipsprite'] = 52,
         ['blipscale'] = 0.8,
         ['blipcolor'] = 0,
-        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2)
+        ['delivery'] = vector4(1845.8175, 2585.9312, 45.6721, 96.7577)
     },
 }

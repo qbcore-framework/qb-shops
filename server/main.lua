@@ -3,17 +3,23 @@ local Bail = {}
 
 -- Functions
 
-local function checkTable(valOrList, listOrTable)
-    if type(valOrList) == 'table' and type(listOrTable) == 'table' then
-        for _, v in ipairs(valOrList) do
-            if listOrTable[v] then return true end
+local function checkTable(inputValue, requiredValue)
+    if type(inputValue) == 'table' and type(requiredValue) == 'table' then
+        for _, v in ipairs(requiredValue) do
+            if inputValue[v] then return true end
         end
-        return false
-    elseif type(valOrList) ~= 'table' and type(listOrTable) == 'table' then
-        for _, v in ipairs(listOrTable) do
-            if v == valOrList then return true end
+    elseif type(requiredValue) == 'table' then
+        for _, v in ipairs(requiredValue) do
+            if v == inputValue then return true end
         end
-        return false
+    elseif type(inputValue) == 'string' and type(requiredValue) == 'string' then
+        return inputValue == requiredValue
+    elseif type(inputValue) == 'table' and type(requiredValue) == 'string' then
+        return inputValue[requiredValue] == true
+    elseif type(inputValue) == 'string' and type(requiredValue) == 'table' then
+        for _, v in ipairs(requiredValue) do
+            if v == inputValue then return true end
+        end
     end
 
     return false
@@ -147,7 +153,7 @@ RegisterNetEvent('qb-shops:server:openShop', function(data)
             addProduct = false
         end
 
-        if addProduct and curProduct.requiredLicense and not checkTable(curProduct.requiredLicense, playerData.metadata['licences']) then
+        if addProduct and curProduct.requiredLicense and not checkTable(playerData.metadata['licences'], curProduct.requiredLicense) then
             addProduct = false
         end
 

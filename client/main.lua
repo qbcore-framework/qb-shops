@@ -1,4 +1,5 @@
-local currentShop, currentData
+local QBCore = exports['qb-core']:GetCoreObject()
+local currentShop, playerData
 local pedSpawned = false
 local listen = false
 local ShopPed = {}
@@ -42,6 +43,8 @@ end
 
 local function createPeds()
     if pedSpawned then return end
+    local defaultTargetIcon = 'fas fa-shopping-cart'
+    local defaultTargetLabel = 'Open Shop'
 
     for k, v in pairs(Config.Locations) do
         if not v.ped then
@@ -52,9 +55,9 @@ local function createPeds()
             }, {
                 options = {
                     {
-                        label = v.targetLabel,
-                        icon = v.targetIcon,
-                        item = v.item,
+                        label = v.targetLabel or defaultTargetLabel,
+                        icon = v.targetIcon or defaultTargetIcon,
+                        item = v.requiredItem,
                         type = 'server',
                         event = 'qb-shops:server:openShop',
                         shop = k,
@@ -77,9 +80,9 @@ local function createPeds()
                 exports['qb-target']:AddTargetEntity(ShopPed[k], {
                     options = {
                         {
-                            label = v.targetLabel,
-                            icon = v.targetIcon,
-                            item = v.item,
+                            label = v.targetLabel or defaultTargetLabel,
+                            icon = v.targetIcon or defaultTargetIcon,
+                            item = v.requiredItem,
                             type = 'server',
                             event = 'qb-shops:server:openShop',
                             shop = k,
@@ -103,19 +106,76 @@ local function deletePeds()
     pedSpawned = false
 end
 
+local function tableCheck(inputValue, requiredValue)
+    local playerJob = inputValue.job.name
+    local playerJobGrade = inputValue.job.grade.level
+    local playerGang = inputValue.gang.name
+    local playerGangGrade = inputValue.gang.grade.level
+    local shopData = Config.Locations[requiredValue]
+
+    local jobCheck = false
+    local gangCheck = false
+    local itemCheck = false
+
+    if shopData.requiredJob then
+        if type(shopData.requiredJob) == 'table' then
+            for job, grade in pairs(shopData.requiredJob) do
+                if playerJob == job and playerJobGrade >= grade then
+                    jobCheck = true
+                    break
+                end
+            end
+        elseif playerJob == shopData.requiredJob then
+            jobCheck = true
+        end
+    else
+        jobCheck = true
+    end
+
+    if shopData.requiredGang then
+        if type(shopData.requiredGang) == 'table' then
+            for gang, grade in pairs(shopData.requiredGang) do
+                if playerGang == gang and playerGangGrade >= grade then
+                    gangCheck = true
+                    break
+                end
+            end
+        elseif playerGang == shopData.requiredGang then
+            gangCheck = true
+        end
+    else
+        gangCheck = true
+    end
+
+    if shopData.requiredItem then
+        itemCheck = exports['qb-inventory']:HasItem(shopData.requiredItem)
+    else
+        itemCheck = true
+    end
+
+    return jobCheck and gangCheck and itemCheck
+end
+
 -- Events
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    playerData = QBCore.Functions.GetPlayerData()
     createBlips()
     createPeds()
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
+    playerData = {}
     deletePeds()
+end)
+
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function(jobInfo)
+    playerData.job = jobInfo
 end)
 
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
+    playerData = QBCore.Functions.GetPlayerData()
     createBlips()
     createPeds()
 end)
@@ -139,10 +199,11 @@ if not Config.UseTarget then
         local combo = ComboZone:Create(NewZones, { name = 'RandomZOneName', debugPoly = false })
         combo:onPlayerInOut(function(isPointInside, _, zone)
             if isPointInside then
-                currentShop = zone.name
-                currentData = Config.Locations[zone.name]
-                exports['qb-core']:DrawText(Lang:t('info.open_shop'))
-                listenForControl()
+                if tableCheck(playerData, zone.name) then
+                    currentShop = zone.name
+                    exports['qb-core']:DrawText(Lang:t('info.open_shop'))
+                    listenForControl()
+                end
             else
                 exports['qb-core']:HideText()
                 listen = false
