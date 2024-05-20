@@ -1,85 +1,153 @@
 Config = {}
-Config.UseTruckerJob = false -- true = The shops stock is based on when truckers refill it | false = shop inventory never runs out
-Config.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add `setr UseTarget true` to use this and just that from true to false or the other way around)
-Config.ShopsInvJsonFile = './json/shops-inventory.json' -- json file location
+Config.UseTarget = GetConvar('UseTarget', 'false') == 'true'
 
-Config.SellCasinoChips = {
-    coords = vector4(950.37, 34.72, 71.87, 33.82),
-    radius = 1.5,
-    ped = 's_m_y_casino_01'
+-- Deliveries
+Config.ShopsInvJsonFile = './json/shops-inventory.json'
+Config.TruckDeposit = 125
+Config.MaxDeliveries = 20
+Config.DeliveryPrice = 500
+Config.RewardItem = 'cryptostick'
+Config.Fuel = 'LegacyFuel'
+
+Config.DeliveryLocations = {
+    ['main'] = { label = 'GO Postal', coords = vector4(69.0862, 127.6753, 79.2123, 156.7736) },
+    ['vehicleWithdraw'] = vector4(71.9318, 120.8389, 79.0823, 160.5110),
+    ['vehicleDeposit'] = vector3(62.7282, 124.9846, 79.0926),
+    ['stores'] = {} -- auto generated
 }
 
+Config.Vehicles = {
+    ['boxville2'] = { ['label'] = 'Boxville StepVan', ['cargodoors'] = { [0] = 2, [1] = 3 }, ['trunkpos'] = 1.5 },
+}
+
+-- Shops
 -- optional requiredJob = {'police', 'ambulance'}
 -- optional requiredGang = {'ballas', 'vagps'}
+-- optional requiredGrade = 3
 -- optional requiredLicense = {'driver', 'business', 'weapon'}
 
 Config.Products = {
     ['normal'] = {
-        {name = 'tosti',         price = 2,   amount = 50,   info = {}, type = 'item'},
-        {name = 'water_bottle',  price = 2,   amount = 50,   info = {}, type = 'item'},
-        {name = 'kurkakola',     price = 2,   amount = 50,   info = {}, type = 'item'},
-        {name = 'twerks_candy',  price = 2,   amount = 50,   info = {}, type = 'item'},
-        {name = 'snikkel_candy', price = 2,   amount = 50,   info = {}, type = 'item'},
-        {name = 'sandwich',      price = 2,   amount = 50,   info = {}, type = 'item'},
-        {name = 'beer',          price = 7,   amount = 50,   info = {}, type = 'item'},
-        {name = 'whiskey',       price = 10,  amount = 50,   info = {}, type = 'item'},
-        {name = 'vodka',         price = 12,  amount = 50,   info = {}, type = 'item'},
-        {name = 'bandage',       price = 100, amount = 50,   info = {}, type = 'item'},
-        {name = 'lighter',       price = 2,   amount = 50,   info = {}, type = 'item'},
-        {name = 'rolling_paper', price = 2,   amount = 5000, info = {}, type = 'item'},
+        { name = 'tosti',         price = 2,   amount = 50, },
+        { name = 'water_bottle',  price = 2,   amount = 50, },
+        { name = 'kurkakola',     price = 2,   amount = 50, },
+        { name = 'twerks_candy',  price = 2,   amount = 50, },
+        { name = 'snikkel_candy', price = 2,   amount = 50, },
+        { name = 'sandwich',      price = 2,   amount = 50, },
+        { name = 'beer',          price = 7,   amount = 50, },
+        { name = 'whiskey',       price = 10,  amount = 50, },
+        { name = 'vodka',         price = 12,  amount = 50, },
+        { name = 'bandage',       price = 100, amount = 50, },
+        { name = 'lighter',       price = 2,   amount = 50, },
+        { name = 'rolling_paper', price = 2,   amount = 5000, },
     },
     ['liquor'] = {
-        {name = 'beer',    price = 7,  amount = 50, info = {}, type = 'item'},
-        {name = 'whiskey', price = 10, amount = 50, info = {}, type = 'item'},
-        {name = 'vodka',   price = 12, amount = 50, info = {}, type = 'item'},
+        { name = 'beer',    price = 7,  amount = 50, },
+        { name = 'whiskey', price = 10, amount = 50, },
+        { name = 'vodka',   price = 12, amount = 50, },
     },
     ['hardware'] = {
-        {name = 'lockpick',          price = 200, amount = 50,  info = {}, type = 'item'},
-        {name = 'weapon_wrench',     price = 250, amount = 250, info = {}, type = 'item'},
-        {name = 'weapon_hammer',     price = 250, amount = 250, info = {}, type = 'item'},
-        {name = 'repairkit',         price = 250, amount = 50,  info = {}, type = 'item', requiredJob  = { 'mechanic', 'police' }},
-        {name = 'screwdriverset',    price = 350, amount = 50,  info = {}, type = 'item'},
-        {name = 'phone',             price = 850, amount = 50,  info = {}, type = 'item'},
-        {name = 'radio',             price = 250, amount = 50,  info = {}, type = 'item'},
-        {name = 'binoculars',        price = 50,  amount = 50,  info = {}, type = 'item'},
-        {name = 'firework1',         price = 50,  amount = 50,  info = {}, type = 'item'},
-        {name = 'firework2',         price = 50,  amount = 50,  info = {}, type = 'item'},
-        {name = 'firework3',         price = 50,  amount = 50,  info = {}, type = 'item'},
-        {name = 'firework4',         price = 50,  amount = 50,  info = {}, type = 'item'},
-        {name = 'fitbit',            price = 400, amount = 150, info = {}, type = 'item'},
-        {name = 'cleaningkit',       price = 150, amount = 150, info = {}, type = 'item'},
-        {name = 'advancedrepairkit', price = 500, amount = 50,  info = {}, type = 'item', requiredJob = { 'mechanic' }},
+        { name = 'lockpick',          price = 200, amount = 50, },
+        { name = 'weapon_wrench',     price = 250, amount = 250, },
+        { name = 'weapon_hammer',     price = 250, amount = 250, },
+        { name = 'repairkit',         price = 250, amount = 50,  requiredJob = { 'mechanic', 'police' } },
+        { name = 'screwdriverset',    price = 350, amount = 50, },
+        { name = 'phone',             price = 850, amount = 50, },
+        { name = 'radio',             price = 250, amount = 50, },
+        { name = 'binoculars',        price = 50,  amount = 50, },
+        { name = 'firework1',         price = 50,  amount = 50, },
+        { name = 'firework2',         price = 50,  amount = 50, },
+        { name = 'firework3',         price = 50,  amount = 50, },
+        { name = 'firework4',         price = 50,  amount = 50, },
+        { name = 'fitbit',            price = 400, amount = 150, },
+        { name = 'cleaningkit',       price = 150, amount = 150, },
+        { name = 'advancedrepairkit', price = 500, amount = 50,  requiredJob = { 'mechanic' } },
     },
     ['weedshop'] = {
-        {name = 'joint',          price = 10,  amount = 50,   info = {}, type = 'item'},
-        {name = 'weapon_poolcue', price = 100, amount = 50,   info = {}, type = 'item'},
-        {name = 'weed_nutrition', price = 20,  amount = 50,   info = {}, type = 'item'},
-        {name = 'empty_weed_bag', price = 2,   amount = 1000, info = {}, type = 'item'},
-        {name = 'rolling_paper',  price = 2,   amount = 1000, info = {}, type = 'item'},
+        { name = 'joint',          price = 10,  amount = 50, },
+        { name = 'weapon_poolcue', price = 100, amount = 50, },
+        { name = 'weed_nutrition', price = 20,  amount = 50, },
+        { name = 'empty_weed_bag', price = 2,   amount = 1000, },
+        { name = 'rolling_paper',  price = 2,   amount = 1000, },
     },
     ['gearshop'] = {
-        {name = 'diving_gear', price = 2500, amount = 10, info = {}, type = 'item'},
-        {name = 'jerry_can',   price = 200,  amount = 50, info = {}, type = 'item'},
+        { name = 'diving_gear', price = 2500, amount = 10, },
+        { name = 'jerry_can',   price = 200,  amount = 50, },
     },
     ['leisureshop'] = {
-        {name = 'parachute',   price = 2500, amount = 10, info = {}, type = 'item'},
-        {name = 'binoculars',  price = 50,   amount = 50, info = {}, type = 'item'},
-        {name = 'diving_gear', price = 2500, amount = 10, info = {}, type = 'item'},
-        {name = 'diving_fill', price = 500,  amount = 10, info = {}, type = 'item'},
+        { name = 'parachute',   price = 2500, amount = 10, },
+        { name = 'binoculars',  price = 50,   amount = 50, },
+        { name = 'diving_gear', price = 2500, amount = 10, },
+        { name = 'diving_fill', price = 500,  amount = 10, },
     },
     ['weapons'] = {
-        {name = 'weapon_knife',         price = 250,  amount = 250, info = {}, type = 'weapon'},
-        {name = 'weapon_bat',           price = 250,  amount = 250, info = {}, type = 'weapon'},
-        {name = 'weapon_hatchet',       price = 250,  amount = 250, info = {}, type = 'weapon'},
-        {name = 'pistol_ammo',          price = 250,  amount = 250, info = {}, type = 'item',   requiredLicense = { 'weapon' }},
-        {name = 'weapon_pistol',        price = 2500, amount = 5,   info = {}, type = 'weapon', requiredLicense = { 'weapon' }},
-        {name = 'weapon_snspistol',     price = 1500, amount = 5,   info = {}, type = 'weapon', requiredLicense = { 'weapon' }},
-        {name = 'weapon_vintagepistol', price = 4000, amount = 5,   info = {}, type = 'weapon', requiredLicense = { 'weapon' }},
+        { name = 'weapon_knife',         price = 250,  amount = 250, },
+        { name = 'weapon_bat',           price = 250,  amount = 250, },
+        { name = 'weapon_hatchet',       price = 250,  amount = 250, },
+        { name = 'pistol_ammo',          price = 250,  amount = 250, requiredLicense = { 'weapon' } },
+        { name = 'weapon_pistol',        price = 2500, amount = 5,   requiredLicense = { 'weapon' } },
+        { name = 'weapon_snspistol',     price = 1500, amount = 5,   requiredLicense = { 'weapon' } },
+        { name = 'weapon_vintagepistol', price = 4000, amount = 5,   requiredLicense = { 'weapon' } },
     },
-    ['casino'] = {
-        {name = 'casinochips', price = 1, amount = 999999, info = {}, type = 'item'}
+    ['prison'] = {
+        { name = 'sandwich',     price = 4, amount = 50, },
+        { name = 'water_bottle', price = 4, amount = 50, },
     },
+    ['police'] = {
+        { name = 'weapon_pistol',       price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_PI_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_stungun',      price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_pumpshotgun',  price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_smg',          price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_SCOPE_MACRO_02', label = '1x Scope' }, { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_carbinerifle', price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' }, { component = 'COMPONENT_AT_SCOPE_MEDIUM', label = '3x Scope' }, } } },
+        { name = 'weapon_nightstick',   price = 0, amount = 50 },
+        { name = 'weapon_flashlight',   price = 0, amount = 50 },
+        { name = 'pistol_ammo',         price = 0, amount = 50 },
+        { name = 'smg_ammo',            price = 0, amount = 50 },
+        { name = 'shotgun_ammo',        price = 0, amount = 50 },
+        { name = 'rifle_ammo',          price = 0, amount = 50 },
+        { name = 'handcuffs',           price = 0, amount = 50 },
+        { name = 'empty_evidence_bag',  price = 0, amount = 50 },
+        { name = 'police_stormram',     price = 0, amount = 50 },
+        { name = 'armor',               price = 0, amount = 50 },
+        { name = 'radio',               price = 0, amount = 50 },
+        { name = 'heavyarmor',          price = 0, amount = 50 },
+    },
+    ['ambulance'] = {
+        { name = 'radio',                   price = 0, amount = 50, },
+        { name = 'bandage',                 price = 0, amount = 50, },
+        { name = 'painkillers',             price = 0, amount = 50, },
+        { name = 'firstaid',                price = 0, amount = 50, },
+        { name = 'weapon_flashlight',       price = 0, amount = 50, },
+        { name = 'weapon_fireextinguisher', price = 0, amount = 50, },
+    },
+    ['mechanic'] = {
+        { name = 'veh_toolbox',       price = 5000, amount = 50 },
+        { name = 'veh_armor',         price = 5000, amount = 50 },
+        { name = 'veh_brakes',        price = 5000, amount = 50 },
+        { name = 'veh_engine',        price = 5000, amount = 50 },
+        { name = 'veh_suspension',    price = 5000, amount = 50 },
+        { name = 'veh_transmission',  price = 5000, amount = 50 },
+        { name = 'veh_turbo',         price = 5000, amount = 50 },
+        { name = 'veh_interior',      price = 5000, amount = 50 },
+        { name = 'veh_exterior',      price = 5000, amount = 50 },
+        { name = 'veh_wheels',        price = 5000, amount = 50 },
+        { name = 'veh_neons',         price = 5000, amount = 50 },
+        { name = 'veh_xenons',        price = 5000, amount = 50 },
+        { name = 'veh_tint',          price = 5000, amount = 50 },
+        { name = 'veh_plates',        price = 5000, amount = 50 },
+        { name = 'nitrous',           price = 5000, amount = 50 },
+        { name = 'tunerlaptop',       price = 5000, amount = 50 },
+        { name = 'repairkit',         price = 5000, amount = 50 },
+        { name = 'advancedrepairkit', price = 5000, amount = 50 },
+        { name = 'tirerepairkit',     price = 5000, amount = 50 },
+    }
 }
+
+-- Shops
+-- optional useStock
+-- optional ped & scenario
+-- optional radius
+-- optional showBlip & data
 
 Config.Locations = {
     -- 24/7 Locations
@@ -96,7 +164,8 @@ Config.Locations = {
         ['blipsprite'] = 52,
         ['blipscale'] = 0.6,
         ['blipcolor'] = 0,
-        ['delivery'] = vector4(26.45, -1315.51, 29.62, 0.07)
+        ['delivery'] = vector4(26.45, -1315.51, 29.62, 0.07),
+        ['useStock'] = true
     },
 
     ['247supermarket2'] = {
@@ -616,39 +685,6 @@ Config.Locations = {
         ['delivery'] = vector4(-3183.6, 1084.35, 20.84, 68.13)
     },
 
-    -- Casino Locations
-    ['casino'] = {
-        ['label'] = 'Diamond Casino',
-        ['coords'] = vector4(978.46, 39.07, 74.88, 64.0),
-        ['ped'] = 'csb_tomcasino',
-        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
-        ['radius'] = 1.5,
-        ['targetIcon'] = 'fas fa-coins',
-        ['targetLabel'] = 'Buy Chips',
-        ['products'] = Config.Products['casino'],
-        ['showblip'] = true,
-        ['blipsprite'] = 617,
-        ['blipscale'] = 0.8,
-        ['blipcolor'] = 0,
-        ['delivery'] = vector4(972.6, 9.22, 81.04, 233.38)
-    },
-
-    ['casinobar'] = {
-        ['label'] = 'Casino Bar',
-        ['coords'] = vector4(968.13, 29.85, 74.88, 208.86),
-        ['ped'] = 'a_m_y_smartcaspat_01',
-        ['scenario'] = 'WORLD_HUMAN_VALET',
-        ['radius'] = 1.5,
-        ['targetIcon'] = 'fas fa-wine-bottle',
-        ['targetLabel'] = 'Open Casino Bar',
-        ['products'] = Config.Products['liquor'],
-        ['showblip'] = false,
-        ['blipsprite'] = 52,
-        ['blipscale'] = 0.8,
-        ['blipcolor'] = 0,
-        ['delivery'] = vector4(937.16, 1.0, 78.76, 152.4)
-    },
-
     -- Weedshop Locations
     ['weedshop'] = {
         ['label'] = 'Smoke On The Water',
@@ -693,6 +729,98 @@ Config.Locations = {
         ['targetIcon'] = 'fas fa-leaf',
         ['targetLabel'] = 'Open Leisure Shop',
         ['products'] = Config.Products['leisureshop'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2)
+    },
+
+    ['police'] = {
+        ['label'] = 'Police Shop',
+        ['coords'] = vector4(461.8498, -981.0677, 30.6896, 91.5892),
+        ['ped'] = 'mp_m_securoguard_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Armory',
+        ['products'] = Config.Products['police'],
+        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['requiredJob'] = 'police'
+    },
+
+    ['ambulance'] = {
+        ['label'] = 'Ambulance Shop',
+        ['coords'] = vector4(309.93, -602.94, 43.29, 71.0820),
+        ['ped'] = 's_m_m_doctor_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-hand',
+        ['targetLabel'] = 'Open Armory',
+        ['products'] = Config.Products['ambulance'],
+        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['requiredJob'] = 'ambulance'
+    },
+
+    ['mechanic'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(-343.66, -140.78, 39.02, 0),
+        ['targetIcon'] = 'fas fa-cart-shopping',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['requiredJob'] = 'mechanic'
+    },
+
+    ['mechanic2'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(1189.36, 2641.00, 38.44, 0),
+        ['targetIcon'] = 'fas fa-cart-shopping',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['requiredJob'] = 'mechanic2'
+    },
+
+    ['mechanic3'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(-1156.56, -1999.85, 13.19, 0),
+        ['targetIcon'] = 'fas fa-cart-shopping',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['requiredJob'] = 'mechanic3'
+    },
+
+    ['bennys'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(-195.80, -1318.24, 31.08, 0),
+        ['targetIcon'] = 'fas fa-cart-shopping',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['requiredJob'] = 'bennys'
+    },
+
+    ['beeker'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(100.92, 6616.00, 32.47, 0),
+        ['targetIcon'] = 'fas fa-cart-shopping',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2),
+        ['requiredJob'] = 'beeker'
+    },
+
+    ['prison'] = {
+        ['label'] = 'Canteen Shop',
+        ['coords'] = vector4(1777.59, 2560.52, 44.62, 187.83),
+        ['ped'] = false,
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-clipboard',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['prison'],
         ['showblip'] = true,
         ['blipsprite'] = 52,
         ['blipscale'] = 0.8,

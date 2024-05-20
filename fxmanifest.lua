@@ -17,7 +17,11 @@ shared_scripts {
     'config.lua'
 }
 
-client_script 'client/main.lua'
+client_scripts {
+    'client/main.lua',
+    'client/deliveries.lua',
+}
+
 server_script 'server/main.lua'
 
 file 'json/shops-inventory.json'
