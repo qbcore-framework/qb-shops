@@ -170,6 +170,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
 end)
 
 RegisterNetEvent('QBCore:Client:OnJobUpdate', function(jobInfo)
+    if not playerData or not playerData.job then return end
     playerData.job = jobInfo
 end)
 
