@@ -1,4 +1,3 @@
-local QBCore = exports['qb-core']:GetCoreObject()
 local Bail = {}
 
 -- Functions
@@ -33,14 +32,14 @@ local function saveShopInv(shop, products)
 end
 
 local function deliveryPay(source, shop)
-    local Player = QBCore.Functions.GetPlayer(source)
+    local Player = exports['qb-core']:GetPlayer(source)
     if not Player then return end
     local playerPed = GetPlayerPed(source)
     local playerCoords = GetEntityCoords(playerPed)
     local deliverCoords = Config.Locations[shop].delivery
     local distance = #(playerCoords - vector3(deliverCoords.x, deliverCoords.y, deliverCoords.z))
     if distance > 10 then return end
-    Player.Functions.AddMoney('bank', Config.DeliveryPrice, 'qb-shops:deliveryPay')
+    Player.AddMoney('bank', Config.DeliveryPrice, 'qb-shops:deliveryPay')
     if math.random(100) <= 10 then exports['qb-inventory']:AddItem(source, Config.RewardItem, 1, false, false, 'qb-shops:deliveryPay') end
 end
 
@@ -74,13 +73,13 @@ end)
 
 RegisterNetEvent('qb-shops:server:DoBail', function(bool)
     local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = exports['qb-core']:GetPlayer(src)
     if bool then
-        if Player.Functions.RemoveMoney('cash', Config.TruckDeposit, 'tow-received-bail') then
+        if Player.RemoveMoney('cash', Config.TruckDeposit, 'tow-received-bail') then
             Bail[Player.PlayerData.citizenid] = Config.TruckDeposit
             TriggerClientEvent('QBCore:Notify', src, Lang:t('success.paid_with_cash', { value = Config.TruckDeposit }), 'success')
             TriggerClientEvent('qb-shops:client:SpawnVehicle', src)
-        elseif Player.Functions.RemoveMoney('bank', Config.TruckDeposit, 'tow-received-bail') then
+        elseif Player.RemoveMoney('bank', Config.TruckDeposit, 'tow-received-bail') then
             Bail[Player.PlayerData.citizenid] = Config.TruckDeposit
             TriggerClientEvent('QBCore:Notify', src, Lang:t('success.paid_with_bank', { value = Config.TruckDeposit }), 'success')
             TriggerClientEvent('qb-shops:client:SpawnVehicle', src)
@@ -89,7 +88,7 @@ RegisterNetEvent('qb-shops:server:DoBail', function(bool)
         end
     else
         if Bail[Player.PlayerData.citizenid] then
-            Player.Functions.AddMoney('cash', Bail[Player.PlayerData.citizenid], 'trucker-bail-paid')
+            Player.AddMoney('cash', Bail[Player.PlayerData.citizenid], 'trucker-bail-paid')
             Bail[Player.PlayerData.citizenid] = nil
             TriggerClientEvent('QBCore:Notify', src, Lang:t('success.refund_to_cash', { value = Config.TruckDeposit }), 'success')
         end
@@ -103,13 +102,13 @@ RegisterNetEvent('qb-shops:server:PaySlip', function(drops)
     local coords = Config.DeliveryLocations['main'].coords
     local distance = #(playerCoords - vector3(coords.x, coords.y, coords.z))
     if distance > 10 then return end
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = exports['qb-core']:GetPlayer(src)
     if not Player then return end
     local completedDrops = tonumber(drops)
     if not drops then return end
     local payment = Config.DeliveryPrice * completedDrops
-    Player.Functions.AddMoney('bank', payment, 'trucker-salary')
-    Player.Functions.AddRep('delivery', completedDrops)
+    Player.AddMoney('bank', payment, 'trucker-salary')
+    Player.AddRep('delivery', completedDrops)
     TriggerClientEvent('QBCore:Notify', src, Lang:t('success.you_earned', { value = payment }), 'success')
 end)
 
@@ -120,7 +119,7 @@ RegisterNetEvent('qb-shops:server:openShop', function(data)
     local shopName = data.shop
     local shopData = Config.Locations[shopName]
     if not shopData then return end
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = exports['qb-core']:GetPlayer(src)
     if not Player then return end
     local playerData = Player.PlayerData
     local products = shopData.products

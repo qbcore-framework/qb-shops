@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local QBCore = exports['qb-core']:GetCoreObject({ 'Functions' })
 local JobsDone = 0
 local LocationsDone = {}
 local CurrentLocation = nil

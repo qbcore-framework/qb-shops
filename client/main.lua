@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local QBCore = exports['qb-core']:GetCoreObject({ 'Functions' })
 local currentShop, playerData
 local pedSpawned = false
 local listen = false
@@ -169,9 +169,16 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     deletePeds()
 end)
 
-RegisterNetEvent('QBCore:Client:OnJobUpdate', function(jobInfo)
-    if not playerData or not playerData.job then return end
-    playerData.job = jobInfo
+RegisterNetEvent('QBCore:Client:OnPlayerUpdated', function(key, val)
+    if key == 'job' then
+        local jobInfo = val
+        if not playerData or not playerData.job then return end
+        playerData.job = jobInfo
+    elseif key == 'all' then
+        local jobInfo = val.job
+        if not playerData or not playerData.job then return end
+        playerData.job = jobInfo
+    end
 end)
 
 AddEventHandler('onResourceStart', function(resourceName)

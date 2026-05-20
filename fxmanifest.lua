@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 author 'Kakarot'
 description 'Allows players to purchase items from various shops around the map'
-version '1.2.1'
+version '1.5.0'
 
 shared_scripts {
     '@PolyZone/client.lua',
